@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3</title>
+<title>LUCA — Prototipo Sprint 00 v3.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -262,8 +262,8 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="ot">Conectá tu CUIT</div>
       <div class="oss">Descargamos tus datos de ARCA automáticamente. Solo lectura — nunca modificamos nada en tu nombre.</div>
       <div class="fi"><label>CUIT</label><input type="text" value="20-28456791-3"></div>
-      <div class="fi"><label>Punto de venta</label><input type="text" value="0001"></div>
-      <div style="background:var(--bpi);border-radius:var(--Rx);padding:12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Certificado X.509 encriptado · Solo lectura en ARCA · Datos nunca compartidos con terceros</div>
+      <div class="fi"><label>Clave Fiscal ARCA</label><input type="password" value="••••••••••" placeholder="Tu clave fiscal de ARCA"></div>
+      <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Tu clave fiscal se encripta con AES-256 y se usa solo para conectar con ARCA. LUCA nunca modifica datos en tu nombre.</div>
       <button class="btn btn-p" onclick="onbNext()">Conectar con ARCA →</button>
     </div>
 
@@ -434,6 +434,13 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       </div>
 
       <div id="cbte-rest" style="display:none;">
+        <!-- 1b. Punto de venta -->
+        <div class="fi"><label>Punto de venta</label>
+          <select>
+            <option value="1">0001 — Comprobantes en línea</option>
+            <option value="2">0002 — Facturador móvil</option>
+          </select>
+        </div>
         <!-- 2. Monto -->
         <div class="fi"><label>2 · Monto</label><input type="number" id="monto-in" value="320000" oninput="updateImpact(this.value)"></div>
         <div class="ib" id="impact-box">
@@ -682,7 +689,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3';
+const SPRINT='S00-v3.1';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
