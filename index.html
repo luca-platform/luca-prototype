@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0056)file:///C:/Users/Guillermo/Downloads/luca-prototype.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.1.1</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>LUCA — Prototipo Sprint 00 v3.2.1</title>
+<link href="./index_files/css2" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  /* Dark mode — Slate profundo, premium fintech */
-  --bp:#0F172A;--bs:#1E293B;--bc:#263044;--bh:#2d3a52;--bpi:#1a2438;
-  --tp:#F1F5F9;--ts:#94A3B8;--tm:#475569;
-  /* Emerald — primario, acción, positivo */
-  --g:#10B981;--gd:rgba(16,185,129,0.12);
-  /* Naranja coral — warning, sin amarillo */
-  --a:#F97316;--ad:rgba(249,115,22,0.12);
-  /* Rojo — danger */
-  --r:#EF4444;--rd:rgba(239,68,68,0.12);
-  /* Indigo — acento brand, info */
-  --bl:#6366F1;--bld:rgba(99,102,241,0.12);
-  --br:rgba(255,255,255,0.06);--brm:rgba(255,255,255,0.11);
-  --sh:0 4px 24px rgba(0,0,0,0.45);--R:14px;--Rs:10px;--Rx:8px;
+  /* DARK MODE — máximo contraste, premium fintech */
+  --bp:#0D1117;--bs:#161B27;--bc:#1C2333;--bh:#232D42;--bpi:#1a2235;
+  /* Textos: tp=blanco puro, ts=gris claro legible, tm=gris medio */
+  --tp:#FFFFFF;--ts:#CBD5E1;--tm:#94A3B8;
+  /* Emerald brillante sobre oscuro */
+  --g:#34D399;--gd:rgba(52,211,153,0.15);
+  /* Naranja coral alto contraste */
+  --a:#FB923C;--ad:rgba(251,146,60,0.15);
+  /* Rojo alto contraste */
+  --r:#F87171;--rd:rgba(248,113,113,0.15);
+  /* Indigo brillante */
+  --bl:#818CF8;--bld:rgba(129,140,248,0.15);
+  --br:rgba(255,255,255,0.08);--brm:rgba(255,255,255,0.15);
+  --sh:0 4px 24px rgba(0,0,0,0.5);--R:14px;--Rs:10px;--Rx:8px;
 }
 .light{
   --bp:#F8FAFC;--bs:#FFFFFF;--bc:#FFFFFF;--bh:#F1F5F9;--bpi:#EEF2F8;
-  --tp:#0F172A;--ts:#475569;--tm:#94A3B8;
+  --tp:#0F172A;--ts:#334155;--tm:#64748B;
   --g:#059669;--gd:rgba(5,150,105,0.1);
   --a:#EA580C;--ad:rgba(234,88,12,0.1);
   --r:#DC2626;--rd:rgba(220,38,38,0.1);
@@ -46,7 +47,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
 /* cards */
 .card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);}
-.cl{font-size:10px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
+.cl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
 /* bottom nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;}
 .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
@@ -62,7 +63,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 /* badge */
 .bdg{display:inline-block;font-size:10px;font-weight:600;border-radius:6px;padding:3px 9px;}
 .bg{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.3);}
-.bb{background:var(--bld);color:var(--bl);border:1px solid rgba(99,102,241,0.35);}
+.bb{background:rgba(129,140,248,0.18);color:#A5B4FC;border:1px solid rgba(129,140,248,0.4);}
 .ba{background:var(--ad);color:var(--a);border:1px solid rgba(249,115,22,0.3);}
 .br2{background:var(--rd);color:var(--r);border:1px solid rgba(239,68,68,0.3);}
 /* mono */
@@ -80,11 +81,11 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 /* grid */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
 .sc{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;box-shadow:var(--sh);}
-.sl{font-size:10px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.sl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
 .sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--tp);}
 .ss{font-size:11px;color:var(--ts);margin-top:3px;}
 /* screen pill */
-.sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--br);}
+.sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--brm);}
 /* form */
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;}
@@ -217,18 +218,18 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
 @media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
 .metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;}
-.metric-label{font-size:9px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.metric-label{font-size:9px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
 .metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--tp);}
 .metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
-.metric-sub{font-size:10px;color:var(--ts);margin-top:3px;}
+.metric-sub{font-size:10px;color:var(--tm);margin-top:3px;}
 /* liberacion chart */
 .lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;}
-.lib-title{font-size:12px;font-weight:600;color:var(--tp);margin-bottom:12px;}
+.lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;}
 .lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.lib-date{font-size:11px;color:var(--ts);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
+.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
 .lib-bar-wrap{flex:1;height:20px;background:var(--bpi);border-radius:4px;overflow:hidden;position:relative;}
 .lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;}
-.lib-amount{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;width:70px;text-align:right;flex-shrink:0;font-weight:600;}
+.lib-amount{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;width:70px;text-align:right;flex-shrink:0;font-weight:700;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -245,8 +246,8 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="ot">Bienvenido, Javier 👋</div>
       <div class="oss">¿Cómo vas a explorar LUCA hoy?</div>
       <div class="mc">
-        <div class="mcard" id="mc-u" onclick="selMode('u')"><div class="mc-ic">👤</div><div class="mc-t">Como usuario</div><div class="mc-s">Probá LUCA como monotributista</div></div>
-        <div class="mcard" id="mc-e" onclick="selMode('e')"><div class="mc-ic">🔍</div><div class="mc-t">Como evaluador</div><div class="mc-s">Explorá para recomendar a clientes</div></div>
+        <div class="mcard" id="mc-u" onclick="selMode(&#39;u&#39;)"><div class="mc-ic">👤</div><div class="mc-t">Como usuario</div><div class="mc-s">Probá LUCA como monotributista</div></div>
+        <div class="mcard" id="mc-e" onclick="selMode(&#39;e&#39;)"><div class="mc-ic">🔍</div><div class="mc-t">Como evaluador</div><div class="mc-s">Explorá para recomendar a clientes</div></div>
       </div>
       <button class="btn btn-p" id="btn-mod" onclick="onbNext()" style="opacity:.4;pointer-events:none;">Continuar →</button>
     </div>
@@ -278,7 +279,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
           <div style="font-size:11px;color:var(--g);font-weight:500;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">ENCONTRAMOS EN ARCA</div>
           <div style="font-size:13px;color:var(--ts);line-height:1.9;">✓ 31 comprobantes emitidos<br>✓ 18 comprobantes recibidos<br>✓ Próximo vencimiento: 20 abril<br>✓ Sin deuda detectada</div>
         </div>
-        <button class="btn btn-p" onclick="goTo('s-dash')">Ver mi panel →</button>
+        <button class="btn btn-p" onclick="goTo(&#39;s-dash&#39;)">Ver mi panel →</button>
       </div>
     </div>
   </div>
@@ -290,11 +291,11 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div class="logo">LUC<span>A</span></div>
     <div class="tb-r">
       <nav class="dnav">
-        <div class="dn active" onclick="goTo('s-dash')">Inicio</div>
-        <div class="dn" onclick="goTo('s-cbte')">Crear Comprobante</div>
-        <div class="dn" onclick="goTo('s-panel')">Panel fiscal</div>
-        <div class="dn" onclick="goTo('s-alerta')">Alertas</div>
-        <div class="dn" onclick="goTo('s-wa')" style="color:var(--g);">💬 WhatsApp</div>
+        <div class="dn active" onclick="goTo(&#39;s-dash&#39;)">Inicio</div>
+        <div class="dn" onclick="goTo(&#39;s-cbte&#39;)">Crear Comprobante</div>
+        <div class="dn" onclick="goTo(&#39;s-panel&#39;)">Panel fiscal</div>
+        <div class="dn" onclick="goTo(&#39;s-alerta&#39;)">Alertas</div>
+        <div class="dn" onclick="goTo(&#39;s-wa&#39;)" style="color:var(--g);">💬 WhatsApp</div>
       </nav>
       <button class="btn-th" onclick="toggleTheme()">☀</button>
       <div class="av">JC</div>
@@ -310,7 +311,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="mb2" id="dash-mb"></div>
     </div>
 
-    <div class="ab" onclick="goTo('s-alerta')">
+    <div class="ab" onclick="goTo(&#39;s-alerta&#39;)">
       <div class="ad2"></div>
       <div style="flex:1;font-size:13px;color:var(--a);font-weight:500;">Riesgo de exclusión — superaste el 90% del tope</div>
       <div style="font-size:12px;color:var(--a);font-weight:500;">Ver →</div>
@@ -321,17 +322,17 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="metric-card">
         <div class="metric-label">Margen disponible</div>
         <div class="metric-value warn">$2.280k</div>
-        <div class="metric-sub">en cat. actual</div>
+        <div class="metric-sub" style="color:var(--ts);">en cat. actual</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">Total facturado</div>
         <div class="metric-value">$5.820k</div>
-        <div class="metric-sub">últimos 365 días</div>
+        <div class="metric-sub" style="color:var(--ts);">últimos 365 días</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">Margen exclusión</div>
         <div class="metric-value danger">$382k</div>
-        <div class="metric-sub">riesgo alto</div>
+        <div class="metric-sub" style="color:var(--ts);">riesgo alto</div>
       </div>
     </div>
 
@@ -348,7 +349,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="pt"><div class="pf" style="width:72%;background:var(--a);"></div></div>
       <div style="display:flex;justify-content:space-between;">
         <span class="mo" style="font-size:15px;font-weight:500;">$5.820.000</span>
-        <span class="mo" style="font-size:12px;color:var(--ts);">límite $8.100.000</span>
+        <span class="mo" style="font-size:12px;color:var(--tm);">límite $8.100.000</span>
       </div>
       <div style="height:1px;background:var(--br);margin:14px 0;"></div>
       <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -364,22 +365,22 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:40%"></div></div><div class="lib-amount">+$320k</div></div>
       <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"></div></div><div class="lib-amount">+$240k</div></div>
       <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:55%"></div></div><div class="lib-amount">+$450k</div></div>
-      <div style="font-size:11px;color:var(--ts);margin-top:8px;line-height:1.5;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
+      <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
     </div>
 
     <div class="g2">
-      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Comprobantes emitidos</div><div class="sv">31</div><div class="ss">Este mes: 8</div></div>
-      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Compras del período</div><div class="sv">$412k</div><div class="ss">18 comprobantes</div></div>
+      <div class="sc" onclick="goTo(&#39;s-panel&#39;)"><div class="sl">Comprobantes emitidos</div><div class="sv">31</div><div class="ss" style="color:var(--ts);">Este mes: 8</div></div>
+      <div class="sc" onclick="goTo(&#39;s-panel&#39;)"><div class="sl">Compras del período</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">18 comprobantes</div></div>
     </div>
 
-    <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo('s-alerta')">
-      <div><div class="cl">Próximo vencimiento</div><div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div><div style="font-size:12px;color:var(--ts);">Cuota abril 2026 · $68.500</div></div>
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo(&#39;s-alerta&#39;)">
+      <div><div class="cl">Próximo vencimiento</div><div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div><div style="font-size:12px;color:var(--ts);font-weight:400;">Cuota abril 2026 · $68.500</div></div>
       <div style="background:var(--ad);color:var(--a);border-radius:var(--Rx);padding:8px 14px;font-size:13px;font-weight:500;" class="mo">20 abr</div>
     </div>
 
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
       <div style="font-size:12px;font-weight:500;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;">Últimos comprobantes</div>
-      <div style="font-size:12px;color:var(--bl);cursor:pointer;" onclick="goTo('s-panel')">Ver todos →</div>
+      <div style="font-size:12px;color:var(--bl);cursor:pointer;font-weight:600;">Ver todos →</div>
     </div>
     <div class="tw">
       <div class="tr2"><div class="tm2"><div>Constructora del Norte S.A.</div><div class="ts2">FC-C 0001-00000031 · 11/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;font-weight:500;">$320.000</div><span class="bdg bg">Autorizado</span></div></div>
@@ -388,7 +389,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     </div>
 
     <!-- WhatsApp CTA -->
-    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo('s-wa')">
+    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo(&#39;s-wa&#39;)">
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="font-size:32px;">💬</div>
         <div>
@@ -402,20 +403,20 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni active" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo('s-alerta')"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni active" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
+    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
-  <button class="fab" onclick="goTo('s-cbte')">+</button>
+  <button class="fab" onclick="goTo(&#39;s-cbte&#39;)">+</button>
 </div>
 
 <!-- ══ CREAR COMPROBANTE ══ -->
 <div class="screen" id="s-cbte">
   <div class="tb">
     <div class="logo">LUC<span>A</span></div>
-    <div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Volver</button><div class="av">JC</div></div>
+    <div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Volver</button><div class="av">JC</div></div>
   </div>
   <div class="cnt">
     <div class="sp">Pantalla 3 — Crear Comprobante</div>
@@ -426,13 +427,13 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <!-- 1. Tipo -->
       <div class="fi"><label>1 · Tipo de comprobante</label></div>
       <div class="ts3" id="type-list">
-        <div class="tc" onclick="selType(this,'FC-C','sum','Factura C')"><div><div class="tc-name">Factura C</div><div style="font-size:11px;color:var(--tm);">El más común para monotributistas</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,'ND-C','sum','Nota de Débito C')"><div><div class="tc-name">Nota de Débito C</div><div style="font-size:11px;color:var(--tm);">Incrementa un comprobante previo</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,'NC-C','nc','Nota de Crédito C')"><div><div class="tc-name">Nota de Crédito C</div><div style="font-size:11px;color:var(--tm);">Anula o reduce un comprobante previo</div></div><span class="tc-tag tag-nc">No suma</span></div>
-        <div class="tc" onclick="selType(this,'RC-C','sum','Recibo C')"><div><div class="tc-name">Recibo C</div><div style="font-size:11px;color:var(--tm);">Documenta el cobro de servicios</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,'FCE-C','sum','FCE MiPyME C')"><div><div class="tc-name">FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);">Operaciones con empresas grandes &gt;$500k</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,'ND-FCE-C','sum','ND FCE MiPyME C')"><div><div class="tc-name">Nota de Débito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,'NC-FCE-C','nc','NC FCE MiPyME C')"><div><div class="tc-name">Nota de Crédito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-nc">No suma</span></div>
+        <div class="tc" onclick="selType(this,&#39;FC-C&#39;,&#39;sum&#39;,&#39;Factura C&#39;)"><div><div class="tc-name">Factura C</div><div style="font-size:11px;color:var(--tm);">El más común para monotributistas</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,&#39;ND-C&#39;,&#39;sum&#39;,&#39;Nota de Débito C&#39;)"><div><div class="tc-name">Nota de Débito C</div><div style="font-size:11px;color:var(--tm);">Incrementa un comprobante previo</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,&#39;NC-C&#39;,&#39;nc&#39;,&#39;Nota de Crédito C&#39;)"><div><div class="tc-name">Nota de Crédito C</div><div style="font-size:11px;color:var(--tm);">Anula o reduce un comprobante previo</div></div><span class="tc-tag tag-nc">No suma</span></div>
+        <div class="tc" onclick="selType(this,&#39;RC-C&#39;,&#39;sum&#39;,&#39;Recibo C&#39;)"><div><div class="tc-name">Recibo C</div><div style="font-size:11px;color:var(--tm);">Documenta el cobro de servicios</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,&#39;FCE-C&#39;,&#39;sum&#39;,&#39;FCE MiPyME C&#39;)"><div><div class="tc-name">FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);">Operaciones con empresas grandes &gt;$500k</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,&#39;ND-FCE-C&#39;,&#39;sum&#39;,&#39;ND FCE MiPyME C&#39;)"><div><div class="tc-name">Nota de Débito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,&#39;NC-FCE-C&#39;,&#39;nc&#39;,&#39;NC FCE MiPyME C&#39;)"><div><div class="tc-name">Nota de Crédito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-nc">No suma</span></div>
       </div>
 
       <div id="cbte-rest" style="display:none;">
@@ -469,7 +470,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
           <label>5 · Concepto</label>
           <select id="concepto-sel" onchange="updateConcepto(this.value)">
             <option value="prod">Productos</option>
-            <option value="serv" selected>Servicios</option>
+            <option value="serv" selected="">Servicios</option>
             <option value="mixto">Productos y Servicios</option>
           </select>
         </div>
@@ -486,7 +487,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
         </div>
 
         <button class="btn btn-p" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
-        <button class="btn btn-s" onclick="goTo('s-dash')">Cancelar</button>
+        <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Cancelar</button>
       </div>
     </div>
 
@@ -518,24 +519,24 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
         <div style="display:flex;flex-direction:column;gap:8px;">
           <button class="btn btn-p">↓ Descargar PDF</button>
           <button class="btn btn-s">✉ Enviar a constructora@norte.com.ar</button>
-          <button class="btn btn-s" onclick="goTo('s-dash')">Volver al inicio</button>
+          <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
         </div>
       </div>
     </div>
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni active"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo('s-alerta')"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
+    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
 <!-- ══ ERROR AFIP ══ -->
 <div class="screen" id="s-error">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-cbte')">← Volver</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-cbte&#39;)">← Volver</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 4 — Error AFIP</div>
     <div class="er-ic">⚠️</div>
@@ -548,15 +549,15 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="er-step"><div class="sn2">2</div><div class="st">No necesitás hacer nada — reintentamos en 10 segundos</div></div>
       <div class="er-step"><div class="sn2">3</div><div class="st">Si el problema persiste, contactá soporte desde el menú</div></div>
     </div>
-    <button class="btn btn-p" style="margin-bottom:8px;" onclick="goTo('s-cbte')">↺ Reintentar ahora</button>
-    <button class="btn btn-s" onclick="goTo('s-dash')">Volver al inicio</button>
+    <button class="btn btn-p" style="margin-bottom:8px;" onclick="goTo(&#39;s-cbte&#39;)">↺ Reintentar ahora</button>
+    <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
     <div class="sn"></div>
   </div>
 </div>
 
 <!-- ══ ALERTA EXCLUSIÓN ══ -->
 <div class="screen" id="s-alerta">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Inicio</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 5 — Alertas</div>
     <div class="eh"><div style="font-size:48px;margin-bottom:10px;">🚨</div><div class="et">Riesgo de exclusión del Monotributo</div><div class="es">Tu facturación superó el 90% del tope. Si alcanzás el límite en los próximos 365 días, quedás excluido del régimen.</div></div>
@@ -574,7 +575,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div style="font-size:13px;color:var(--ts);line-height:1.6;">Podés <strong>recategorizarte a Categoría G</strong> antes de llegar al límite. El período de recategorización está abierto hasta el 31 de julio.</div>
     </div>
     <button class="btn btn-p" style="margin-bottom:8px;">Iniciar recategorización →</button>
-    <button class="btn btn-s" onclick="goTo('s-dash')">Volver al inicio</button>
+    <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
     <div style="margin-top:20px;">
       <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Otras alertas</div>
       <div class="tw">
@@ -585,17 +586,17 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
     <div class="ni active"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
 <!-- ══ PANEL FISCAL ══ -->
 <div class="screen" id="s-panel">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Inicio</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Panel Fiscal — Abril 2026</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Panel Fiscal</div>
@@ -617,18 +618,18 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
     <div class="ni active"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo('s-alerta')"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
+    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
 <!-- ══ WHATSAPP SCREEN ══ -->
 <div class="screen wa-bg" id="s-wa">
   <div class="wa-tb">
-    <div class="wa-back" onclick="goTo('s-dash')">←</div>
+    <div class="wa-back" onclick="goTo(&#39;s-dash&#39;)">←</div>
     <div class="wa-av">L</div>
     <div class="wa-info">
       <div class="wa-name">LUCA Fiscal</div>
@@ -650,9 +651,9 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div id="wa-step-1">
       <div class="wa-msg in">
         <div class="wa-btns">
-          <div class="wa-btn" onclick="waStep(2,'📄 Emitir comprobante')">📄 Emitir comprobante</div>
-          <div class="wa-btn" onclick="waStep(10,'💰 ¿Cuánto puedo facturar?')">💰 ¿Cuánto puedo facturar?</div>
-          <div class="wa-btn" onclick="waStep(20,'🔁 Configurar recurrente')">🔁 Configurar recurrente</div>
+          <div class="wa-btn" onclick="waStep(2,&#39;📄 Emitir comprobante&#39;)">📄 Emitir comprobante</div>
+          <div class="wa-btn" onclick="waStep(10,&#39;💰 ¿Cuánto puedo facturar?&#39;)">💰 ¿Cuánto puedo facturar?</div>
+          <div class="wa-btn" onclick="waStep(20,&#39;🔁 Configurar recurrente&#39;)">🔁 Configurar recurrente</div>
         </div>
         <div class="wa-time">10:15 ✓✓</div>
       </div>
@@ -662,7 +663,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
   <div style="background:#0b141a;padding:8px 16px;display:flex;gap:8px;overflow-x:auto;" id="wa-suggestions"></div>
 
   <div class="wa-input-area">
-    <input class="wa-input" id="wa-input" placeholder="Escribí un mensaje..." onkeydown="if(event.key==='Enter')waSend()">
+    <input class="wa-input" id="wa-input" placeholder="Escribí un mensaje..." onkeydown="if(event.key===&#39;Enter&#39;)waSend()">
     <button class="wa-send" onclick="waSend()">➤</button>
   </div>
 </div>
@@ -674,9 +675,9 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
   <div class="fb-s" id="fb-ctx">Pantalla: Dashboard</div>
   <div style="font-size:12px;color:var(--ts);margin-bottom:8px;">¿Qué tipo de feedback es?</div>
   <div class="fb-types">
-    <div class="fbt" onclick="selFbT(this,'problema')">🐛 Problema</div>
-    <div class="fbt" onclick="selFbT(this,'sugerencia')">💡 Sugerencia</div>
-    <div class="fbt" onclick="selFbT(this,'me gustó')">❤️ Me gustó</div>
+    <div class="fbt" onclick="selFbT(this,&#39;problema&#39;)">🐛 Problema</div>
+    <div class="fbt" onclick="selFbT(this,&#39;sugerencia&#39;)">💡 Sugerencia</div>
+    <div class="fbt" onclick="selFbT(this,&#39;me gustó&#39;)">❤️ Me gustó</div>
   </div>
   <div style="font-size:12px;color:var(--ts);margin-bottom:6px;">¿Qué tan útil es esta pantalla?</div>
   <div class="fb-stars">
@@ -691,7 +692,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.1';
+const SPRINT='S00-v3.2';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
@@ -964,5 +965,6 @@ setTimeout(()=>{
   if(document.getElementById('monto-in')){updateImpact('320000');}
 },100);
 </script>
-</body>
-</html>
+
+
+</body></html>
