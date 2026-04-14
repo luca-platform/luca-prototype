@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.1</title>
+<title>LUCA — Prototipo Sprint 00 v3.1.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
@@ -46,7 +46,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
 /* cards */
 .card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);}
-.cl{font-size:10px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
+.cl{font-size:10px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
 /* bottom nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;}
 .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
@@ -60,9 +60,11 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .pt{height:8px;background:var(--bpi);border-radius:100px;overflow:hidden;margin:8px 0;}
 .pf{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1);}
 /* badge */
-.bdg{display:inline-block;font-size:10px;font-weight:500;border-radius:6px;padding:2px 8px;}
-.bg{background:var(--gd);color:var(--g);}.bb{background:var(--bld);color:var(--bl);}
-.ba{background:var(--ad);color:var(--a);}.br2{background:var(--rd);color:var(--r);}
+.bdg{display:inline-block;font-size:10px;font-weight:600;border-radius:6px;padding:3px 9px;}
+.bg{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.3);}
+.bb{background:var(--bld);color:var(--bl);border:1px solid rgba(99,102,241,0.35);}
+.ba{background:var(--ad);color:var(--a);border:1px solid rgba(249,115,22,0.3);}
+.br2{background:var(--rd);color:var(--r);border:1px solid rgba(239,68,68,0.3);}
 /* mono */
 .mo{font-family:'JetBrains Mono',monospace;}
 /* alert */
@@ -73,16 +75,16 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .tw{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);overflow:hidden;}
 .tr2{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--br);cursor:pointer;}
 .tr2:last-child{border-bottom:none;}.tr2:active{background:var(--bh);}
-.tm2{flex:1;font-size:13px;font-weight:500;}.ts2{font-size:11px;color:var(--tm);font-family:'JetBrains Mono',monospace;}
+.tm2{flex:1;font-size:13px;font-weight:500;}.ts2{font-size:11px;color:var(--ts);font-family:'JetBrains Mono',monospace;}
 .tr2-r{text-align:right;}
 /* grid */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
 .sc{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;box-shadow:var(--sh);}
-.sl{font-size:10px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
-.sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;}
+.sl{font-size:10px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--tp);}
 .ss{font-size:11px;color:var(--ts);margin-top:3px;}
 /* screen pill */
-.sp{display:inline-block;font-size:10px;color:var(--tm);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;}
+.sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--br);}
 /* form */
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;}
@@ -100,15 +102,15 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .ib.danger{background:var(--rd);border:1px solid var(--r);}
 .ib-l{font-size:12px;font-weight:500;margin-bottom:4px;}
 .ib.warn .ib-l{color:var(--a);}.ib.ok .ib-l{color:var(--g);}.ib.danger .ib-l{color:var(--r);}
-.ib-t{font-size:13px;color:var(--ts);}
+.ib-t{font-size:13px;color:var(--tp);}
 /* type selector */
 .ts3{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
 .tc{background:var(--bpi);border:1.5px solid var(--br);border-radius:var(--Rx);padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;}
 .tc:active{opacity:.8;}
 .tc.sel-sum{border-color:var(--g);background:var(--gd);}
 .tc.sel-nc{border-color:var(--bl);background:var(--bld);}
-.tc-name{font-size:13px;font-weight:500;color:var(--tp);}
-.tc.sel-sum .tc-name,.tc.sel-nc .tc-name{font-weight:600;}
+.tc-name{font-size:13px;font-weight:600;color:var(--tp);}
+.tc.sel-sum .tc-name{font-weight:700;color:var(--g);}.tc.sel-nc .tc-name{font-weight:700;color:var(--bl);}
 .tc-tag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;}
 .tag-sum{background:var(--gd);color:var(--g);}.tag-nc{background:var(--bld);color:var(--bl);}
 /* date suggestion */
@@ -122,17 +124,17 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 /* error */
 .er-ic{font-size:56px;text-align:center;margin:32px 0 16px;}
 .er-t{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px;}
-.er-m{font-size:14px;color:var(--ts);text-align:center;margin-bottom:6px;line-height:1.6;}
+.er-m{font-size:14px;color:var(--tp);text-align:center;margin-bottom:6px;line-height:1.6;}
 .er-c{font-size:11px;color:var(--tm);text-align:center;font-family:'JetBrains Mono',monospace;margin-bottom:24px;}
 .er-steps{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;}
 .er-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
 .er-step:last-child{margin-bottom:0;}
 .sn2{width:22px;height:22px;border-radius:50%;background:var(--bld);color:var(--bl);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
-.st{font-size:13px;color:var(--ts);line-height:1.5;}
+.st{font-size:13px;color:var(--tp);line-height:1.5;}
 /* alerta */
 .eh{background:var(--rd);border:2px solid var(--r);border-radius:var(--R);padding:20px;text-align:center;margin-bottom:16px;}
 .et{font-size:20px;font-weight:600;color:var(--r);margin-bottom:6px;}
-.es{font-size:13px;color:var(--ts);line-height:1.5;}
+.es{font-size:13px;color:var(--tp);line-height:1.5;}
 .cd{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:var(--r);text-align:center;margin:16px 0;}
 .cdl{font-size:12px;color:var(--tm);text-align:center;margin-top:-10px;margin-bottom:16px;}
 /* onboarding */
@@ -152,8 +154,8 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .mc-s{font-size:11px;color:var(--ts);line-height:1.4;}
 /* mode badge */
 .mb2{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:500;}
-.mb-u{background:var(--gd);color:var(--g);border:1px solid var(--g);}
-.mb-e{background:var(--bld);color:var(--bl);border:1px solid var(--bl);}
+.mb-u{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.4);font-weight:600;}
+.mb-e{background:var(--bld);color:var(--bl);border:1px solid rgba(99,102,241,0.4);font-weight:600;}
 /* desktop nav */
 @media(min-width:768px){
   .bnav{display:none;}.fab{bottom:24px;}
@@ -191,8 +193,8 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .wa-tb{background:#161b27;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
 .wa-av{width:40px;height:40px;border-radius:50%;background:#1e2740;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#8696a0;}
 .wa-info{flex:1;}
-.wa-name{font-size:15px;font-weight:500;color:#e9edef;}
-.wa-status{font-size:12px;color:#8696a0;}
+.wa-name{font-size:15px;font-weight:600;color:#F1F5F9;}
+.wa-status{font-size:12px;color:#94A3B8;}
 .wa-back{font-size:20px;color:#8696a0;cursor:pointer;padding:4px;}
 .wa-msgs{padding:12px 16px;display:flex;flex-direction:column;gap:8px;padding-bottom:80px;}
 .wa-msg{max-width:85%;padding:8px 12px;border-radius:8px;font-size:14px;line-height:1.5;position:relative;}
@@ -215,18 +217,18 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
 @media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
 .metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;}
-.metric-label{font-size:9px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
-.metric-value{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;color:var(--tp);}
+.metric-label{font-size:9px;font-weight:600;color:var(--ts);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--tp);}
 .metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
-.metric-sub{font-size:10px;color:var(--tm);margin-top:2px;}
+.metric-sub{font-size:10px;color:var(--ts);margin-top:3px;}
 /* liberacion chart */
 .lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;}
-.lib-title{font-size:12px;font-weight:500;color:var(--ts);margin-bottom:12px;}
+.lib-title{font-size:12px;font-weight:600;color:var(--tp);margin-bottom:12px;}
 .lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.lib-date{font-size:11px;color:var(--tm);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;}
+.lib-date{font-size:11px;color:var(--ts);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
 .lib-bar-wrap{flex:1;height:20px;background:var(--bpi);border-radius:4px;overflow:hidden;position:relative;}
 .lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;}
-.lib-amount{font-size:11px;color:var(--g);font-family:'JetBrains Mono',monospace;width:70px;text-align:right;flex-shrink:0;}
+.lib-amount{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;width:70px;text-align:right;flex-shrink:0;font-weight:600;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -303,14 +305,14 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
       <div>
         <div style="font-size:21px;font-weight:600;">Hola, Javier 👋</div>
-        <div style="font-size:13px;color:var(--ts);margin-top:2px;">Lunes 13 de abril · Todo al día</div>
+        <div style="font-size:13px;color:var(--ts);margin-top:2px;font-weight:400;">Lunes 13 de abril · Todo al día</div>
       </div>
       <div class="mb2" id="dash-mb"></div>
     </div>
 
     <div class="ab" onclick="goTo('s-alerta')">
       <div class="ad2"></div>
-      <div style="flex:1;font-size:13px;color:var(--a);">Riesgo de exclusión — superaste el 90% del tope</div>
+      <div style="flex:1;font-size:13px;color:var(--a);font-weight:500;">Riesgo de exclusión — superaste el 90% del tope</div>
       <div style="font-size:12px;color:var(--a);font-weight:500;">Ver →</div>
     </div>
 
@@ -339,18 +341,18 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
         <span class="bdg bg mo">Monotributo</span>
       </div>
       <div style="font-size:34px;font-weight:600;letter-spacing:-1px;margin-bottom:3px;">Categoría F</div>
-      <div style="font-size:13px;color:var(--ts);margin-bottom:16px;" class="mo">Cuota mensual: <strong>$68.500</strong></div>
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--ts);margin-bottom:5px;">
+      <div style="font-size:13px;color:var(--tp);margin-bottom:16px;" class="mo">Cuota mensual: <strong>$68.500</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
         <span>Facturado (últimos 365 días)</span><span class="mo">72%</span>
       </div>
       <div class="pt"><div class="pf" style="width:72%;background:var(--a);"></div></div>
       <div style="display:flex;justify-content:space-between;">
         <span class="mo" style="font-size:15px;font-weight:500;">$5.820.000</span>
-        <span class="mo" style="font-size:12px;color:var(--tm);">límite $8.100.000</span>
+        <span class="mo" style="font-size:12px;color:var(--ts);">límite $8.100.000</span>
       </div>
       <div style="height:1px;background:var(--br);margin:14px 0;"></div>
       <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--ts);">Proyección próxima categoría</span>
+        <span style="font-size:12px;color:var(--tp);">Proyección próxima categoría</span>
         <span class="bdg bb">→ Categoría G</span>
       </div>
     </div>
@@ -362,7 +364,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:40%"></div></div><div class="lib-amount">+$320k</div></div>
       <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"></div></div><div class="lib-amount">+$240k</div></div>
       <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:55%"></div></div><div class="lib-amount">+$450k</div></div>
-      <div style="font-size:11px;color:var(--tm);margin-top:8px;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
+      <div style="font-size:11px;color:var(--ts);margin-top:8px;line-height:1.5;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
     </div>
 
     <div class="g2">
