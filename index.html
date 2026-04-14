@@ -3,25 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v2</title>
+<title>LUCA — Prototipo Sprint 00 v3</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  --bp:#0f1117;--bs:#181c24;--bc:#1e2330;--bh:#232840;--bpi:#252b3a;
-  --tp:#eef0f6;--ts:#8891aa;--tm:#4e566b;
-  --g:#2dce7a;--gd:#1a5e3d;--a:#f5a623;--ad:#5c3d0d;
-  --r:#f05252;--rd:#5c1d1d;--bl:#5b8cff;--bld:#1a2b5e;
-  --br:rgba(255,255,255,0.06);--brm:rgba(255,255,255,0.12);
-  --sh:0 4px 24px rgba(0,0,0,0.4);--R:14px;--Rs:10px;--Rx:8px;
+  /* Dark mode — Slate profundo, premium fintech */
+  --bp:#0F172A;--bs:#1E293B;--bc:#263044;--bh:#2d3a52;--bpi:#1a2438;
+  --tp:#F1F5F9;--ts:#94A3B8;--tm:#475569;
+  /* Emerald — primario, acción, positivo */
+  --g:#10B981;--gd:rgba(16,185,129,0.12);
+  /* Naranja coral — warning, sin amarillo */
+  --a:#F97316;--ad:rgba(249,115,22,0.12);
+  /* Rojo — danger */
+  --r:#EF4444;--rd:rgba(239,68,68,0.12);
+  /* Indigo — acento brand, info */
+  --bl:#6366F1;--bld:rgba(99,102,241,0.12);
+  --br:rgba(255,255,255,0.06);--brm:rgba(255,255,255,0.11);
+  --sh:0 4px 24px rgba(0,0,0,0.45);--R:14px;--Rs:10px;--Rx:8px;
 }
 .light{
-  --bp:#f4f5f8;--bs:#fff;--bc:#fff;--bh:#f0f2f8;--bpi:#eef0f6;
-  --tp:#12152a;--ts:#5a6180;--tm:#9aa0b8;
-  --g:#0e9e56;--gd:#d4f4e5;--a:#c87d0e;--ad:#fef3db;
-  --r:#d83535;--rd:#fde8e8;--bl:#2f5fd4;--bld:#dde8ff;
-  --br:rgba(0,0,0,0.07);--brm:rgba(0,0,0,0.13);
-  --sh:0 2px 16px rgba(0,0,0,0.07);
+  --bp:#F8FAFC;--bs:#FFFFFF;--bc:#FFFFFF;--bh:#F1F5F9;--bpi:#EEF2F8;
+  --tp:#0F172A;--ts:#475569;--tm:#94A3B8;
+  --g:#059669;--gd:rgba(5,150,105,0.1);
+  --a:#EA580C;--ad:rgba(234,88,12,0.1);
+  --r:#DC2626;--rd:rgba(220,38,38,0.1);
+  --bl:#4F46E5;--bld:rgba(79,70,229,0.1);
+  --br:rgba(15,23,42,0.08);--brm:rgba(15,23,42,0.14);
+  --sh:0 2px 16px rgba(15,23,42,0.08);
 }
 html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min-height:100vh;transition:background .3s,color .3s;}
 .screen{display:none;min-height:100vh;flex-direction:column;}
@@ -178,30 +187,30 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .fb-send:hover{opacity:.88;}
 .fb-ok{font-size:13px;color:var(--g);text-align:center;padding:6px 0;display:none;font-weight:500;}
 /* WHATSAPP SCREEN */
-.wa-bg{background:#0b141a;min-height:100vh;}
-.wa-tb{background:#1f2c34;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
-.wa-av{width:40px;height:40px;border-radius:50%;background:#2a3942;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#8696a0;}
+.wa-bg{background:#0d1117;min-height:100vh;}
+.wa-tb{background:#161b27;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
+.wa-av{width:40px;height:40px;border-radius:50%;background:#1e2740;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#8696a0;}
 .wa-info{flex:1;}
 .wa-name{font-size:15px;font-weight:500;color:#e9edef;}
 .wa-status{font-size:12px;color:#8696a0;}
 .wa-back{font-size:20px;color:#8696a0;cursor:pointer;padding:4px;}
 .wa-msgs{padding:12px 16px;display:flex;flex-direction:column;gap:8px;padding-bottom:80px;}
 .wa-msg{max-width:85%;padding:8px 12px;border-radius:8px;font-size:14px;line-height:1.5;position:relative;}
-.wa-msg.in{background:#1f2c34;color:#e9edef;align-self:flex-start;border-bottom-left-radius:2px;}
-.wa-msg.out{background:#005c4b;color:#e9edef;align-self:flex-end;border-bottom-right-radius:2px;}
+.wa-msg.in{background:#161b27;color:#e9edef;align-self:flex-start;border-bottom-left-radius:2px;}
+.wa-msg.out{background:#1e3a5f;color:#e9edef;align-self:flex-end;border-bottom-right-radius:2px;}
 .wa-time{font-size:10px;color:#8696a0;margin-top:4px;text-align:right;}
 .wa-msg.in .wa-time{text-align:left;}
 .wa-status-msg{font-size:11px;color:#8696a0;text-align:center;margin:4px 0;}
 .wa-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.wa-btn{background:#2a3942;border:1px solid #3b4a54;border-radius:20px;padding:6px 14px;font-size:13px;color:#00a884;cursor:pointer;font-family:'Sora',sans-serif;transition:background .15s;}
-.wa-btn:active{background:#3b4a54;}
-.wa-input-area{position:fixed;bottom:0;left:0;right:0;background:#1f2c34;padding:10px 16px;display:flex;align-items:center;gap:10px;}
-.wa-input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:10px 16px;font-family:'Sora',sans-serif;font-size:14px;color:#e9edef;outline:none;}
+.wa-btn{background:#1e2740;border:1px solid #263252;border-radius:20px;padding:6px 14px;font-size:13px;color:#818cf8;cursor:pointer;font-family:'Sora',sans-serif;transition:background .15s;}
+.wa-btn:active{background:#263252;}
+.wa-input-area{position:fixed;bottom:0;left:0;right:0;background:#161b27;padding:10px 16px;display:flex;align-items:center;gap:10px;}
+.wa-input{flex:1;background:#1e2740;border:none;border-radius:20px;padding:10px 16px;font-family:'Sora',sans-serif;font-size:14px;color:#e9edef;outline:none;}
 .wa-input::placeholder{color:#8696a0;}
-.wa-send{width:44px;height:44px;border-radius:50%;background:#00a884;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;}
-.wa-typing{background:#1f2c34;padding:8px 12px;border-radius:8px;align-self:flex-start;font-size:13px;color:#8696a0;display:none;}
+.wa-send{width:44px;height:44px;border-radius:50%;background:#6366f1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;}
+.wa-typing{background:#161b27;padding:8px 12px;border-radius:8px;align-self:flex-start;font-size:13px;color:#8696a0;display:none;}
 .wa-typing.show{display:block;}
-.wa-warn{background:#2a3942;border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:6px;font-size:12px;color:var(--a);}
+.wa-warn{background:#1e2740;border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:6px;font-size:12px;color:var(--a);}
 /* metrics row */
 .metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
 @media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
@@ -377,14 +386,14 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     </div>
 
     <!-- WhatsApp CTA -->
-    <div class="card" style="background:linear-gradient(135deg,#1a3a2a,#0b2a1a);border-color:#00a884;margin-top:14px;cursor:pointer;" onclick="goTo('s-wa')">
+    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo('s-wa')">
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="font-size:32px;">💬</div>
         <div>
-          <div style="font-size:14px;font-weight:600;color:#00d991;margin-bottom:3px;">Facturá por WhatsApp</div>
+          <div style="font-size:14px;font-weight:600;color:var(--bl);margin-bottom:3px;">Facturá por WhatsApp</div>
           <div style="font-size:12px;color:#8696a0;line-height:1.5;">Emití comprobantes hablando con LUCA. Sin abrir la app.</div>
         </div>
-        <div style="margin-left:auto;color:#00a884;font-size:18px;">→</div>
+        <div style="margin-left:auto;color:#818cf8;font-size:18px;">→</div>
       </div>
     </div>
 
@@ -616,7 +625,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
       <div class="wa-name">LUCA Fiscal</div>
       <div class="wa-status" id="wa-status">en línea</div>
     </div>
-    <div style="font-size:11px;color:#8696a0;background:#1a3a2a;padding:3px 8px;border-radius:10px;border:1px solid #00a884;">Beta · Iteración 2</div>
+    <div style="font-size:11px;color:#8696a0;background:#1a3a2a;padding:3px 8px;border-radius:10px;border:1px solid var(--bl);">Beta · Iteración 2</div>
   </div>
 
   <div class="wa-msgs" id="wa-msgs">
@@ -673,7 +682,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v2';
+const SPRINT='S00-v3';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
