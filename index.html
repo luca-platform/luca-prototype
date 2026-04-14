@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>LUCA — Prototipo Sprint 00</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+  --bg-page:#0f1117; --bg-surface:#181c24; --bg-card:#1e2330;
+  --bg-hover:#232840; --bg-pill:#252b3a;
+  --text-primary:#eef0f6; --text-secondary:#8891aa; --text-muted:#4e566b;
+  --green:#2dce7a; --green-dim:#1a5e3d;
+  --amber:#f5a623; --amber-dim:#5c3d0d;
+  --red:#f05252; --red-dim:#5c1d1d;
+  --blue:#5b8cff; --blue-dim:#1a2b5e;
+  --border:rgba(255,255,255,0.06); --border-md:rgba(255,255,255,0.12);
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
+  --r:14px; --rs:10px; --rx:8px;
+}
+.light {
+  --bg-page:#f4f5f8; --bg-surface:#ffffff; --bg-card:#ffffff;
+  --bg-hover:#f0f2f8; --bg-pill:#eef0f6;
+  --text-primary:#12152a; --text-secondary:#5a6180; --text-muted:#9aa0b8;
+  --green:#0e9e56; --green-dim:#d4f4e5;
+  --amber:#c87d0e; --amber-dim:#fef3db;
+  --red:#d83535; --red-dim:#fde8e8;
+  --blue:#2f5fd4; --blue-dim:#dde8ff;
+  --border:rgba(0,0,0,0.07); --border-md:rgba(0,0,0,0.13);
+  --shadow:0 2px 16px rgba(0,0,0,0.07);
+}
+html,body{font-family:'Sora',sans-serif;background:var(--bg-page);color:var(--text-primary);min-height:100vh;transition:background .3s,color .3s;}
+.screen{display:none;min-height:100vh;flex-direction:column;}
+.screen.active{display:flex;}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bg-surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;}
+.logo{font-size:20px;font-weight:600;letter-spacing:-.5px;}
+.logo span{color:var(--green);}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.btn-theme{background:var(--bg-pill);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-family:'Sora',sans-serif;font-size:11px;color:var(--text-secondary);cursor:pointer;}
+.btn-back{background:var(--bg-pill);border:1px solid var(--border);border-radius:var(--rx);padding:6px 12px;font-family:'Sora',sans-serif;font-size:13px;color:var(--text-secondary);cursor:pointer;}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--blue);cursor:pointer;position:relative;}
+.avatar-name{position:absolute;right:44px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:500;white-space:nowrap;color:var(--text-primary);}
+.content{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:var(--shadow);}
+.card-label{font-size:10px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg-surface);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
+.nav-icon{font-size:20px;}
+.nav-label{font-size:10px;color:var(--text-muted);}
+.nav-item.active .nav-label{color:var(--green);font-weight:500;}
+.spacer-nav{height:80px;}
+.fab{position:fixed;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--green);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(45,206,122,.45);font-size:26px;color:#fff;z-index:49;transition:transform .15s;}
+.fab:active{transform:scale(.94);}
+.prog-track{height:8px;background:var(--bg-pill);border-radius:100px;overflow:hidden;margin:8px 0;}
+.prog-fill{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1);}
+.badge{display:inline-block;font-size:10px;font-weight:500;border-radius:6px;padding:2px 8px;}
+.badge-green{background:var(--green-dim);color:var(--green);}
+.badge-blue{background:var(--blue-dim);color:var(--blue);}
+.badge-amber{background:var(--amber-dim);color:var(--amber);}
+.badge-red{background:var(--red-dim);color:var(--red);}
+.mono{font-family:'JetBrains Mono',monospace;}
+.alert-banner{background:var(--amber-dim);border:1px solid var(--amber);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;}
+.alert-dot{width:7px;height:7px;border-radius:50%;background:var(--amber);flex-shrink:0;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.inv-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;cursor:pointer;}
+.field{margin-bottom:14px;}
+.field label{font-size:12px;color:var(--text-secondary);display:block;margin-bottom:5px;}
+.field input,.field textarea,.field select{width:100%;background:var(--bg-pill);border:1px solid var(--border);border-radius:var(--rx);padding:10px 12px;font-family:'Sora',sans-serif;font-size:14px;color:var(--text-primary);outline:none;transition:border-color .2s;}
+.field input:focus,.field textarea:focus{border-color:var(--green);}
+.field textarea{resize:none;min-height:80px;}
+.btn{width:100%;padding:14px;border-radius:var(--rs);font-family:'Sora',sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
+.btn:active{transform:scale(.98);}
+.btn-primary{background:var(--green);color:#fff;}
+.btn-secondary{background:var(--bg-pill);color:var(--text-primary);border:1px solid var(--border);}
+.error-icon{font-size:56px;text-align:center;margin:32px 0 16px;}
+.error-title{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px;}
+.error-msg{font-size:14px;color:var(--text-secondary);text-align:center;margin-bottom:6px;line-height:1.6;}
+.error-code{font-size:11px;color:var(--text-muted);text-align:center;font-family:'JetBrains Mono',monospace;margin-bottom:24px;}
+.error-steps{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px;}
+.error-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.error-step:last-child{margin-bottom:0;}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--blue-dim);color:var(--blue);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step-text{font-size:13px;color:var(--text-secondary);line-height:1.5;}
+.exclusion-hero{background:var(--red-dim);border:2px solid var(--red);border-radius:var(--r);padding:20px;text-align:center;margin-bottom:16px;}
+.exclusion-title{font-size:20px;font-weight:600;color:var(--red);margin-bottom:6px;}
+.exclusion-sub{font-size:13px;color:var(--text-secondary);line-height:1.5;}
+.countdown{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:var(--red);text-align:center;margin:16px 0;}
+.countdown-label{font-size:12px;color:var(--text-muted);text-align:center;margin-top:-10px;margin-bottom:16px;}
+.onb-step{display:none;}
+.onb-step.active{display:block;}
+.onb-progress{display:flex;gap:6px;margin-bottom:24px;}
+.onb-dot{flex:1;height:3px;border-radius:100px;background:var(--bg-pill);transition:background .3s;}
+.onb-dot.done{background:var(--green);}
+.onb-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.onb-sub{font-size:14px;color:var(--text-secondary);margin-bottom:24px;line-height:1.6;}
+.success-screen{text-align:center;padding:32px 20px;}
+.success-icon{font-size:64px;margin-bottom:16px;}
+.success-title{font-size:22px;font-weight:600;margin-bottom:8px;}
+.success-sub{font-size:14px;color:var(--text-secondary);margin-bottom:8px;}
+.cae-box{background:var(--green-dim);border:1px solid var(--green);border-radius:var(--rs);padding:14px;margin:20px 0;}
+.cae-label{font-size:11px;color:var(--green);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
+.cae-number{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;color:var(--green);letter-spacing:1px;}
+.impact-bar{background:var(--bg-card);border:1px solid var(--amber);border-radius:var(--rs);padding:12px 14px;margin-bottom:14px;}
+.impact-label{font-size:12px;color:var(--amber);margin-bottom:4px;font-weight:500;}
+.impact-text{font-size:13px;color:var(--text-secondary);}
+.tbl-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;}
+.tbl-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;}
+.tbl-row:last-child{border-bottom:none;}
+.tbl-row:active{background:var(--bg-hover);}
+.tbl-main{flex:1;font-size:13px;font-weight:500;}
+.tbl-sub{font-size:11px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;}
+.tbl-right{text-align:right;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:14px;box-shadow:var(--shadow);}
+.stat-label{font-size:10px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.stat-value{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;}
+.stat-sub{font-size:11px;color:var(--text-secondary);margin-top:3px;}
+.screen-pill{display:inline-block;font-size:10px;color:var(--text-muted);background:var(--bg-pill);border-radius:20px;padding:3px 10px;margin-bottom:12px;}
+/* modo badge */
+.mode-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:500;}
+.mode-usuario{background:var(--green-dim);color:var(--green);border:1px solid var(--green);}
+.mode-evaluador{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue);}
+/* desktop nav */
+@media(min-width:768px){
+  .bottom-nav{display:none;}
+  .fab{bottom:24px;}
+  #fb-btn{bottom:24px;}
+  #fb-panel{bottom:80px;}
+  .content{padding:28px 24px;}
+  .desktop-nav{display:flex;align-items:center;gap:4px;}
+  .dnav-item{padding:6px 14px;font-size:13px;color:var(--text-secondary);border-radius:var(--rx);cursor:pointer;transition:all .15s;}
+  .dnav-item:hover{background:var(--bg-pill);color:var(--text-primary);}
+  .dnav-item.active{color:var(--green);font-weight:500;}
+}
+@media(max-width:767px){
+  .desktop-nav{display:none;}
+  .spacer-nav{display:block;}
+}
+/* FEEDBACK */
+#fb-btn{position:fixed;bottom:82px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--bg-surface);border:1.5px solid var(--border-md);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:var(--shadow);font-size:18px;transition:transform .15s;}
+#fb-btn:hover{transform:scale(1.1);}
+#fb-panel{position:fixed;bottom:136px;left:16px;width:min(320px,calc(100vw - 32px));background:var(--bg-surface);border:1px solid var(--border-md);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;z-index:200;display:none;}
+#fb-panel.open{display:block;}
+.fb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.fb-title{font-size:14px;font-weight:600;}
+.fb-close{font-size:18px;cursor:pointer;color:var(--text-muted);line-height:1;}
+.fb-sub{font-size:11px;color:var(--text-secondary);margin-bottom:12px;}
+.fb-types{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+.fb-type{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--border-md);cursor:pointer;color:var(--text-secondary);background:var(--bg-pill);transition:all .15s;}
+.fb-type.selected{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.fb-stars{display:flex;gap:6px;margin-bottom:12px;}
+.fb-star{font-size:22px;cursor:pointer;opacity:.25;transition:opacity .12s;}
+.fb-star.on{opacity:1;}
+.fb-textarea{width:100%;background:var(--bg-pill);border:1px solid var(--border);border-radius:var(--rx);padding:8px 10px;font-family:'Sora',sans-serif;font-size:12px;color:var(--text-primary);resize:none;outline:none;min-height:60px;margin-bottom:10px;transition:border-color .2s;}
+.fb-textarea:focus{border-color:var(--green);}
+.fb-textarea::placeholder{color:var(--text-muted);}
+.fb-send{width:100%;padding:9px;background:var(--green);color:#fff;border:none;border-radius:var(--rx);font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;}
+.fb-send:hover{opacity:.88;}
+.fb-sent{font-size:13px;color:var(--green);text-align:center;padding:6px 0;display:none;font-weight:500;}
+.fb-mode-indicator{font-size:10px;padding:3px 8px;border-radius:10px;margin-bottom:8px;display:inline-block;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* modo selector */
+.mode-selector{display:flex;gap:10px;margin-bottom:24px;}
+.mode-card{flex:1;background:var(--bg-card);border:2px solid var(--border);border-radius:var(--r);padding:16px;cursor:pointer;text-align:center;transition:all .2s;}
+.mode-card:hover{border-color:var(--border-md);}
+.mode-card.selected-usuario{border-color:var(--green);background:var(--green-dim);}
+.mode-card.selected-evaluador{border-color:var(--blue);background:var(--blue-dim);}
+.mode-card-icon{font-size:28px;margin-bottom:8px;}
+.mode-card-title{font-size:13px;font-weight:600;margin-bottom:4px;}
+.mode-card-sub{font-size:11px;color:var(--text-secondary);line-height:1.4;}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     SCREEN 1 — ONBOARDING
+══════════════════════════════════════ -->
+<div class="screen active" id="s-onboarding">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <button class="btn-theme" onclick="toggleTheme()">☀</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Pantalla 1 de 5 — Onboarding</div>
+    <div class="onb-progress">
+      <div class="onb-dot done" id="od0"></div>
+      <div class="onb-dot" id="od1"></div>
+      <div class="onb-dot" id="od2"></div>
+      <div class="onb-dot" id="od3"></div>
+    </div>
+
+    <!-- PASO 0: modo -->
+    <div class="onb-step active" id="os0">
+      <div class="onb-title">Bienvenido, Javier 👋</div>
+      <div class="onb-sub">¿Cómo vas a explorar LUCA hoy?</div>
+      <div class="mode-selector">
+        <div class="mode-card" id="mc-usuario" onclick="selectMode('usuario')">
+          <div class="mode-card-icon">👤</div>
+          <div class="mode-card-title">Como usuario</div>
+          <div class="mode-card-sub">Probá LUCA como si fueras un monotributista</div>
+        </div>
+        <div class="mode-card" id="mc-evaluador" onclick="selectMode('evaluador')">
+          <div class="mode-card-icon">🔍</div>
+          <div class="mode-card-title">Como evaluador</div>
+          <div class="mode-card-sub">Explorá el producto para recomendarlo a tus clientes</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="btn-modo" onclick="onbNext()" style="opacity:.4;pointer-events:none;">Continuar →</button>
+    </div>
+
+    <!-- PASO 1: registro -->
+    <div class="onb-step" id="os1">
+      <div class="onb-title">Creá tu cuenta</div>
+      <div class="onb-sub">Tu información fiscal está protegida con encriptación AES-256. LUCA nunca modifica datos en ARCA.</div>
+      <div class="field">
+        <label>Nombre completo</label>
+        <input type="text" value="Javier Costa">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" value="javier@estudiocosta.com.ar">
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" value="••••••••">
+      </div>
+      <button class="btn btn-primary" onclick="onbNext()">Crear cuenta →</button>
+    </div>
+
+    <!-- PASO 2: CUIT -->
+    <div class="onb-step" id="os2">
+      <div class="onb-title">Conectá tu CUIT</div>
+      <div class="onb-sub">LUCA descarga tus datos de ARCA automáticamente. Solo lectura — nunca modificamos nada en tu nombre.</div>
+      <div class="field">
+        <label>CUIT</label>
+        <input type="text" value="20-28456791-3">
+      </div>
+      <div class="field">
+        <label>Punto de venta</label>
+        <input type="text" value="0001">
+      </div>
+      <div style="background:var(--bg-pill);border-radius:var(--rx);padding:12px;margin-bottom:14px;">
+        <div style="font-size:12px;color:var(--text-secondary);line-height:1.6;">🔒 Certificado X.509 encriptado · Solo lectura en ARCA · Datos nunca compartidos</div>
+      </div>
+      <button class="btn btn-primary" onclick="onbNext()">Conectar con ARCA →</button>
+    </div>
+
+    <!-- PASO 3: éxito -->
+    <div class="onb-step" id="os3">
+      <div style="text-align:center;padding:16px 0;">
+        <div style="font-size:52px;margin-bottom:14px;">✅</div>
+        <div class="onb-title">¡Listo, Javier!</div>
+        <div class="onb-sub">Encontramos tu cuenta en ARCA. Sos <strong>Categoría F</strong> con $5.820.000 facturados este año.</div>
+        <div style="background:var(--green-dim);border:1px solid var(--green);border-radius:var(--rs);padding:14px;margin:18px 0;text-align:left;">
+          <div style="font-size:11px;color:var(--green);font-weight:500;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">Encontramos en ARCA</div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.9;">
+            ✓ 31 facturas emitidas este año<br>
+            ✓ 18 comprobantes recibidos<br>
+            ✓ Próximo vencimiento: 20 abril<br>
+            ✓ Sin deuda detectada
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="goTo('s-dashboard')">Ver mi panel →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 2 — DASHBOARD
+══════════════════════════════════════ -->
+<div class="screen" id="s-dashboard">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <nav class="desktop-nav">
+        <div class="dnav-item active" onclick="goTo('s-dashboard')">Inicio</div>
+        <div class="dnav-item" onclick="goTo('s-factura')">Nueva factura</div>
+        <div class="dnav-item" onclick="goTo('s-panel')">Panel fiscal</div>
+        <div class="dnav-item" onclick="goTo('s-alerta')">Alertas</div>
+      </nav>
+      <button class="btn-theme" onclick="toggleTheme()">☀</button>
+      <span class="avatar-name" id="topbar-name" style="display:none"></span>
+      <div class="avatar" id="topbar-avatar" title="Javier Costa">JC</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Pantalla 2 de 5 — Dashboard</div>
+
+    <!-- modo badge -->
+    <div style="margin-bottom:14px;display:flex;align-items:center;gap:10px;">
+      <div>
+        <div style="font-size:21px;font-weight:600;">Hola, Javier 👋</div>
+        <div style="font-size:13px;color:var(--text-secondary);margin-top:2px;">Lunes 13 de abril · Todo al día</div>
+      </div>
+      <div class="mode-badge" id="dash-mode-badge" style="margin-left:auto;"></div>
+    </div>
+
+    <div class="alert-banner" onclick="goTo('s-alerta')">
+      <div class="alert-dot"></div>
+      <div style="flex:1;font-size:13px;color:var(--amber);">Período de recategorización abierto — julio 2026</div>
+      <div style="font-size:12px;color:var(--amber);font-weight:500;">Ver →</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div class="card-label">Categoría vigente</div>
+        <span class="badge badge-green mono">Monotributo</span>
+      </div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-1px;margin-bottom:3px;">Categoría F</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;" class="mono">Cuota mensual: <strong>$68.500</strong></div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-secondary);margin-bottom:5px;">
+        <span>Facturado este año</span><span class="mono">72%</span>
+      </div>
+      <div class="prog-track">
+        <div class="prog-fill" style="width:72%;background:var(--amber);"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;">
+        <span class="mono" style="font-size:15px;font-weight:500;">$5.820.000</span>
+        <span class="mono" style="font-size:12px;color:var(--text-muted);">límite $8.100.000</span>
+      </div>
+      <div style="height:1px;background:var(--border);margin:14px 0;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:var(--text-secondary);">Proyección próxima categoría</span>
+        <span class="badge badge-blue">→ Categoría G</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="stat-card" onclick="goTo('s-panel')">
+        <div class="stat-label">Facturas emitidas</div>
+        <div class="stat-value">31</div>
+        <div class="stat-sub">Este mes: 8</div>
+      </div>
+      <div class="stat-card" onclick="goTo('s-panel')">
+        <div class="stat-label">Compras del período</div>
+        <div class="stat-value">$412k</div>
+        <div class="stat-sub">18 comprobantes</div>
+      </div>
+    </div>
+
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo('s-alerta')">
+      <div>
+        <div class="card-label">Próximo vencimiento</div>
+        <div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div>
+        <div style="font-size:12px;color:var(--text-secondary);">Cuota abril 2026 · $68.500</div>
+      </div>
+      <div style="background:var(--amber-dim);color:var(--amber);border-radius:var(--rx);padding:8px 14px;font-size:13px;font-weight:500;" class="mono">20 abr</div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:500;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.6px;">Últimas facturas</div>
+      <div style="font-size:12px;color:var(--blue);cursor:pointer;" onclick="goTo('s-panel')">Ver todas →</div>
+    </div>
+    <div class="tbl-wrap">
+      <div class="tbl-row"><div class="tbl-main"><div>Constructora del Norte S.A.</div><div class="tbl-sub">FC-C 0001-00000031</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;font-weight:500;">$320.000</div><div style="font-size:11px;color:var(--text-muted);">11 abr</div></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Farmacia Belgrano S.R.L.</div><div class="tbl-sub">FC-C 0001-00000030</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;font-weight:500;">$185.000</div><div style="font-size:11px;color:var(--text-muted);">9 abr</div></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Recursos Humanos Plus</div><div class="tbl-sub">FC-C 0001-00000029</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;font-weight:500;">$240.000</div><div style="font-size:11px;color:var(--text-muted);">7 abr</div></div></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item active" onclick="goTo('s-dashboard')"><div class="nav-icon">⊞</div><div class="nav-label">Inicio</div></div>
+    <div class="nav-item" onclick="goTo('s-factura')"><div class="nav-icon">◎</div><div class="nav-label">Facturar</div></div>
+    <div class="nav-item" onclick="goTo('s-panel')"><div class="nav-icon">≡</div><div class="nav-label">Panel</div></div>
+    <div class="nav-item" onclick="goTo('s-alerta')"><div class="nav-icon">◉</div><div class="nav-label">Alertas</div></div>
+  </div>
+  <button class="fab" onclick="goTo('s-factura')">+</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 3 — NUEVA FACTURA
+══════════════════════════════════════ -->
+<div class="screen" id="s-factura">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <button class="btn-back" onclick="goTo('s-dashboard')">← Volver</button>
+      <div class="avatar">JC</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Pantalla 3 de 5 — Nueva Factura</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:18px;">Nueva Factura C</div>
+
+    <div id="factura-form">
+      <div class="field">
+        <label>CUIT del receptor</label>
+        <input type="text" id="cuit-input" placeholder="30-71234567-8" value="30-71456892-1" oninput="lookupCuit(this.value)">
+      </div>
+      <div id="receptor-info" style="background:var(--bg-pill);border-radius:var(--rx);padding:10px 12px;margin-bottom:14px;margin-top:-8px;">
+        <div style="font-size:13px;font-weight:500;">Constructora del Norte S.A.</div>
+        <div style="font-size:11px;color:var(--text-muted);">Responsable Inscripto · CABA · Padrón ARCA</div>
+      </div>
+      <div class="field">
+        <label>Concepto</label>
+        <input type="text" value="Servicios contables — Abril 2026">
+      </div>
+      <div class="field">
+        <label>Monto</label>
+        <input type="number" id="monto-input" value="320000" oninput="updateImpact(this.value)">
+      </div>
+      <div class="impact-bar">
+        <div class="impact-label">Impacto en tu tope</div>
+        <div class="impact-text" id="impact-text">Después de esta factura: <strong>$6.140.000</strong> de $8.100.000 (75%) — te quedan <strong>$1.960.000</strong></div>
+      </div>
+      <div class="field">
+        <label>Fecha</label>
+        <input type="text" value="13/04/2026">
+      </div>
+      <button class="btn btn-primary" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
+      <button class="btn btn-secondary" onclick="goTo('s-dashboard')">Cancelar</button>
+    </div>
+
+    <div id="factura-confirm" style="display:none;">
+      <div class="card" style="margin-bottom:14px;">
+        <div class="card-label" style="margin-bottom:12px;">Resumen de la factura</div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--text-secondary);">Receptor</span><span>Constructora del Norte S.A.</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--text-secondary);">Tipo</span><span>Factura C</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--text-secondary);">Concepto</span><span style="text-align:right;max-width:60%;">Servicios contables — Abril 2026</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;"><span style="color:var(--text-secondary);">Fecha</span><span>13/04/2026</span></div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0 0;font-size:16px;font-weight:600;"><span>Total</span><span class="mono">$320.000</span></div>
+      </div>
+      <button class="btn btn-primary" onclick="emitirFactura()" style="margin-bottom:8px;">Emitir factura →</button>
+      <button class="btn btn-secondary" onclick="backToForm()">← Editar</button>
+    </div>
+
+    <div id="factura-loading" style="display:none;text-align:center;padding:40px 0;">
+      <div style="font-size:40px;margin-bottom:16px;animation:spin 1s linear infinite;">⟳</div>
+      <div style="font-size:15px;font-weight:500;">Solicitando CAE a ARCA...</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">Esto tarda unos segundos</div>
+    </div>
+
+    <div id="factura-success" style="display:none;">
+      <div class="success-screen">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">¡Factura emitida!</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:6px;">ARCA autorizó tu comprobante</div>
+        <div class="cae-box">
+          <div class="cae-label">Código de Autorización Electrónica (CAE)</div>
+          <div class="cae-number">74023456789012</div>
+          <div style="font-size:11px;color:var(--green);margin-top:4px;">Vence: 23/04/2026</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn btn-primary">↓ Descargar PDF</button>
+          <button class="btn btn-secondary">✉ Enviar a constructora@norte.com.ar</button>
+          <button class="btn btn-secondary" onclick="goTo('s-dashboard')">Volver al inicio</button>
+        </div>
+      </div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('s-dashboard')"><div class="nav-icon">⊞</div><div class="nav-label">Inicio</div></div>
+    <div class="nav-item active"><div class="nav-icon">◎</div><div class="nav-label">Facturar</div></div>
+    <div class="nav-item" onclick="goTo('s-panel')"><div class="nav-icon">≡</div><div class="nav-label">Panel</div></div>
+    <div class="nav-item" onclick="goTo('s-alerta')"><div class="nav-icon">◉</div><div class="nav-label">Alertas</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 4 — ERROR AFIP
+══════════════════════════════════════ -->
+<div class="screen" id="s-error">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <button class="btn-back" onclick="goTo('s-factura')">← Volver</button>
+      <div class="avatar">JC</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Pantalla 4 de 5 — Error AFIP</div>
+    <div class="error-icon">⚠️</div>
+    <div class="error-title">No pudimos emitir la factura</div>
+    <div class="error-msg">ARCA rechazó la solicitud porque el número de comprobante no es el correcto para tu punto de venta.</div>
+    <div class="error-code">Código ARCA: 10016 · Punto de venta: 0001</div>
+    <div class="error-steps">
+      <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px;">Qué hacer</div>
+      <div class="error-step"><div class="step-num">1</div><div class="step-text">LUCA sincroniza el número correcto con ARCA automáticamente</div></div>
+      <div class="error-step"><div class="step-num">2</div><div class="step-text">No necesitás hacer nada — reintentamos en 10 segundos</div></div>
+      <div class="error-step"><div class="step-num">3</div><div class="step-text">Si el problema persiste, contactá soporte desde el menú</div></div>
+    </div>
+    <button class="btn btn-primary" style="margin-bottom:8px;" onclick="goTo('s-factura')">↺ Reintentar ahora</button>
+    <button class="btn btn-secondary" onclick="goTo('s-dashboard')">Volver al inicio</button>
+    <div class="spacer-nav"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('s-dashboard')"><div class="nav-icon">⊞</div><div class="nav-label">Inicio</div></div>
+    <div class="nav-item active"><div class="nav-icon">◎</div><div class="nav-label">Facturar</div></div>
+    <div class="nav-item" onclick="goTo('s-panel')"><div class="nav-icon">≡</div><div class="nav-label">Panel</div></div>
+    <div class="nav-item" onclick="goTo('s-alerta')"><div class="nav-icon">◉</div><div class="nav-label">Alertas</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN 5 — ALERTA EXCLUSIÓN
+══════════════════════════════════════ -->
+<div class="screen" id="s-alerta">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <button class="btn-back" onclick="goTo('s-dashboard')">← Inicio</button>
+      <div class="avatar">JC</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Pantalla 5 de 5 — Alertas</div>
+    <div class="exclusion-hero">
+      <div style="font-size:48px;margin-bottom:10px;">🚨</div>
+      <div class="exclusion-title">Riesgo de exclusión del Monotributo</div>
+      <div class="exclusion-sub">Tu facturación superó el 90% del tope. Si alcanzás el límite, quedás excluido del régimen simplificado.</div>
+    </div>
+    <div class="countdown">$382.000</div>
+    <div class="countdown-label">para llegar al límite de exclusión</div>
+    <div class="card" style="margin-bottom:14px;">
+      <div class="card-label" style="margin-bottom:10px;">Tu situación actual</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">Categoría actual</span><span>F · hasta $8.100.000</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">Facturado este año</span><span class="mono">$7.718.000</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--text-secondary);">Margen restante</span><span class="mono" style="color:var(--red);font-weight:500;">$382.000</span></div>
+      <div class="prog-track" style="margin-top:10px;">
+        <div class="prog-fill" style="width:95%;background:var(--red);"></div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--green-dim);border-color:var(--green);margin-bottom:14px;">
+      <div style="font-size:13px;font-weight:500;color:var(--green);margin-bottom:6px;">¿Qué hacer ahora?</div>
+      <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">Podés <strong>recategorizarte a Categoría G</strong> antes de llegar al límite. El período de recategorización está abierto hasta el 31 de julio.</div>
+    </div>
+    <button class="btn btn-primary" style="margin-bottom:8px;">Iniciar recategorización →</button>
+    <button class="btn btn-secondary" onclick="goTo('s-dashboard')">Volver al inicio</button>
+    <div style="margin-top:20px;">
+      <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Otras alertas</div>
+      <div class="tbl-wrap">
+        <div class="tbl-row"><div class="tbl-main"><div>Pago mensual monotributo</div><div class="tbl-sub">Vence 20 abr · $68.500</div></div><span class="badge badge-amber">7 días</span></div>
+        <div class="tbl-row"><div class="tbl-main"><div>Período recategorización</div><div class="tbl-sub">Julio 2026</div></div><span class="badge badge-blue">Abierto</span></div>
+      </div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('s-dashboard')"><div class="nav-icon">⊞</div><div class="nav-label">Inicio</div></div>
+    <div class="nav-item" onclick="goTo('s-factura')"><div class="nav-icon">◎</div><div class="nav-label">Facturar</div></div>
+    <div class="nav-item" onclick="goTo('s-panel')"><div class="nav-icon">≡</div><div class="nav-label">Panel</div></div>
+    <div class="nav-item active"><div class="nav-icon">◉</div><div class="nav-label">Alertas</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PANEL FISCAL
+══════════════════════════════════════ -->
+<div class="screen" id="s-panel">
+  <div class="topbar">
+    <div class="logo">LUC<span>A</span></div>
+    <div class="topbar-right">
+      <button class="btn-back" onclick="goTo('s-dashboard')">← Inicio</button>
+      <div class="avatar">JC</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="screen-pill">Panel Fiscal — Abril 2026</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Panel Fiscal</div>
+    <div class="grid-2">
+      <div class="stat-card"><div class="stat-label">Ventas netas</div><div class="stat-value">$1.42M</div><div class="stat-sub" style="color:var(--green);">↑ 8% vs marzo</div></div>
+      <div class="stat-card"><div class="stat-label">Compras</div><div class="stat-value">$412k</div><div class="stat-sub" style="color:var(--red);">↓ 3% vs marzo</div></div>
+    </div>
+    <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Ventas del período</div>
+    <div class="tbl-wrap" style="margin-bottom:14px;">
+      <div class="tbl-row"><div class="tbl-main"><div>Constructora del Norte S.A.</div><div class="tbl-sub">FC-C · 11/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$320.000</div><span class="badge badge-green">Autorizada</span></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Farmacia Belgrano S.R.L.</div><div class="tbl-sub">FC-C · 09/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$185.000</div><span class="badge badge-green">Autorizada</span></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Recursos Humanos Plus</div><div class="tbl-sub">FC-C · 07/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$240.000</div><span class="badge badge-green">Autorizada</span></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Estudio Pérez & Asociados</div><div class="tbl-sub">FC-C · 04/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$175.000</div><span class="badge badge-green">Autorizada</span></div></div>
+    </div>
+    <div style="font-size:12px;font-weight:500;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Compras del período</div>
+    <div class="tbl-wrap">
+      <div class="tbl-row"><div class="tbl-main"><div>Coworking Centro S.A.</div><div class="tbl-sub">FC-A · 08/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$145.000</div><span class="badge badge-blue">Registrada</span></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Telecom Argentina</div><div class="tbl-sub">FC-A · 05/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$85.000</div><span class="badge badge-blue">Registrada</span></div></div>
+      <div class="tbl-row"><div class="tbl-main"><div>Software de gestión SRL</div><div class="tbl-sub">FC-A · 02/04</div></div><div class="tbl-right"><div class="mono" style="font-size:14px;">$182.000</div><span class="badge badge-blue">Registrada</span></div></div>
+    </div>
+    <div class="spacer-nav"></div>
+  </div>
+  <div class="bottom-nav">
+    <div class="nav-item" onclick="goTo('s-dashboard')"><div class="nav-icon">⊞</div><div class="nav-label">Inicio</div></div>
+    <div class="nav-item" onclick="goTo('s-factura')"><div class="nav-icon">◎</div><div class="nav-label">Facturar</div></div>
+    <div class="nav-item active"><div class="nav-icon">≡</div><div class="nav-label">Panel</div></div>
+    <div class="nav-item" onclick="goTo('s-alerta')"><div class="nav-icon">◉</div><div class="nav-label">Alertas</div></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     FEEDBACK FLOTANTE
+══════════════════════════════════════ -->
+<div id="fb-btn" onclick="toggleFeedback()" title="Dejar feedback">💬</div>
+<div id="fb-panel">
+  <div class="fb-header">
+    <div class="fb-title">Tu opinión importa</div>
+    <div class="fb-close" onclick="toggleFeedback()">×</div>
+  </div>
+  <div class="fb-sub" id="fb-context">Pantalla: Dashboard</div>
+  <div class="fb-mode-indicator" id="fb-mode-ind"></div>
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">¿Qué tipo de feedback es?</div>
+  <div class="fb-types">
+    <div class="fb-type" onclick="selType(this,'problema')">🐛 Problema</div>
+    <div class="fb-type" onclick="selType(this,'sugerencia')">💡 Sugerencia</div>
+    <div class="fb-type" onclick="selType(this,'me gustó')">❤️ Me gustó</div>
+  </div>
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:6px;">¿Qué tan útil es esta pantalla?</div>
+  <div class="fb-stars">
+    <span class="fb-star" onclick="setFbStar(1)">⭐</span>
+    <span class="fb-star" onclick="setFbStar(2)">⭐</span>
+    <span class="fb-star" onclick="setFbStar(3)">⭐</span>
+    <span class="fb-star" onclick="setFbStar(4)">⭐</span>
+    <span class="fb-star" onclick="setFbStar(5)">⭐</span>
+  </div>
+  <textarea class="fb-textarea" id="fb-text" placeholder="Contanos qué viste, qué cambiarías o qué te gustó..."></textarea>
+  <button class="fb-send" onclick="submitFeedback()">Enviar feedback</button>
+  <div class="fb-sent" id="fb-sent">¡Gracias, Javier! Tu feedback fue guardado ✓</div>
+</div>
+
+<script>
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
+const SPRINT='S00';
+const SCREEN_NAMES={'onboarding':'Onboarding','dashboard':'Dashboard','factura':'Nueva Factura','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal'};
+
+let curScreen='onboarding', fbStarVal=0, fbType='', isDark=true, onbStep=0, userMode='';
+
+function goTo(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  curScreen=id.replace('s-','');
+  document.getElementById('fb-context').textContent='Pantalla: '+(SCREEN_NAMES[curScreen]||curScreen);
+  document.getElementById('fb-sent').style.display='none';
+  document.querySelector('.fb-send').style.display='block';
+  closeFb();
+  window.scrollTo(0,0);
+}
+
+function toggleTheme(){
+  isDark=!isDark;
+  document.body.classList.toggle('light',!isDark);
+  document.querySelectorAll('.btn-theme').forEach(b=>b.textContent=isDark?'☀':'☾');
+}
+
+function selectMode(m){
+  userMode=m;
+  document.getElementById('mc-usuario').className='mode-card'+(m==='usuario'?' selected-usuario':'');
+  document.getElementById('mc-evaluador').className='mode-card'+(m==='evaluador'?' selected-evaluador':'');
+  const btn=document.getElementById('btn-modo');
+  btn.style.opacity='1'; btn.style.pointerEvents='auto';
+  // actualizar badge de modo en todas las pantallas
+  const badge=document.getElementById('dash-mode-badge');
+  const ind=document.getElementById('fb-mode-ind');
+  if(m==='usuario'){
+    badge.className='mode-badge mode-usuario'; badge.textContent='👤 Modo usuario';
+    ind.className='fb-mode-indicator mode-usuario'; ind.textContent='Evaluando como usuario';
+  } else {
+    badge.className='mode-badge mode-evaluador'; badge.textContent='🔍 Modo evaluador';
+    ind.className='fb-mode-indicator mode-evaluador'; ind.textContent='Evaluando como contador';
+  }
+}
+
+function onbNext(){
+  onbStep++;
+  document.querySelectorAll('.onb-step').forEach((s,i)=>s.classList.toggle('active',i===onbStep));
+  document.querySelectorAll('[id^=od]').forEach((d,i)=>d.classList.toggle('done',i<=onbStep));
+}
+
+function lookupCuit(v){
+  const info=document.getElementById('receptor-info');
+  info.style.display=v.length>8?'block':'none';
+}
+
+function updateImpact(v){
+  const m=parseFloat(v)||0, base=5820000, lim=8100000;
+  const nuevo=base+m, pct=Math.round(nuevo/lim*100), rest=lim-nuevo;
+  document.getElementById('impact-text').innerHTML=
+    `Después de esta factura: <strong>$${nuevo.toLocaleString('es-AR')}</strong> de $8.100.000 (${pct}%) — te quedan <strong>$${rest.toLocaleString('es-AR')}</strong>`;
+}
+
+function showConfirm(){
+  document.getElementById('factura-form').style.display='none';
+  document.getElementById('factura-confirm').style.display='block';
+}
+function backToForm(){
+  document.getElementById('factura-form').style.display='block';
+  document.getElementById('factura-confirm').style.display='none';
+}
+function emitirFactura(){
+  document.getElementById('factura-confirm').style.display='none';
+  document.getElementById('factura-loading').style.display='block';
+  setTimeout(()=>{
+    document.getElementById('factura-loading').style.display='none';
+    document.getElementById('factura-success').style.display='block';
+  },2200);
+}
+
+function toggleFeedback(){document.getElementById('fb-panel').classList.toggle('open');}
+function closeFb(){document.getElementById('fb-panel').classList.remove('open');}
+function selType(el,t){
+  document.querySelectorAll('.fb-type').forEach(x=>x.classList.remove('selected'));
+  el.classList.add('selected'); fbType=t;
+}
+function setFbStar(v){
+  fbStarVal=v;
+  document.querySelectorAll('.fb-star').forEach((s,i)=>s.classList.toggle('on',i<v));
+}
+function submitFeedback(){
+  const text=document.getElementById('fb-text').value.trim();
+  fetch(SHEETS_URL,{method:'POST',body:JSON.stringify({
+    sprint:SPRINT,
+    pantalla:SCREEN_NAMES[curScreen]||curScreen,
+    tipo:fbType||'general',
+    estrellas:fbStarVal||'',
+    comentario:text,
+    dispositivo:window.innerWidth<768?'mobile':'desktop',
+    modo:userMode||'no indicado'
+  })}).catch(()=>{});
+  document.querySelector('.fb-send').style.display='none';
+  document.getElementById('fb-sent').style.display='block';
+  document.getElementById('fb-text').value='';
+  fbStarVal=0; fbType='';
+  document.querySelectorAll('.fb-star').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.fb-type').forEach(t=>t.classList.remove('selected'));
+  setTimeout(()=>closeFb(),2000);
+}
+</script>
+</body>
+</html>
