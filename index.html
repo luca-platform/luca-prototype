@@ -1,26 +1,18 @@
 <!DOCTYPE html>
-<!-- saved from url=(0056)file:///C:/Users/Guillermo/Downloads/luca-prototype.html -->
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.5</title>
+<title>LUCA — Prototipo Sprint 00 v4.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
-  /* DARK MODE — máximo contraste, premium fintech */
   --bp:#0D1117;--bs:#161B27;--bc:#1C2333;--bh:#232D42;--bpi:#1a2235;
-  /* Textos: tp=blanco puro, ts=gris claro legible, tm=gris medio */
   --tp:#FFFFFF;--ts:#CBD5E1;--tm:#94A3B8;
-  /* Emerald brillante sobre oscuro */
   --g:#34D399;--gd:rgba(52,211,153,0.15);
-  /* Naranja coral alto contraste */
   --a:#FB923C;--ad:rgba(251,146,60,0.15);
-  /* Rojo alto contraste */
   --r:#F87171;--rd:rgba(248,113,113,0.15);
-  /* Indigo brillante */
   --bl:#818CF8;--bld:rgba(129,140,248,0.15);
   --br:rgba(255,255,255,0.08);--brm:rgba(255,255,255,0.15);
   --sh:0 4px 24px rgba(0,0,0,0.5);--R:14px;--Rs:10px;--Rx:8px;
@@ -39,67 +31,52 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .mo,input.mo{font-variant-numeric:tabular-nums slashed-zero;}
 .screen{display:none;min-height:100vh;flex-direction:column;}
 .screen.active{display:flex;}
-/* topbar */
 .tb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bs);border-bottom:1px solid var(--br);position:sticky;top:0;z-index:50;}
 .logo{font-size:20px;font-weight:600;letter-spacing:-.5px;}.logo span{color:var(--g);}
 .tb-r{display:flex;align-items:center;gap:10px;}
 .btn-th{background:var(--bpi);border:1px solid var(--br);border-radius:20px;padding:5px 12px;font-family:'Inter',system-ui,sans-serif;font-size:11px;color:var(--ts);cursor:pointer;}
 .btn-bk{background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:6px 12px;font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--ts);cursor:pointer;}
-.av{width:34px;height:34px;border-radius:50%;background:var(--bld);color:var(--bl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bl);}
-/* content */
+.av{width:34px;height:34px;border-radius:50%;background:var(--bld);color:var(--bl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bl);cursor:pointer;}
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
-/* cards */
 .card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);}
 .cl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
-/* bottom nav */
 .bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;}
 .ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
 .ni-i{font-size:20px;}.ni-l{font-size:10px;color:var(--tm);}
 .ni.active .ni-l{color:var(--g);font-weight:500;}
 .sn{height:80px;}
-/* fab */
 .fab{position:fixed;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(45,206,122,.45);font-size:26px;color:#fff;z-index:49;transition:transform .15s;}
 .fab:active{transform:scale(.94);}
-/* progress */
 .pt{height:8px;background:var(--bpi);border-radius:100px;overflow:hidden;margin:8px 0;}
 .pf{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1);}
-/* badge */
 .bdg{display:inline-block;font-size:10px;font-weight:600;border-radius:6px;padding:3px 9px;}
 .bg{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.3);}
 .bb{background:rgba(129,140,248,0.18);color:#A5B4FC;border:1px solid rgba(129,140,248,0.4);}
 .ba{background:var(--ad);color:var(--a);border:1px solid rgba(249,115,22,0.3);}
 .br2{background:var(--rd);color:var(--r);border:1px solid rgba(239,68,68,0.3);}
-/* mono */
 .mo{font-family:'JetBrains Mono',monospace;}
-/* alert */
 .ab{background:var(--ad);border:1px solid var(--a);border-radius:var(--Rs);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;}
 .ad2{width:7px;height:7px;border-radius:50%;background:var(--a);flex-shrink:0;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-/* table */
 .tw{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);overflow:hidden;}
 .tr2{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--br);cursor:pointer;}
 .tr2:last-child{border-bottom:none;}.tr2:active{background:var(--bh);}
 .tm2{flex:1;font-size:13px;font-weight:500;}.ts2{font-size:11px;color:var(--ts);font-family:'JetBrains Mono',monospace;}
 .tr2-r{text-align:right;}
-/* grid */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
 .sc{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;box-shadow:var(--sh);}
 .sl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
 .sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--tp);}
 .ss{font-size:11px;color:var(--ts);margin-top:3px;}
-/* screen pill */
 .sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--brm);}
-/* form */
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;}
 .fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s;}
 .fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);}
 .fi textarea{resize:none;min-height:80px;}
-/* btn */
 .btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
 .btn:active{transform:scale(.98);}
 .btn-p{background:var(--g);color:#fff;}.btn-s{background:var(--bpi);color:var(--tp);border:1px solid var(--br);}
-/* impact */
 .ib{border-radius:var(--Rs);padding:12px 14px;margin-bottom:14px;}
 .ib.warn{background:var(--ad);border:1px solid var(--a);}
 .ib.ok{background:var(--gd);border:1px solid var(--g);}
@@ -107,7 +84,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .ib-l{font-size:12px;font-weight:500;margin-bottom:4px;}
 .ib.warn .ib-l{color:var(--a);}.ib.ok .ib-l{color:var(--g);}.ib.danger .ib-l{color:var(--r);}
 .ib-t{font-size:13px;color:var(--tp);}
-/* type selector */
+/* type selector (kept for fallback) */
 .ts3{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
 .tc{background:var(--bpi);border:1.5px solid var(--br);border-radius:var(--Rx);padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;}
 .tc:active{opacity:.8;}
@@ -117,15 +94,12 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .tc.sel-sum .tc-name{font-weight:700;color:var(--g);}.tc.sel-nc .tc-name{font-weight:700;color:var(--bl);}
 .tc-tag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;}
 .tag-sum{background:var(--gd);color:var(--g);}.tag-nc{background:var(--bld);color:var(--bl);}
-/* date suggestion */
-.ds{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:10px 12px;margin-top:-8px;margin-bottom:14px;font-size:12px;color:var(--r);font-weight:500;}
-/* success */
+.ds{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:14px 16px;margin-top:-8px;margin-bottom:14px;font-size:15px;color:var(--r);font-weight:600;text-align:center;}
 .suc-sc{text-align:center;padding:32px 20px;}
 .suc-ic{font-size:64px;margin-bottom:16px;}
 .cae-box{background:var(--gd);border:1px solid var(--g);border-radius:var(--Rs);padding:14px;margin:20px 0;}
 .cae-l{font-size:11px;color:var(--g);font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
 .cae-n{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:500;color:var(--g);letter-spacing:1px;}
-/* error */
 .er-ic{font-size:56px;text-align:center;margin:32px 0 16px;}
 .er-t{font-size:22px;font-weight:600;text-align:center;margin-bottom:8px;}
 .er-m{font-size:14px;color:var(--tp);text-align:center;margin-bottom:6px;line-height:1.6;}
@@ -135,20 +109,17 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .er-step:last-child{margin-bottom:0;}
 .sn2{width:22px;height:22px;border-radius:50%;background:var(--bld);color:var(--bl);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
 .st{font-size:13px;color:var(--tp);line-height:1.5;}
-/* alerta */
 .eh{background:var(--rd);border:2px solid var(--r);border-radius:var(--R);padding:20px;text-align:center;margin-bottom:16px;}
 .et{font-size:20px;font-weight:600;color:var(--r);margin-bottom:6px;}
 .es{font-size:13px;color:var(--tp);line-height:1.5;}
 .cd{font-family:'JetBrains Mono',monospace;font-size:36px;font-weight:600;color:var(--r);text-align:center;margin:16px 0;}
 .cdl{font-size:12px;color:var(--tm);text-align:center;margin-top:-10px;margin-bottom:16px;}
-/* onboarding */
 .os{display:none;}.os.active{display:block;}
 .op{display:flex;gap:6px;margin-bottom:24px;}
 .od{flex:1;height:3px;border-radius:100px;background:var(--bpi);transition:background .3s;}
 .od.done{background:var(--g);}
 .ot{font-size:22px;font-weight:600;margin-bottom:8px;}
 .oss{font-size:14px;color:var(--ts);margin-bottom:24px;line-height:1.6;}
-/* mode cards */
 .mc{display:flex;gap:10px;margin-bottom:24px;}
 .mcard{flex:1;background:var(--bc);border:2px solid var(--br);border-radius:var(--R);padding:16px;cursor:pointer;text-align:center;transition:all .2s;}
 .mcard.su{border-color:var(--g);background:var(--gd);}
@@ -156,10 +127,51 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .mc-ic{font-size:28px;margin-bottom:8px;}
 .mc-t{font-size:13px;font-weight:600;margin-bottom:4px;}
 .mc-s{font-size:11px;color:var(--ts);line-height:1.4;}
-/* mode badge */
 .mb2{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:500;}
 .mb-u{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.4);font-weight:600;}
 .mb-e{background:var(--bld);color:var(--bl);border:1px solid rgba(99,102,241,0.4);font-weight:600;}
+/* cat card v4 */
+.cat-main{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.cat-letter{font-size:42px;font-weight:700;color:var(--g);font-family:'JetBrains Mono',monospace;line-height:1;}
+.cat-text{font-size:14px;color:var(--ts);line-height:1.5;}
+.cat-toggle{display:flex;border:1px solid var(--br);border-radius:var(--Rx);overflow:hidden;margin:10px 0;}
+.cat-toggle-btn{flex:1;padding:8px;font-size:12px;text-align:center;cursor:pointer;background:var(--bpi);border:none;color:var(--ts);font-family:'Inter',system-ui,sans-serif;transition:all .15s;}
+.cat-toggle-btn.active{background:var(--gd);color:var(--g);font-weight:600;}
+/* collapsible chart */
+.lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;overflow:visible;}
+.lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.lib-chevron{transition:transform .2s;font-size:14px;color:var(--tm);}
+.lib-chevron.collapsed{transform:rotate(-90deg);}
+.lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;overflow:visible;}
+.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:52px;flex-shrink:0;font-weight:500;}
+.lib-bar-wrap{flex:1;min-width:0;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
+.lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
+.lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+.lib-amount.outside{position:absolute;left:calc(100% + 6px);right:auto;top:50%;transform:translateY(-50%);color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+.lib-cumul{position:absolute;right:-70px;top:50%;transform:translateY(-50%);color:var(--tm);font-size:10px;white-space:nowrap;font-family:'JetBrains Mono',monospace;}
+/* margen hero */
+.margen-hero{text-align:center;padding:20px;margin-bottom:14px;}
+.margen-amount{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;margin:4px 0;}
+.margen-sub{font-size:12px;color:var(--ts);margin-top:4px;}
+.margen-excl{font-size:12px;color:var(--r);font-weight:600;margin-top:6px;}
+/* service date warning */
+.ds-service{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:14px 16px;margin-top:-6px;margin-bottom:14px;font-size:14px;color:var(--r);font-weight:600;}
+/* feedback history */
+.fbh-item{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;margin-bottom:10px;border-left:3px solid var(--a);}
+.fbh-item.resolved{border-left-color:var(--g);opacity:.7;}
+.fbh-text{font-size:13px;color:var(--tp);margin:8px 0;line-height:1.5;}
+.fbh-meta{font-size:11px;color:var(--tm);}
+.fbh-btn{font-size:12px;padding:6px 14px;border-radius:var(--Rx);border:1px solid var(--br);cursor:pointer;background:var(--bpi);color:var(--ts);font-family:'Inter',system-ui,sans-serif;transition:all .15s;}
+.fbh-btn:hover{border-color:var(--g);color:var(--g);}
+.fbh-item.resolved .fbh-btn{border-color:var(--a);color:var(--a);}
+/* metrics row */
+.metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+@media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
+.metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;}
+.metric-label{font-size:9px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
+.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--tp);}
+.metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
+.metric-sub{font-size:10px;color:var(--tm);margin-top:3px;}
 /* desktop nav */
 @media(min-width:768px){
   .bnav{display:none;}.fab{bottom:24px;}
@@ -192,6 +204,8 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .fb-send{width:100%;padding:9px;background:var(--g);color:#fff;border:none;border-radius:var(--Rx);font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;}
 .fb-send:hover{opacity:.88;}
 .fb-ok{font-size:13px;color:var(--g);text-align:center;padding:6px 0;display:none;font-weight:500;}
+.fb-hist-link{font-size:12px;color:var(--bl);cursor:pointer;text-align:center;margin-top:8px;font-weight:500;}
+.fb-hist-link:hover{text-decoration:underline;}
 /* WHATSAPP SCREEN */
 .wa-bg{background:#0d1117;min-height:100vh;}
 .wa-tb{background:#161b27;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
@@ -217,23 +231,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .wa-typing{background:#161b27;padding:8px 12px;border-radius:8px;align-self:flex-start;font-size:13px;color:#8696a0;display:none;}
 .wa-typing.show{display:block;}
 .wa-warn{background:#1e2740;border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:6px;font-size:12px;color:var(--a);}
-/* metrics row */
-.metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
-@media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
-.metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;}
-.metric-label{font-size:9px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
-.metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--tp);}
-.metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
-.metric-sub{font-size:10px;color:var(--tm);margin-top:3px;}
-/* liberacion chart */
-.lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;overflow:visible;}
-.lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;}
-.lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;overflow:visible;}
-.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:52px;flex-shrink:0;font-weight:500;}
-.lib-bar-wrap{flex:1;min-width:0;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
-.lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
-.lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-.lib-amount.outside{position:absolute;left:calc(100% + 6px);right:auto;top:50%;transform:translateY(-50%);color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -245,17 +242,15 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="cnt">
     <div class="sp">Pantalla 1 — Onboarding</div>
     <div class="op"><div class="od done" id="od0"></div><div class="od" id="od1"></div><div class="od" id="od2"></div><div class="od" id="od3"></div></div>
-
     <div class="os active" id="os0">
       <div class="ot">Bienvenido, Javier 👋</div>
       <div class="oss">¿Cómo vas a explorar LUCA hoy?</div>
       <div class="mc">
-        <div class="mcard" id="mc-u" onclick="selMode(&#39;u&#39;)"><div class="mc-ic">👤</div><div class="mc-t">Como usuario</div><div class="mc-s">Probá LUCA como monotributista</div></div>
-        <div class="mcard" id="mc-e" onclick="selMode(&#39;e&#39;)"><div class="mc-ic">🔍</div><div class="mc-t">Como evaluador</div><div class="mc-s">Explorá para recomendar a clientes</div></div>
+        <div class="mcard" id="mc-u" onclick="selMode('u')"><div class="mc-ic">👤</div><div class="mc-t">Como usuario</div><div class="mc-s">Probá LUCA como monotributista</div></div>
+        <div class="mcard" id="mc-e" onclick="selMode('e')"><div class="mc-ic">🔍</div><div class="mc-t">Como evaluador</div><div class="mc-s">Explorá para recomendar a clientes</div></div>
       </div>
       <button class="btn btn-p" id="btn-mod" onclick="onbNext()" style="opacity:.4;pointer-events:none;">Continuar →</button>
     </div>
-
     <div class="os" id="os1">
       <div class="ot">Creá tu cuenta</div>
       <div class="oss">Encriptación AES-256. LUCA actúa en tu nombre para emitir comprobantes y consultar ARCA, siempre bajo tu control.</div>
@@ -264,7 +259,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="fi"><label>Contraseña</label><input type="password" value="••••••••"></div>
       <button class="btn btn-p" onclick="onbNext()">Crear cuenta →</button>
     </div>
-
     <div class="os" id="os2">
       <div class="ot">Conectá tu CUIT</div>
       <div class="oss">Descargamos tus datos de ARCA automáticamente. LUCA actúa en tu nombre para emitir comprobantes y consultar ARCA, siempre bajo tu control.</div>
@@ -273,7 +267,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Tu clave fiscal se encripta con AES-256 y se usa solo para conectarse con ARCA.</div>
       <button class="btn btn-p" onclick="onbNext()">Conectar con ARCA →</button>
     </div>
-
     <div class="os" id="os3">
       <div style="text-align:center;padding:16px 0;">
         <div style="font-size:52px;margin-bottom:14px;">✅</div>
@@ -283,26 +276,27 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <div style="font-size:11px;color:var(--g);font-weight:500;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">ENCONTRAMOS EN ARCA</div>
           <div style="font-size:13px;color:var(--ts);line-height:1.9;">✓ Próximo vencimiento: 20 abril<br>✓ Sin deuda detectada</div>
         </div>
-        <button class="btn btn-p" onclick="goTo(&#39;s-dash&#39;)">Ver mi panel →</button>
+        <button class="btn btn-p" onclick="goTo('s-dash')">Ver mi panel →</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ DASHBOARD ══ -->
+<!-- ══ DASHBOARD (FB-004) ══ -->
 <div class="screen" id="s-dash">
   <div class="tb">
     <div class="logo">LUC<span>A</span></div>
     <div class="tb-r">
       <nav class="dnav">
-        <div class="dn active" onclick="goTo(&#39;s-dash&#39;)">Inicio</div>
-        <div class="dn" onclick="goTo(&#39;s-cbte&#39;)">Crear Comprobante</div>
-        <div class="dn" onclick="goTo(&#39;s-panel&#39;)">Panel fiscal</div>
-        <div class="dn" onclick="goTo(&#39;s-alerta&#39;)">Alertas</div>
-        <div class="dn" onclick="goTo(&#39;s-wa&#39;)" style="color:var(--g);">💬 WhatsApp</div>
+        <div class="dn active" onclick="goTo('s-dash')">Inicio</div>
+        <div class="dn" onclick="goTo('s-cbte')">Crear Comprobante</div>
+        <div class="dn" onclick="goTo('s-panel')">Panel fiscal</div>
+        <div class="dn" onclick="goTo('s-recat')">Recategorización</div>
+        <div class="dn" onclick="goTo('s-agenda')">Agenda</div>
+        <div class="dn" onclick="goTo('s-wa')" style="color:var(--g);">💬 WhatsApp</div>
       </nav>
       <button class="btn-th" onclick="toggleTheme()">☀</button>
-      <div class="av">JC</div>
+      <div class="av" onclick="goTo('s-fbhist')" title="Ver historial feedback">JC</div>
     </div>
   </div>
   <div class="cnt">
@@ -315,7 +309,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="mb2" id="dash-mb"></div>
     </div>
 
-    <div class="ab" onclick="goTo(&#39;s-alerta&#39;)">
+    <div class="ab" onclick="goTo('s-recat')">
       <div class="ad2"></div>
       <div style="flex:1;font-size:13px;color:var(--a);font-weight:500;">Riesgo de exclusión — superaste el 90% del tope</div>
       <div style="font-size:12px;color:var(--a);font-weight:500;">Ver →</div>
@@ -340,45 +334,84 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       </div>
     </div>
 
+    <!-- Categoría card — FB-004 restructured -->
     <div class="card">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
-        <div class="cl">Categoría vigente</div>
-        <span class="bdg bg mo">Monotributo</span>
+      <div class="cl">Tu categoría</div>
+      <div class="cat-main">
+        <div class="cat-letter">F</div>
+        <div class="cat-text">Sos <strong>Categoría F</strong> con <strong class="mo">$5.820.000</strong> facturados en los últimos 365 días.<br>Cuota mensual: <strong class="mo">$68.500</strong></div>
       </div>
-      <div style="font-size:34px;font-weight:600;letter-spacing:-1px;margin-bottom:3px;">Categoría F</div>
-      <div style="font-size:13px;color:var(--tp);margin-bottom:16px;" class="mo">Cuota mensual: <strong>$68.500</strong></div>
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
-        <span>Facturado (últimos 365 días)</span><span class="mo">72%</span>
+
+      <div class="cat-toggle">
+        <button class="cat-toggle-btn active" onclick="toggleCatLimit('actual')">Límite actual</button>
+        <button class="cat-toggle-btn" onclick="toggleCatLimit('ipc')">Proyectado IPC</button>
       </div>
-      <div class="pt"><div class="pf" style="width:72%;background:var(--a);"></div></div>
-      <div style="display:flex;justify-content:space-between;">
-        <span class="mo" style="font-size:15px;font-weight:500;">$5.820.000</span>
-        <span class="mo" style="font-size:12px;color:var(--tm);">límite $8.100.000</span>
+      <div id="cat-limit-display" style="text-align:center;margin-bottom:14px;">
+        <span class="mo" style="font-size:20px;font-weight:600;" id="cat-limit-val">$8.100.000</span>
+        <span style="font-size:12px;color:var(--tm);margin-left:6px;" id="cat-limit-label">límite Cat F</span>
       </div>
-      <div style="height:1px;background:var(--br);margin:14px 0;"></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:12px;color:var(--tp);">Proyección próxima categoría</span>
-        <span class="bdg bb">→ Categoría G</span>
+
+      <!-- Progress: Recategorización -->
+      <div style="margin-bottom:16px;">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
+          <span>Progreso recategorización</span><span class="mo" id="recat-pct">72%</span>
+        </div>
+        <div class="pt"><div class="pf" id="recat-bar" style="width:72%;background:var(--a);"></div></div>
+        <div style="display:flex;justify-content:space-between;">
+          <span class="mo" style="font-size:13px;font-weight:500;">$5.820.000</span>
+          <span class="mo" style="font-size:11px;color:var(--tm);" id="recat-lim">límite $8.100.000</span>
+        </div>
+        <div style="font-size:10px;color:var(--tm);margin-top:4px;">Desde última recategorización a la fecha</div>
+      </div>
+
+      <!-- Progress: Exclusión -->
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
+          <span>Progreso exclusión (365 días)</span><span class="mo" style="color:var(--r);">95%</span>
+        </div>
+        <div class="pt"><div class="pf" style="width:95%;background:var(--r);"></div></div>
+        <div style="display:flex;justify-content:space-between;">
+          <span class="mo" style="font-size:13px;font-weight:500;">$7.718.000</span>
+          <span class="mo" style="font-size:11px;color:var(--tm);">límite $8.100.000</span>
+        </div>
+        <div style="font-size:10px;color:var(--tm);margin-top:4px;">Facturado en los últimos 365 días vs tope máximo</div>
       </div>
     </div>
 
-    <!-- Margen disponible por fecha -->
+    <!-- Chart — FB-004 collapsible + cumulative -->
     <div class="lib-chart">
-      <div class="lib-title">📅 Saldo pendiente de facturar por fecha</div>
-      <div class="lib-row"><div class="lib-date">hoy</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:28%"><span class="lib-amount">$2.280.000</span></div></div></div>
-      <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"><span class="lib-amount">$2.465.000</span></div></div></div>
-      <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:34%"><span class="lib-amount">$2.785.000</span></div></div></div>
-      <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:37%"><span class="lib-amount">$3.025.000</span></div></div></div>
-      <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:43%"><span class="lib-amount">$3.475.000</span></div></div></div>
-      <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">Margen que tendrás disponible a medida que vencen los 365 días de comprobantes anteriores.</div>
+      <div class="lib-title" onclick="toggleChart()">
+        <span>📅 Evolución del Margen de Facturación Disponible</span>
+        <span class="lib-chevron" id="chart-chevron">▼</span>
+      </div>
+      <div id="chart-body">
+        <div class="lib-row"><div class="lib-date">hoy</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:28%"><span class="lib-amount">$2.280.000</span></div></div></div>
+        <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"><span class="lib-amount">$2.465.000</span></div></div></div>
+        <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:34%"><span class="lib-amount">$2.785.000</span></div></div></div>
+        <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:37%"><span class="lib-amount">$3.025.000</span></div></div></div>
+        <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:43%"><span class="lib-amount">$3.475.000</span></div></div></div>
+        <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">Margen que tendrás disponible a medida que vencen los 365 días de comprobantes anteriores.</div>
+      </div>
     </div>
 
+    <!-- Compras — FB-004 últimos 12 meses + límite -->
     <div class="g2">
-      <div class="sc" onclick="goTo(&#39;s-panel&#39;)"><div class="sl">Comprobantes emitidos</div><div class="sv">31</div><div class="ss" style="color:var(--ts);">Este mes: 8</div></div>
-      <div class="sc" onclick="goTo(&#39;s-panel&#39;)"><div class="sl">Compras del período</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">18 comprobantes</div></div>
+      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
+      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">Límite 40% Cat K: $10.9M</div></div>
     </div>
 
-    <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo(&#39;s-alerta&#39;)">
+    <!-- CCMA card — FB-004 new -->
+    <div class="card">
+      <div class="cl">Cuenta Corriente Monotributistas (CCMA)</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:14px;color:var(--tp);">Saldo CCMA</span>
+        <span class="mo" style="font-size:18px;font-weight:600;color:var(--g);">$0</span>
+      </div>
+      <div style="font-size:12px;color:var(--g);font-weight:500;margin-bottom:8px;">✓ Sin deuda detectada en ARCA</div>
+      <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;font-size:11px;color:var(--tm);line-height:1.5;">La CCMA registra pagos y deuda del monotributo. Consultamos ARCA automáticamente cada día.</div>
+    </div>
+
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo('s-recat')">
       <div><div class="cl">Próximo vencimiento</div><div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div><div style="font-size:12px;color:var(--ts);font-weight:400;">Cuota abril 2026 · $68.500</div></div>
       <div style="background:var(--ad);color:var(--a);border-radius:var(--Rx);padding:8px 14px;font-size:13px;font-weight:500;" class="mo">20 abr</div>
     </div>
@@ -394,7 +427,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
 
     <!-- WhatsApp CTA -->
-    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo(&#39;s-wa&#39;)">
+    <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo('s-wa')">
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="font-size:32px;">💬</div>
         <div>
@@ -408,41 +441,50 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni active" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni active" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
-  <button class="fab" onclick="goTo(&#39;s-cbte&#39;)">+</button>
+  <button class="fab" onclick="goTo('s-cbte')">+</button>
 </div>
 
-<!-- ══ CREAR COMPROBANTE ══ -->
+<!-- ══ CREAR COMPROBANTE (FB-005) ══ -->
 <div class="screen" id="s-cbte">
   <div class="tb">
     <div class="logo">LUC<span>A</span></div>
-    <div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Volver</button><div class="av">JC</div></div>
+    <div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Volver</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div>
   </div>
   <div class="cnt">
     <div class="sp">Pantalla 3 — Crear Comprobante</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Crear Comprobante</div>
-    <div style="font-size:12px;color:var(--ts);margin-bottom:18px;">Margen disponible: <span class="mo" style="color:var(--a);font-weight:500;">$2.280.000</span> · <span style="color:var(--r);">Exclusión en $382.000</span></div>
+
+    <!-- Margen hero — FB-005 -->
+    <div class="card margen-hero" id="margen-hero">
+      <div class="cl">Margen disponible</div>
+      <div class="margen-amount" id="margen-hero-val" style="color:var(--a);">$2.280.000</div>
+      <div class="margen-sub">antes de recategorización</div>
+      <div class="margen-excl">Exclusión en $382.000</div>
+    </div>
 
     <div id="cbte-form">
-      <!-- 1. Tipo -->
-      <div class="fi"><label>1 · Tipo de comprobante</label></div>
-      <div class="ts3" id="type-list">
-        <div class="tc" onclick="selType(this,&#39;FC-C&#39;,&#39;sum&#39;,&#39;Factura C&#39;)"><div><div class="tc-name">Factura C</div><div style="font-size:11px;color:var(--tm);">El más común para monotributistas</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,&#39;ND-C&#39;,&#39;sum&#39;,&#39;Nota de Débito C&#39;)"><div><div class="tc-name">Nota de Débito C</div><div style="font-size:11px;color:var(--tm);">Incrementa un comprobante previo</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,&#39;NC-C&#39;,&#39;nc&#39;,&#39;Nota de Crédito C&#39;)"><div><div class="tc-name">Nota de Crédito C</div><div style="font-size:11px;color:var(--tm);">Anula o reduce un comprobante previo</div></div><span class="tc-tag tag-nc">No suma</span></div>
-        <div class="tc" onclick="selType(this,&#39;RC-C&#39;,&#39;sum&#39;,&#39;Recibo C&#39;)"><div><div class="tc-name">Recibo C</div><div style="font-size:11px;color:var(--tm);">Documenta el cobro de servicios</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,&#39;FCE-C&#39;,&#39;sum&#39;,&#39;FCE MiPyME C&#39;)"><div><div class="tc-name">FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);">Operaciones con empresas grandes &gt;$500k</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,&#39;ND-FCE-C&#39;,&#39;sum&#39;,&#39;ND FCE MiPyME C&#39;)"><div><div class="tc-name">Nota de Débito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
-        <div class="tc" onclick="selType(this,&#39;NC-FCE-C&#39;,&#39;nc&#39;,&#39;NC FCE MiPyME C&#39;)"><div><div class="tc-name">Nota de Crédito FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);"></div></div><span class="tc-tag tag-nc">No suma</span></div>
+      <!-- 1. Tipo — FB-005: dropdown instead of cards -->
+      <div class="fi">
+        <label>1 · Tipo de comprobante</label>
+        <select id="type-select" onchange="selTypeDropdown(this)">
+          <option value="">Seleccioná tipo...</option>
+          <option value="FC-C" data-kind="sum">Factura C — Suma al tope</option>
+          <option value="ND-C" data-kind="sum">Nota de Débito C — Suma al tope</option>
+          <option value="NC-C" data-kind="nc">Nota de Crédito C — No suma</option>
+          <option value="RC-C" data-kind="sum">Recibo C — Suma al tope</option>
+          <option value="FCE-C" data-kind="sum">FCE MiPyME C — Suma al tope</option>
+          <option value="ND-FCE-C" data-kind="sum">ND FCE MiPyME C — Suma al tope</option>
+          <option value="NC-FCE-C" data-kind="nc">NC FCE MiPyME C — No suma</option>
+        </select>
       </div>
 
       <div id="cbte-rest" style="display:none;">
-        <!-- 1b. Punto de venta -->
         <div class="fi"><label>Punto de venta</label>
           <select>
             <option value="1">0001 — Comprobantes en línea</option>
@@ -462,10 +504,14 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <label>3 · Fecha del comprobante</label>
           <input type="text" id="fecha-in" value="13/04/2026" oninput="updateFecha(this.value)">
         </div>
-        <div class="ds" id="fecha-sugerida">⚠️ Superás el tope con esta fecha. Adelantá la fecha para liberar margen.</div>
+        <div class="ds" id="fecha-sugerida">Este comprobante supera el tope de tu categoría. Considerá adelantar la fecha.</div>
 
         <!-- 4. Receptor -->
-        <div class="fi"><label>4 · CUIT del receptor</label><input type="text" value="30-71456892-1" oninput="lookupCuit(this.value)"></div>
+        <div class="fi">
+          <label>4 · CUIT del receptor</label>
+          <input type="text" value="30-71456892-1" oninput="lookupCuit(this.value)">
+          <div style="font-size:12px;color:var(--bl);cursor:pointer;margin-top:4px;" onclick="goTo('s-agenda')">Buscar en agenda →</div>
+        </div>
         <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;margin-top:-8px;">
           <div style="font-size:13px;font-weight:500;">Constructora del Norte S.A.</div>
           <div style="font-size:11px;color:var(--tm);">Responsable Inscripto · CABA · Padrón ARCA ✓</div>
@@ -476,25 +522,25 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <label>5 · Concepto</label>
           <select id="concepto-sel" onchange="updateConcepto(this.value)">
             <option value="prod">Productos</option>
-            <option value="serv" selected="">Servicios</option>
+            <option value="serv" selected>Servicios</option>
             <option value="mixto">Productos y Servicios</option>
           </select>
         </div>
         <div class="fi"><label>Descripción</label><input type="text" value="Servicios contables — Abril 2026"></div>
 
-        <!-- Período (si servicios) -->
+        <!-- Período -->
         <div id="periodo-box">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
             <div class="fi" style="margin:0;"><label>Período desde</label><input type="text" value="01/04/2026"></div>
             <div class="fi" style="margin:0;"><label>Período hasta</label><input type="text" value="30/04/2026"></div>
           </div>
-          <div style="color:var(--r);font-size:12px;margin-top:-6px;margin-bottom:12px;font-weight:500;">⚠️ Usá la misma fecha que la de emisión para evitar discrepancias en ARCA.</div>
+          <div class="ds-service">⚠️ Para evitar discrepancias en ARCA, usá la misma fecha que la de emisión en los campos desde y hasta.</div>
           <div class="fi"><label>Fecha de cobro esperada</label><input type="text" value="30/04/2026"></div>
           <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);">ℹ️ Para servicios, el tope se calcula usando la fecha <strong>desde</strong> del período facturado (01/04/2026).</div>
         </div>
 
         <button class="btn btn-p" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
-        <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Cancelar</button>
+        <button class="btn btn-s" onclick="goTo('s-dash')">Cancelar</button>
       </div>
     </div>
 
@@ -517,6 +563,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div style="font-size:13px;color:var(--ts);margin-top:6px;">Esto tarda unos segundos</div>
     </div>
 
+    <!-- Success — FB-006: WhatsApp send button added -->
     <div id="cbte-ok" style="display:none;">
       <div class="suc-sc">
         <div class="suc-ic">🎉</div>
@@ -525,25 +572,26 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <div class="cae-box"><div class="cae-l">Código de Autorización Electrónica (CAE)</div><div class="cae-n">74023456789012</div><div style="font-size:11px;color:var(--g);margin-top:4px;">Vence: 23/04/2026</div></div>
         <div style="display:flex;flex-direction:column;gap:8px;">
           <button class="btn btn-p">↓ Descargar PDF</button>
+          <button class="btn btn-s" style="background:#1e3a5f;color:#818cf8;border-color:#263252;" onclick="sendWhatsApp()">💬 Enviar por WhatsApp</button>
           <button class="btn btn-s">✉ Enviar a constructora@norte.com.ar</button>
-          <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
+          <button class="btn btn-s" onclick="goTo('s-dash')">Volver al inicio</button>
         </div>
       </div>
     </div>
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni active"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
 <!-- ══ ERROR AFIP ══ -->
 <div class="screen" id="s-error">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-cbte&#39;)">← Volver</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-cbte')">← Volver</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 4 — Error AFIP</div>
     <div class="er-ic">⚠️</div>
@@ -556,60 +604,92 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="er-step"><div class="sn2">2</div><div class="st">No necesitás hacer nada — reintentamos en 10 segundos</div></div>
       <div class="er-step"><div class="sn2">3</div><div class="st">Si el problema persiste, contactá soporte desde el menú</div></div>
     </div>
-    <button class="btn btn-p" style="margin-bottom:8px;" onclick="goTo(&#39;s-cbte&#39;)">↺ Reintentar ahora</button>
-    <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
+    <button class="btn btn-p" style="margin-bottom:8px;" onclick="goTo('s-cbte')">↺ Reintentar ahora</button>
+    <button class="btn btn-s" onclick="goTo('s-dash')">Volver al inicio</button>
     <div class="sn"></div>
   </div>
 </div>
 
-<!-- ══ ALERTA EXCLUSIÓN ══ -->
-<div class="screen" id="s-alerta">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Inicio</button><div class="av">JC</div></div></div>
+<!-- ══ RECATEGORIZACIÓN (FB-007 — replaces Alerta Exclusión) ══ -->
+<div class="screen" id="s-recat">
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
-    <div class="sp">Pantalla 5 — Alertas</div>
-    <div class="eh"><div style="font-size:48px;margin-bottom:10px;">🚨</div><div class="et">Riesgo de exclusión del Monotributo</div><div class="es">Tu facturación superó el 90% del tope. Si alcanzás el límite en los próximos 365 días, quedás excluido del régimen.</div></div>
-    <div class="cd">$382.000</div>
-    <div class="cdl">para llegar al límite de exclusión</div>
-    <div class="card" style="margin-bottom:14px;">
-      <div class="cl" style="margin-bottom:10px;">Tu situación (últimos 365 días)</div>
+    <div class="sp">Pantalla 5 — Recategorización</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Recategorización</div>
+    <div style="font-size:13px;color:var(--ts);margin-bottom:16px;">Período abierto: enero y julio de cada año</div>
+
+    <!-- Current situation -->
+    <div class="card">
+      <div class="cl" style="margin-bottom:10px;">Tu situación actual</div>
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Categoría actual</span><span>F · hasta $8.100.000</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Total facturado</span><span class="mo">$7.718.000</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Margen para exclusión</span><span class="mo" style="color:var(--r);font-weight:500;">$382.000</span></div>
-      <div class="pt" style="margin-top:10px;"><div class="pf" style="width:95%;background:var(--r);"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Facturado últ. 365 días</span><span class="mo">$5.820.000</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">% del tope</span><span class="mo" style="color:var(--a);">72%</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Categoría sugerida</span><span class="bdg bb">→ Categoría G</span></div>
+      <div class="pt" style="margin-top:10px;"><div class="pf" style="width:72%;background:var(--a);"></div></div>
     </div>
-    <div class="card" style="background:var(--gd);border-color:var(--g);margin-bottom:14px;">
-      <div style="font-size:13px;font-weight:500;color:var(--g);margin-bottom:6px;">¿Qué hacer ahora?</div>
-      <div style="font-size:13px;color:var(--ts);line-height:1.6;">Podés <strong>recategorizarte a Categoría G</strong> antes de llegar al límite. El período de recategorización está abierto hasta el 31 de julio.</div>
+
+    <!-- Steps -->
+    <div class="card">
+      <div class="cl" style="margin-bottom:12px;">Pasos para recategorizar</div>
+      <div class="er-step"><div class="sn2">1</div><div class="st">Verificá tu facturación de los últimos 12 meses en el Panel Fiscal</div></div>
+      <div class="er-step"><div class="sn2">2</div><div class="st">Ingresá a ARCA con tu clave fiscal nivel 2 o superior</div></div>
+      <div class="er-step"><div class="sn2">3</div><div class="st">Seleccioná <strong>Monotributo > Recategorización</strong> y seguí los pasos</div></div>
+      <div class="er-step"><div class="sn2">4</div><div class="st">Confirmá la nueva categoría y pagá la diferencia de cuota si corresponde</div></div>
     </div>
-    <button class="btn btn-p" style="margin-bottom:8px;">Iniciar recategorización →</button>
-    <button class="btn btn-s" onclick="goTo(&#39;s-dash&#39;)">Volver al inicio</button>
-    <div style="margin-top:20px;">
-      <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Otras alertas</div>
+
+    <!-- Important dates -->
+    <div class="card">
+      <div class="cl" style="margin-bottom:10px;">Fechas importantes</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Próximo período</span><span>Julio 2026</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Fecha límite</span><span class="mo">31/07/2026</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Vigencia nueva cat.</span><span>Agosto 2026 — Enero 2027</span></div>
+    </div>
+
+    <!-- Exclusion risk (collapsed) -->
+    <div class="eh" style="cursor:pointer;" onclick="document.getElementById('excl-detail').style.display=document.getElementById('excl-detail').style.display==='none'?'block':'none'">
+      <div style="font-size:32px;margin-bottom:8px;">⚠️</div>
+      <div class="et">Riesgo de exclusión</div>
+      <div class="es">Tu facturación superó el 90% del tope. Tocá para ver detalles.</div>
+    </div>
+    <div id="excl-detail" style="display:none;">
+      <div class="cd">$382.000</div>
+      <div class="cdl">para llegar al límite de exclusión</div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Total facturado (365 días)</span><span class="mo">$7.718.000</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Margen para exclusión</span><span class="mo" style="color:var(--r);font-weight:500;">$382.000</span></div>
+        <div class="pt" style="margin-top:10px;"><div class="pf" style="width:95%;background:var(--r);"></div></div>
+      </div>
+    </div>
+
+    <!-- Other alerts -->
+    <div style="margin-top:14px;">
+      <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Vencimientos</div>
       <div class="tw">
         <div class="tr2"><div class="tm2"><div>Pago mensual monotributo</div><div class="ts2">Vence 20 abr · $68.500</div></div><span class="bdg ba">7 días</span></div>
         <div class="tr2"><div class="tm2"><div>Período recategorización</div><div class="ts2">Julio 2026</div></div><span class="bdg bb">Abierto</span></div>
       </div>
     </div>
+
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo(&#39;s-panel&#39;)"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni active"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni active"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
 <!-- ══ PANEL FISCAL ══ -->
 <div class="screen" id="s-panel">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo(&#39;s-dash&#39;)">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Panel Fiscal — Abril 2026</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Panel Fiscal</div>
     <div class="g2">
       <div class="sc"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
-      <div class="sc"><div class="sl">Compras</div><div class="sv">$412k</div><div class="ss" style="color:var(--r);">↓ 3% vs marzo</div></div>
+      <div class="sc"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">Límite 40% Cat K: $10.9M</div></div>
     </div>
     <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Comprobantes emitidos</div>
     <div class="tw" style="margin-bottom:14px;">
@@ -625,18 +705,60 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div class="sn"></div>
   </div>
   <div class="bnav">
-    <div class="ni" onclick="goTo(&#39;s-dash&#39;)"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo(&#39;s-cbte&#39;)"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
     <div class="ni active"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
-    <div class="ni" onclick="goTo(&#39;s-alerta&#39;)"><div class="ni-i">◉</div><div class="ni-l">Alertas</div></div>
-    <div class="ni" onclick="goTo(&#39;s-wa&#39;)"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
-<!-- ══ WHATSAPP SCREEN ══ -->
+<!-- ══ AGENDA DE CLIENTES (FB-006) ══ -->
+<div class="screen" id="s-agenda">
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
+  <div class="cnt">
+    <div class="sp">Pantalla 7 — Agenda de Clientes</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Agenda de Clientes</div>
+
+    <div class="fi">
+      <input type="text" id="agenda-search" placeholder="Buscar por nombre o CUIT..." oninput="filterAgenda(this.value)">
+    </div>
+
+    <div id="agenda-list" class="tw" style="margin-bottom:14px;">
+      <div class="tr2 agenda-row"><div class="tm2"><div>Constructora del Norte S.A.</div><div class="ts2">30-71456892-1 · constructora@norte.com.ar</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('30-71456892-1')">Facturar</button></div></div>
+      <div class="tr2 agenda-row"><div class="tm2"><div>Farmacia Belgrano S.R.L.</div><div class="ts2">30-65432198-7 · admin@farmaciabelgrano.com</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('30-65432198-7')">Facturar</button></div></div>
+      <div class="tr2 agenda-row"><div class="tm2"><div>Recursos Humanos Plus</div><div class="ts2">20-34567891-2 · rrhh@rhplus.com.ar</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('20-34567891-2')">Facturar</button></div></div>
+    </div>
+
+    <button class="btn btn-s" id="agenda-add-btn" onclick="showAgendaForm()" style="margin-bottom:14px;">+ Agregar cliente</button>
+
+    <div id="agenda-form" style="display:none;">
+      <div class="card">
+        <div class="cl" style="margin-bottom:12px;">Nuevo cliente</div>
+        <div class="fi"><label>Nombre o razón social</label><input type="text" placeholder="Ej: Estudio Costa"></div>
+        <div class="fi"><label>CUIT</label><input type="text" placeholder="20-12345678-9"></div>
+        <div class="fi"><label>Email</label><input type="email" placeholder="contacto@empresa.com"></div>
+        <div class="fi"><label>Teléfono</label><input type="tel" placeholder="+54 11 1234-5678"></div>
+        <button class="btn btn-p" onclick="hideAgendaForm()" style="margin-bottom:8px;">Guardar cliente</button>
+        <button class="btn btn-s" onclick="hideAgendaForm()">Cancelar</button>
+      </div>
+    </div>
+
+    <div class="sn"></div>
+  </div>
+  <div class="bnav">
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+  </div>
+</div>
+
+<!-- ══ WHATSAPP SCREEN (FB-008) ══ -->
 <div class="screen wa-bg" id="s-wa">
   <div class="wa-tb">
-    <div class="wa-back" onclick="goTo(&#39;s-dash&#39;)">←</div>
+    <div class="wa-back" onclick="goTo('s-dash')">←</div>
     <div class="wa-av">L</div>
     <div class="wa-info">
       <div class="wa-name">LUCA Fiscal</div>
@@ -647,43 +769,58 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
   <div class="wa-msgs" id="wa-msgs">
     <div class="wa-status-msg">13 de abril de 2026</div>
-
     <div class="wa-msg in">
       Hola Javier 👋 Soy LUCA, tu asistente fiscal.<br><br>
-      Podés pedirme que emita comprobantes o consultar tu saldo disponible. Los recurrentes se configuran desde la app.<br><br>
       ¿En qué te ayudo hoy?
       <div class="wa-time">10:15 ✓✓</div>
     </div>
-
     <div id="wa-step-1">
       <div class="wa-msg in">
         <div class="wa-btns">
-          <div class="wa-btn" onclick="waStep(2,&#39;📄 Emitir comprobante&#39;)">📄 Emitir comprobante</div>
-          <div class="wa-btn" onclick="waStep(10,&#39;💰 ¿Cuánto puedo facturar?&#39;)">💰 ¿Cuánto puedo facturar?</div>
+          <div class="wa-btn" onclick="waStep(100,'📄 Emitir Comprobante')">📄 Emitir Comprobante</div>
+          <div class="wa-btn" onclick="waStep(200,'📊 Consultas')">📊 Consultas</div>
+          <div class="wa-btn" onclick="waStep(300,'🤖 Asesor')">🤖 Asesor</div>
         </div>
         <div class="wa-time">10:15 ✓✓</div>
       </div>
     </div>
   </div>
 
-  <div style="background:#0b141a;padding:8px 16px;display:flex;gap:8px;overflow-x:auto;" id="wa-suggestions"></div>
-
   <div class="wa-input-area">
-    <input class="wa-input" id="wa-input" placeholder="Escribí un mensaje..." onkeydown="if(event.key===&#39;Enter&#39;)waSend()">
+    <input class="wa-input" id="wa-input" placeholder="Escribí un mensaje..." onkeydown="if(event.key==='Enter')waSend()">
     <button class="wa-send" onclick="waSend()">➤</button>
   </div>
 </div>
 
-<!-- ══ FEEDBACK ══ -->
+<!-- ══ FEEDBACK HISTORY (NEW) ══ -->
+<div class="screen" id="s-fbhist">
+  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="cnt">
+    <div class="sp">Historial de Feedback</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Tu feedback enviado</div>
+    <div style="font-size:13px;color:var(--ts);margin-bottom:16px;">Marcá como resuelto lo que ya se haya implementado</div>
+    <div id="fbhist-list"></div>
+    <div class="sn"></div>
+  </div>
+  <div class="bnav">
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+  </div>
+</div>
+
+<!-- ══ FEEDBACK PANEL ══ -->
 <div id="fb-btn" onclick="toggleFb()" title="Feedback">💬</div>
 <div id="fb-panel">
   <div class="fb-h"><div class="fb-t">Tu opinión importa</div><div class="fb-x" onclick="toggleFb()">×</div></div>
   <div class="fb-s" id="fb-ctx">Pantalla: Dashboard</div>
   <div style="font-size:12px;color:var(--ts);margin-bottom:8px;">¿Qué tipo de feedback es?</div>
   <div class="fb-types">
-    <div class="fbt" onclick="selFbT(this,&#39;problema&#39;)">🐛 Problema</div>
-    <div class="fbt" onclick="selFbT(this,&#39;sugerencia&#39;)">💡 Sugerencia</div>
-    <div class="fbt" onclick="selFbT(this,&#39;me gustó&#39;)">❤️ Me gustó</div>
+    <div class="fbt" onclick="selFbT(this,'problema')">🐛 Problema</div>
+    <div class="fbt" onclick="selFbT(this,'sugerencia')">💡 Sugerencia</div>
+    <div class="fbt" onclick="selFbT(this,'me gustó')">❤️ Me gustó</div>
   </div>
   <div style="font-size:12px;color:var(--ts);margin-bottom:6px;">¿Qué tan útil es esta pantalla?</div>
   <div class="fb-stars">
@@ -694,12 +831,13 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <textarea class="fb-ta" id="fb-text" placeholder="Contanos qué viste, qué cambiarías..."></textarea>
   <button class="fb-send" onclick="submitFb()">Enviar feedback</button>
   <div class="fb-ok" id="fb-ok">¡Gracias, Javier! Feedback guardado ✓</div>
+  <div class="fb-hist-link" onclick="closeFb();goTo('s-fbhist')">Ver historial de feedback →</div>
 </div>
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.5';
-const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
+const SPRINT='S00-v4.0';
+const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','recat':'Recategorización','panel':'Panel Fiscal','wa':'WhatsApp','agenda':'Agenda de Clientes','fbhist':'Historial Feedback'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
 let waConv=[], waStepId=0;
@@ -710,8 +848,8 @@ function goTo(id){
   curS=id.replace('s-','');
   document.getElementById('fb-ctx').textContent='Pantalla: '+(SNAMES[curS]||curS);
   closeFb(); window.scrollTo(0,0);
-  // reset comprobante form when going to it
   if(id==='s-cbte'){resetCbteForm();}
+  if(id==='s-fbhist'){renderFbHistory();}
 }
 
 function toggleTheme(){
@@ -737,39 +875,53 @@ function onbNext(){
   document.querySelectorAll('[id^=od]').forEach((d,i)=>d.classList.toggle('done',i<=obStep));
 }
 
-// COMPROBANTE
-function selType(el,code,kind,name){
-  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';});
-  el.className='tc '+(kind==='nc'?'sel-nc':'sel-sum');
-  selTypeCode=code; selTypeSum=(kind==='sum'); selTypeName=name;
-  document.getElementById('cbte-rest').style.display='block';
-  // ADR-030: hide all non-selected type cards
-  document.querySelectorAll('.tc').forEach(t=>t.style.display = t===el ? '' : 'none');
-  // Remove existing change button if any
-  const existing=document.getElementById('change-type-btn');
-  if(existing) existing.remove();
-  // Add "cambiar tipo" button after the selected card
-  const btn=document.createElement('div');
-  btn.id='change-type-btn';
-  btn.innerHTML='← Cambiar tipo';
-  btn.style.cssText='font-size:13px;color:var(--bl);cursor:pointer;margin:4px 0 12px;';
-  btn.onclick=resetTypeSelection;
-  el.parentNode.insertBefore(btn, el.nextSibling);
-  updateImpact(parseMonto(document.getElementById('monto-in').value));
+// ── DASHBOARD: category limit toggle (FB-004)
+function toggleCatLimit(type){
+  const btns=document.querySelectorAll('.cat-toggle-btn');
+  btns[0].classList.toggle('active',type==='actual');
+  btns[1].classList.toggle('active',type==='ipc');
+  const limVal=document.getElementById('cat-limit-val');
+  const limLabel=document.getElementById('cat-limit-label');
+  const recatPct=document.getElementById('recat-pct');
+  const recatBar=document.getElementById('recat-bar');
+  const recatLim=document.getElementById('recat-lim');
+  if(type==='ipc'){
+    limVal.textContent='$8.910.000';
+    limLabel.textContent='proyectado IPC (+10%)';
+    recatPct.textContent='65%';
+    recatBar.style.width='65%';recatBar.style.background='var(--g)';
+    recatLim.textContent='límite $8.910.000';
+  } else {
+    limVal.textContent='$8.100.000';
+    limLabel.textContent='límite Cat F';
+    recatPct.textContent='72%';
+    recatBar.style.width='72%';recatBar.style.background='var(--a)';
+    recatLim.textContent='límite $8.100.000';
+  }
 }
 
-function resetTypeSelection(){
-  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
-  const changeBtn=document.getElementById('change-type-btn');
-  if(changeBtn) changeBtn.remove();
-  selTypeCode=''; selTypeSum=true; selTypeName='';
+// ── DASHBOARD: collapsible chart (FB-004)
+function toggleChart(){
+  const body=document.getElementById('chart-body');
+  const chev=document.getElementById('chart-chevron');
+  if(body.style.display==='none'){body.style.display='block';chev.classList.remove('collapsed');}
+  else{body.style.display='none';chev.classList.add('collapsed');}
+}
+
+// ── COMPROBANTE (FB-005)
+function selTypeDropdown(sel){
+  const opt=sel.selectedOptions[0];
+  if(!opt||!opt.value){selTypeCode='';selTypeSum=true;selTypeName='';document.getElementById('cbte-rest').style.display='none';return;}
+  selTypeCode=opt.value;
+  selTypeSum=opt.dataset.kind==='sum';
+  selTypeName=opt.textContent.split(' — ')[0];
+  document.getElementById('cbte-rest').style.display='block';
   updateImpact(parseMonto(document.getElementById('monto-in').value));
 }
 
 function resetCbteForm(){
-  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
-  const changeBtn=document.getElementById('change-type-btn');
-  if(changeBtn) changeBtn.remove();
+  const sel=document.getElementById('type-select');
+  if(sel)sel.selectedIndex=0;
   selTypeCode=''; selTypeSum=true; selTypeName='';
   document.getElementById('cbte-rest').style.display='none';
   document.getElementById('cbte-form').style.display='block';
@@ -795,6 +947,7 @@ function updateImpact(v){
   const margen=document.getElementById('ib-margen');
   const text=document.getElementById('impact-text');
   const ds=document.getElementById('fecha-sugerida');
+  const hero=document.getElementById('margen-hero-val');
 
   if(!selTypeSum){
     box.className='ib ok';
@@ -802,6 +955,7 @@ function updateImpact(v){
     margen.textContent='$'+(lim-base).toLocaleString('es-AR');
     text.textContent='Las Notas de Crédito no afectan el cálculo de categoría. Podés emitirla sin restricciones.';
     ds.style.display='none';
+    if(hero){hero.textContent='$'+(lim-base).toLocaleString('es-AR');hero.style.color='var(--g)';}
     return;
   }
 
@@ -811,14 +965,15 @@ function updateImpact(v){
   else{box.className='ib ok';}
   title.textContent='Margen disponible tras emitir';
   margen.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');
-  text.innerHTML=`Facturado: <strong>$${nuevo.toLocaleString('es-AR')}</strong> / $8.100.000 (${pct}%)`;
+  text.innerHTML='Facturado: <strong>$'+nuevo.toLocaleString('es-AR')+'</strong> / $8.100.000 ('+pct+'%)';
   ds.style.display=pct>=95?'block':'none';
+  if(hero){
+    hero.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');
+    hero.style.color=pct>=95?'var(--r)':pct>=80?'var(--a)':'var(--g)';
+  }
 }
 
-function updateFecha(v){
-  // simulation placeholder — in real app recalculates window
-}
-
+function updateFecha(v){}
 function updateConcepto(v){
   document.getElementById('periodo-box').style.display=v==='prod'?'none':'block';
 }
@@ -843,79 +998,70 @@ function emitir(){
   },2200);
 }
 function lookupCuit(){}
+function sendWhatsApp(){
+  alert('Se abriría wa.me con el comprobante pre-armado.\n\nFactura C — Constructora del Norte S.A.\n$320.000 · CAE: 74023456789012\n\n(Simulación del prototipo)');
+}
 
-// WHATSAPP
+// ── AGENDA (FB-006)
+function filterAgenda(q){
+  const rows=document.querySelectorAll('.agenda-row');
+  const ql=q.toLowerCase();
+  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(ql)?'':'none';});
+}
+function showAgendaForm(){
+  document.getElementById('agenda-form').style.display='block';
+  document.getElementById('agenda-add-btn').style.display='none';
+}
+function hideAgendaForm(){
+  document.getElementById('agenda-form').style.display='none';
+  document.getElementById('agenda-add-btn').style.display='block';
+}
+function agendaFacturar(cuit){goTo('s-cbte');}
+
+// ── WHATSAPP (FB-008 — menu per Javier spec)
 const waFlows = {
-  2: {
-    out: '📄 Emitir comprobante',
-    in: '¿A quién le facturamos y por cuánto?\n\nPodés escribirme algo como:\n"facturale a Constructora del Norte 320000"',
-    btns: [{t:'Constructora del Norte $320.000',s:3}]
-  },
-  3: {
-    out: 'Constructora del Norte $320.000',
-    typing: true,
-    in: '¿Confirmás?\n\n📄 Factura C\n📋 Constructora del Norte S.A.\n   CUIT: 30-71456892-1\n💰 $320.000\n📅 Hoy, 13/04/2026\n\n⚠️ Después de emitir te quedan $1.960.000 de margen en tu categoría.\n\n✅ Todo en orden para emitir.',
-    btns: [{t:'✓ Confirmar',s:4},{t:'✏️ Editar',s:31}]
-  },
-  31: {
-    out: '✏️ Editar',
-    in: 'Claro, ¿qué querés cambiar?\n',
-    btns: [{t:'Cambiar el monto',s:32},{t:'Cambiar la fecha',s:33},{t:'Cambiar el receptor',s:34}]
-  },
-  32: {out:'Cambiar el monto',in:'¿Cuál es el nuevo monto?',btns:[{t:'$285.000',s:3}]},
-  33: {out:'Cambiar la fecha',in:'¿Qué fecha querés usar?',btns:[{t:'15/04/2026 (libera $185k más)',s:3}]},
-  34: {out:'Cambiar el receptor',in:'Escribí el nombre o CUIT del receptor.',btns:[{t:'Farmacia Belgrano',s:3}]},
-  4: {
-    out: '✓ Confirmar',
-    typing: true,
-    in: '✅ ¡Comprobante emitido!\n\n📋 Factura C — Constructora del Norte S.A.\n💰 $320.000\n📄 CAE: 74023456789012\n📅 Vence: 23/04/2026\n\n¿Qué hacemos con el PDF?',
-    btns: [{t:'📤 Enviar al cliente',s:5},{t:'↓ Descargar PDF',s:6},{t:'Volver al menú',s:1}]
-  },
-  5: {out:'📤 Enviar al cliente',in:'✉️ PDF enviado a constructora@norte.com.ar\n\n¿Algo más?',btns:[{t:'Volver al menú',s:1}]},
-  6: {out:'↓ Descargar PDF',in:'📄 Descargando PDF...\n\n¿Algo más?',btns:[{t:'Volver al menú',s:1}]},
-  10: {
-    out: '💰 ¿Cuánto puedo facturar?',
-    typing: true,
-    in: '📊 Tu situación hoy (últimos 365 días):\n\n🟡 Categoría F · límite $8.100.000\n• Facturado: $7.718.000 (95%)\n• Margen categoría: $382.000\n• Margen exclusión: $382.000 ⚠️\n\n📅 Próximas liberaciones:\n• 15 abr → +$185.000\n• 22 abr → +$320.000\n• 1 may → +$240.000\n\nSi facturás $382.000 o más, pasás a Categoría G. ¿Querés simular una fecha?',
-    btns:[{t:'Simular fecha futura',s:11},{t:'Volver al menú',s:1}]
-  },
-  11: {
-    out:'Simular fecha futura',
-    in:'¿Para qué fecha querés simular?\n\nCon fecha 22/04 tendrías un margen de $702.000 (liberados $320.000 del 22/04/2025).',
-    btns:[{t:'Crear comprobante al 22/04',s:3},{t:'Volver al menú',s:1}]
-  },
-  'app-redirect': {
-    out:'Ver en la app',
-    in:'Para configurar recurrentes, ingresá a la app LUCA.\n\nLa configuración de comprobantes recurrentes solo puede hacerse desde la app web/mobile (ADR-035). Desde WhatsApp solo vas a poder aprobar propuestas cuando llegue la fecha de emisión.',
-    btns:[{t:'Volver al menú',s:1}]
-  },
-  1: {
-    out:'Volver al menú',
-    in:'¿En qué más te ayudo?',
-    btns:[{t:'📄 Emitir comprobante',s:2},{t:'💰 ¿Cuánto puedo facturar?',s:10}]
-  }
+  // ROOT
+  1:{out:'Volver al menú',in:'¿En qué más te ayudo?',btns:[{t:'📄 Emitir Comprobante',s:100},{t:'📊 Consultas',s:200},{t:'🤖 Asesor',s:300}]},
+  // EMITIR
+  100:{out:'📄 Emitir Comprobante',in:'¿Cómo querés emitir?\n\nPodés escribir los datos o mandar un audio.',btns:[{t:'✍️ Por texto',s:101},{t:'🎤 Por voz',s:102}]},
+  101:{out:'✍️ Por texto',in:'¿A quién le facturamos y por cuánto?\n\nEscribime algo como:\n"facturale a Constructora del Norte 320000"\n\n(Nota de Crédito solo desde la app web)',btns:[{t:'Constructora del Norte $320.000',s:103}]},
+  102:{out:'🎤 Por voz',in:'🎙️ Mandá un audio con los datos del comprobante.\n\nDecime: receptor, monto y concepto.\n\nEjemplo: "Facturale trescientos veinte mil a Constructora del Norte por servicios contables de abril"\n\n(Nota de Crédito solo desde la app web)',btns:[{t:'(simular audio) Constructora $320k',s:103}]},
+  103:{out:'Constructora del Norte $320.000',typing:true,in:'¿Confirmás?\n\n📄 Factura C\n📋 Constructora del Norte S.A.\n   CUIT: 30-71456892-1\n💰 $320.000\n📅 Hoy, 13/04/2026\n\n⚠️ Después de emitir te quedan $1.960.000 de margen.\n\n✅ Todo en orden.',btns:[{t:'✓ Confirmar',s:104},{t:'✏️ Editar',s:105}]},
+  104:{out:'✓ Confirmar',typing:true,in:'✅ ¡Comprobante emitido!\n\n📋 Factura C — Constructora del Norte S.A.\n💰 $320.000\n📄 CAE: 74023456789012\n📅 Vence: 23/04/2026\n\n¿Qué hacemos con el PDF?',btns:[{t:'📤 Enviar al cliente',s:106},{t:'↓ Descargar PDF',s:107},{t:'Volver al menú',s:1}]},
+  105:{out:'✏️ Editar',in:'¿Qué querés cambiar?',btns:[{t:'Cambiar monto',s:108},{t:'Cambiar fecha',s:109},{t:'Cambiar receptor',s:110}]},
+  106:{out:'📤 Enviar al cliente',in:'✉️ PDF enviado a constructora@norte.com.ar',btns:[{t:'Volver al menú',s:1}]},
+  107:{out:'↓ Descargar PDF',in:'📄 Descargando PDF...',btns:[{t:'Volver al menú',s:1}]},
+  108:{out:'Cambiar monto',in:'¿Cuál es el nuevo monto?',btns:[{t:'$285.000',s:103}]},
+  109:{out:'Cambiar fecha',in:'¿Qué fecha querés usar?',btns:[{t:'15/04/2026',s:103}]},
+  110:{out:'Cambiar receptor',in:'Escribí el nombre o CUIT.',btns:[{t:'Farmacia Belgrano',s:103}]},
+  // CONSULTAS
+  200:{out:'📊 Consultas',in:'¿Qué querés consultar?',btns:[{t:'💰 Montos facturados',s:201},{t:'📈 Montos disponibles',s:202},{t:'🏷️ Categoría actual',s:203},{t:'💳 Deuda CCMA',s:204},{t:'🪪 Obtener credencial',s:205}]},
+  201:{out:'💰 Montos facturados',typing:true,in:'📊 Facturación últimos 365 días:\n\n• Total: $5.820.000\n• Este mes: $505.000 (8 comprobantes)\n• Mes anterior: $1.420.000',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  202:{out:'📈 Montos disponibles',typing:true,in:'📊 Margen disponible hoy:\n\n🟡 Categoría F — límite $8.100.000\n• Margen recategorización: $2.280.000\n• Margen exclusión: $382.000 ⚠️\n\n📅 Próximas liberaciones:\n• 15 abr → +$185.000\n• 22 abr → +$320.000',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  203:{out:'🏷️ Categoría actual',typing:true,in:'🏷️ Tu categoría:\n\nCategoría F\nCuota mensual: $68.500\nLímite anual: $8.100.000\nFacturado al período: $5.820.000\nDisponible: $2.280.000\nPróxima recategorización: Julio 2026',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  204:{out:'💳 Deuda CCMA',typing:true,in:'💳 Cuenta Corriente Monotributista:\n\nSaldo: $0\n✅ Sin deuda detectada.\n\nÚltima consulta ARCA: hoy 10:15',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  205:{out:'🪪 Obtener credencial',typing:true,in:'🪪 Tu credencial de Monotributo:\n\nCUIT: 20-28456791-3\nCategoría: F\nActividad: Servicios contables\nVigencia: Enero 2026 — Julio 2026\n\n📄 Descargando PDF de credencial...',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  // ASESOR
+  300:{out:'🤖 Asesor',in:'🤖 Soy el asesor de LUCA. Preguntame lo que necesites sobre Monotributo.\n\nEjemplos:\n• "¿Cuándo es la próxima recategorización?"\n• "¿Qué pasa si supero el tope?"\n• "¿Puedo tener empleados?"',btns:[{t:'¿Cuándo recategorizo?',s:301},{t:'¿Qué pasa si supero el tope?',s:302},{t:'Volver al menú',s:1}]},
+  301:{out:'¿Cuándo recategorizo?',typing:true,in:'📅 Recategorización:\n\nSe hace en enero y julio. El próximo período es julio 2026 (del 1 al 31).\n\nSe evalúan los últimos 12 meses de facturación, alquileres y consumo eléctrico.\n\nLUCA te va a avisar cuando se abra el período.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]},
+  302:{out:'¿Qué pasa si supero el tope?',typing:true,in:'⚠️ Exclusión del Monotributo:\n\nSi tu facturación de los últimos 365 días supera el tope de la categoría máxima (K = $27.300.000 para servicios), quedás excluido automáticamente.\n\nTenés que inscribirte como Responsable Inscripto. LUCA te alerta antes de llegar al límite.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]}
 };
 
 function waStep(s, outText){
   const msgs=document.getElementById('wa-msgs');
   const flow=waFlows[s];
   if(!flow) return;
-
-  // out msg
   if(outText||flow.out){
     const div=document.createElement('div');
     div.className='wa-msg out';
-    div.innerHTML=(outText||flow.out).replace(/\n/g,'<br>');
-    div.innerHTML+='<div class="wa-time">ahora ✓✓</div>';
+    div.innerHTML=(outText||flow.out).replace(/\n/g,'<br>')+'<div class="wa-time">ahora ✓✓</div>';
     msgs.appendChild(div);
   }
-
   const typing=document.createElement('div');
   typing.className='wa-typing show';
   typing.textContent='LUCA está escribiendo...';
   msgs.appendChild(typing);
   msgs.scrollTop=msgs.scrollHeight;
-
   setTimeout(()=>{
     typing.remove();
     const inDiv=document.createElement('div');
@@ -924,7 +1070,7 @@ function waStep(s, outText){
     if(flow.btns&&flow.btns.length){
       html+='<div class="wa-btns">';
       flow.btns.forEach(b=>{
-        html+=`<div class="wa-btn" onclick="waStep(${b.s},'${b.t.replace(/'/g,"\\'")}')">` +b.t+'</div>';
+        html+='<div class="wa-btn" onclick="waStep('+b.s+',\''+b.t.replace(/'/g,"\\'")+'\')">' +b.t+'</div>';
       });
       html+='</div>';
     }
@@ -940,10 +1086,13 @@ function waSend(){
   const v=inp.value.trim();
   if(!v) return;
   inp.value='';
-  // simple NLU simulation
-  if(v.toLowerCase().includes('factur')||v.toLowerCase().includes('comprobante')){waStep(2,v);}
-  else if(v.toLowerCase().includes('cuánto')||v.toLowerCase().includes('cuanto')||v.toLowerCase().includes('saldo')){waStep(10,v);}
-  else if(v.toLowerCase().includes('recurrent')||v.toLowerCase().includes('program')){waStep('app-redirect',v);}
+  const vl=v.toLowerCase();
+  if(vl.includes('factur')||vl.includes('comprobante')||vl.includes('emitir')){waStep(100,v);}
+  else if(vl.includes('cuánto')||vl.includes('cuanto')||vl.includes('saldo')||vl.includes('consulta')||vl.includes('disponible')||vl.includes('facturado')){waStep(200,v);}
+  else if(vl.includes('asesor')||vl.includes('ayuda')||vl.includes('monotributo')){waStep(300,v);}
+  else if(vl.includes('credencial')){waStep(205,v);}
+  else if(vl.includes('deuda')||vl.includes('ccma')){waStep(204,v);}
+  else if(vl.includes('categoría')||vl.includes('categoria')){waStep(203,v);}
   else{
     const msgs=document.getElementById('wa-msgs');
     const out=document.createElement('div');
@@ -953,7 +1102,7 @@ function waSend(){
     setTimeout(()=>{
       const resp=document.createElement('div');
       resp.className='wa-msg in';
-      resp.innerHTML='Entendido. ¿Querés que emita un comprobante o consultar tu saldo?<div class="wa-btns"><div class="wa-btn" onclick="waStep(2,\'📄 Emitir comprobante\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(10,\'💰 Saldo\')">💰 Saldo</div></div><div class="wa-time">ahora ✓✓</div>';
+      resp.innerHTML='No entendí tu mensaje. ¿Qué necesitás?<div class="wa-btns"><div class="wa-btn" onclick="waStep(100,\'📄 Emitir\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(200,\'📊 Consultas\')">📊 Consultas</div><div class="wa-btn" onclick="waStep(300,\'🤖 Asesor\')">🤖 Asesor</div></div><div class="wa-time">ahora ✓✓</div>';
       msgs.appendChild(resp);
       msgs.scrollTop=msgs.scrollHeight;
     },1000);
@@ -961,7 +1110,7 @@ function waSend(){
   }
 }
 
-// FEEDBACK
+// ── FEEDBACK
 function toggleFb(){document.getElementById('fb-panel').classList.toggle('open');}
 function closeFb(){document.getElementById('fb-panel').classList.remove('open');}
 function selFbT(el,t){document.querySelectorAll('.fbt').forEach(x=>x.classList.remove('sel'));el.classList.add('sel');fbType=t;}
@@ -973,17 +1122,78 @@ function submitFb(){
     estrellas:fbStar||'',comentario:text,
     dispositivo:window.innerWidth<768?'mobile':'desktop',modo:mode==='u'?'usuario':'evaluador'
   })}).catch(()=>{});
+  // Save to localStorage history
+  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
+  const newId='fb-'+String(list.length+1).padStart(3,'0');
+  list.push({id:newId,date:new Date().toISOString().slice(0,10),sprint:SPRINT,screen:SNAMES[curS]||curS,type:fbType||'general',stars:fbStar||0,text:text,status:'pendiente'});
+  localStorage.setItem('luca_fb_history',JSON.stringify(list));
   document.querySelector('.fb-send').style.display='none';
   document.getElementById('fb-ok').style.display='block';
   document.getElementById('fb-text').value='';
-  setTimeout(()=>closeFb(),2000);
+  setTimeout(()=>{closeFb();document.querySelector('.fb-send').style.display='block';document.getElementById('fb-ok').style.display='none';},2000);
 }
 
-// init impact
+// ── FEEDBACK HISTORY
+function initFbHistory(){
+  if(!localStorage.getItem('luca_fb_history')){
+    localStorage.setItem('luca_fb_history',JSON.stringify([
+      {id:'fb-001',date:'2026-04-14',sprint:'S00',screen:'Onboarding',type:'problema',stars:0,text:'El punto de venta se debe seleccionar en emisión de comprobantes, no en el onboarding',status:'resuelto'},
+      {id:'fb-002',date:'2026-04-14',sprint:'S00',screen:'Onboarding',type:'problema',stars:0,text:'Falta poner la Clave Fiscal, iría en el lugar del punto de venta',status:'resuelto'},
+      {id:'fb-003',date:'2026-04-14',sprint:'S00-v3.2',screen:'Onboarding',type:'sugerencia',stars:0,text:'La frase "nunca modifica datos en tu nombre" no aplica porque el sistema emite comprobantes',status:'resuelto'},
+      {id:'fb-004',date:'2026-04-14',sprint:'S00-v3.2',screen:'Dashboard',type:'general',stars:0,text:'Pondría dentro del rectángulo lo de categoría y facturado, sacaría la cantidad de comprobantes',status:'resuelto'},
+      {id:'fb-005',date:'2026-04-14',sprint:'S00-v3.2',screen:'Dashboard',type:'general',stars:0,text:'Sugerencias detalladas en documento Word "LUCA Pantalla 2 — Dashboard"',status:'resuelto'},
+      {id:'fb-006',date:'2026-04-14',sprint:'S00-v3.2',screen:'Crear Comprobante',type:'general',stars:0,text:'Margen disponible más grande, usar desplegable en lugar de tarjetas para tipo',status:'resuelto'},
+      {id:'fb-007',date:'2026-04-14',sprint:'S00-v3.2',screen:'Crear Comprobante',type:'general',stars:0,text:'Fecha: si te pasás ponerlo en ROJO y grande. Fechas desde/hasta sugerir misma fecha que emisión',status:'resuelto'},
+      {id:'fb-008',date:'2026-04-14',sprint:'S00-v3.2',screen:'Crear Comprobante',type:'general',stars:0,text:'Agregar opción de envío por WhatsApp y una Agenda de Clientes con CUIT, razón social, mails y celu',status:'resuelto'},
+      {id:'fb-009',date:'2026-04-14',sprint:'S00-v3.2',screen:'Alerta Exclusión',type:'general',stars:0,text:'Reemplazar pestaña de alerta por recategorización con paso a paso, vencimientos, etc.',status:'resuelto'},
+      {id:'fb-010',date:'2026-04-14',sprint:'S00-v3.2',screen:'Dashboard',type:'general',stars:0,text:'Agregar pestaña con info de CCMA (Cuenta Corriente de Monotributistas como AFIPPI)',status:'resuelto'},
+      {id:'fb-011',date:'2026-04-14',sprint:'S00-v3.2',screen:'WhatsApp',type:'general',stars:0,text:'Refinar menú WhatsApp: Emitir (texto/voz), Consultas (5 opciones), Asesor. Recurrentes desde la web.',status:'resuelto'}
+    ]));
+  }
+}
+
+function renderFbHistory(){
+  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
+  const container=document.getElementById('fbhist-list');
+  if(!container)return;
+  container.innerHTML='';
+  // Sort newest first
+  list.sort((a,b)=>b.id.localeCompare(a.id));
+  list.forEach(item=>{
+    const isRes=item.status==='resuelto';
+    const div=document.createElement('div');
+    div.className='fbh-item'+(isRes?' resolved':'');
+    div.innerHTML=
+      '<div style="display:flex;justify-content:space-between;align-items:center;">'+
+        '<div><span class="bdg '+(isRes?'bg':'ba')+'">'+(isRes?'Resuelto':'Pendiente')+'</span> <span style="font-size:12px;color:var(--ts);margin-left:6px;">'+item.screen+'</span></div>'+
+        '<span class="fbh-meta">'+item.date+'</span>'+
+      '</div>'+
+      '<div class="fbh-text">'+item.text+'</div>'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;">'+
+        '<span class="fbh-meta">'+(item.type||'general')+' · '+item.sprint+'</span>'+
+        '<button class="fbh-btn" onclick="resolveFb(\''+item.id+'\')">'+(isRes?'Marcar pendiente':'Marcar resuelto')+'</button>'+
+      '</div>';
+    container.appendChild(div);
+  });
+}
+
+function resolveFb(id){
+  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
+  const item=list.find(x=>x.id===id);
+  if(item){
+    item.status=item.status==='resuelto'?'pendiente':'resuelto';
+    localStorage.setItem('luca_fb_history',JSON.stringify(list));
+    renderFbHistory();
+    // Fire-and-forget to Google Sheets
+    fetch(SHEETS,{method:'POST',body:JSON.stringify({action:'update_status',id:id,status:item.status})}).catch(()=>{});
+  }
+}
+
+// ── INIT
+initFbHistory();
 setTimeout(()=>{
   if(document.getElementById('monto-in')){updateImpact(320000);}
 },100);
 </script>
-
 
 </body></html>
