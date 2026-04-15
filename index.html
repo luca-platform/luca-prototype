@@ -158,12 +158,11 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .coll-body{padding:0 16px 16px;display:none;}
 .coll-body.open{display:block;}
 /* liberation table */
-.lib-row2{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--br);gap:10px;}
+.lib-row2{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--br);justify-content:space-between;}
 .lib-row2:last-child{border-bottom:none;}
-.lib-date2{font-size:11px;color:var(--tm);font-family:'JetBrains Mono',monospace;width:58px;flex-shrink:0;}
-.lib-client{font-size:12px;color:var(--tp);flex:1;font-weight:500;}
-.lib-invoice-amt{font-size:12px;color:var(--ts);font-family:'JetBrains Mono',monospace;width:80px;text-align:right;flex-shrink:0;}
-.lib-freed{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;font-weight:600;width:90px;text-align:right;flex-shrink:0;}
+.lib-date2{font-size:12px;color:var(--tm);font-family:'JetBrains Mono',monospace;flex-shrink:0;}
+.lib-invoice-amt{font-size:12px;color:var(--ts);font-family:'JetBrains Mono',monospace;text-align:center;flex-shrink:0;}
+.lib-freed{font-size:13px;color:var(--g);font-family:'JetBrains Mono',monospace;font-weight:600;text-align:right;flex-shrink:0;}
 .lib-summary{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;margin-top:4px;border-top:1px solid var(--br);}
 /* margen hero */
 .margen-hero{text-align:center;padding:20px;margin-bottom:14px;}
@@ -377,39 +376,37 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div class="collapsible" id="lib-section">
       <div class="coll-header" onclick="toggleColl('lib-section')">
         <div class="coll-title">📅 Próximas liberaciones de margen</div>
-        <div class="coll-hint"><span style="font-size:12px;">5 facturas</span> <span class="coll-chevron" id="lib-section-chev">▾</span></div>
+        <div class="coll-hint"><span style="font-size:11px;">Ver detalle</span> <span class="coll-chevron" id="lib-section-chev">▾</span></div>
       </div>
       <div class="coll-body" id="lib-section-body">
-        <div style="font-size:11px;color:var(--tm);margin-bottom:10px;">Las 5 facturas más antiguas que liberarán margen al cumplir 365 días.</div>
+        <div style="font-size:11px;color:var(--tm);margin-bottom:10px;line-height:1.5;">Las siguientes 5 facturas aumentarán el margen de facturación en las siguientes fechas/montos.</div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.5px;padding-bottom:6px;border-bottom:1px solid var(--br);">
+          <span>Fecha</span><span>Factura</span><span>Margen disp.</span>
+        </div>
         <div class="lib-row2">
           <div class="lib-date2">15 abr</div>
-          <div class="lib-client">Farmacia Belgrano S.R.L.</div>
           <div class="lib-invoice-amt">$185.000</div>
-          <div class="lib-freed">→ $2.465k</div>
+          <div class="lib-freed">$2.465.000</div>
         </div>
         <div class="lib-row2">
           <div class="lib-date2">22 abr</div>
-          <div class="lib-client">Recursos Humanos Plus</div>
           <div class="lib-invoice-amt">$320.000</div>
-          <div class="lib-freed">→ $2.785k</div>
+          <div class="lib-freed">$2.785.000</div>
         </div>
         <div class="lib-row2">
           <div class="lib-date2">1 may</div>
-          <div class="lib-client">Coworking Centro S.A.</div>
           <div class="lib-invoice-amt">$240.000</div>
-          <div class="lib-freed">→ $3.025k</div>
+          <div class="lib-freed">$3.025.000</div>
         </div>
         <div class="lib-row2">
           <div class="lib-date2">10 may</div>
-          <div class="lib-client">Telecom Argentina</div>
           <div class="lib-invoice-amt">$450.000</div>
-          <div class="lib-freed">→ $3.475k</div>
+          <div class="lib-freed">$3.475.000</div>
         </div>
         <div class="lib-row2">
           <div class="lib-date2">18 may</div>
-          <div class="lib-client">Constructora del Norte</div>
           <div class="lib-invoice-amt">$280.000</div>
-          <div class="lib-freed">→ $3.755k</div>
+          <div class="lib-freed">$3.755.000</div>
         </div>
         <div class="lib-summary">
           <span style="font-size:12px;color:var(--ts);">Margen hoy</span>
