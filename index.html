@@ -3,7 +3,7 @@
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.4</title>
+<title>LUCA — Prototipo Sprint 00 v3.4.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -226,14 +226,14 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
 .metric-sub{font-size:10px;color:var(--tm);margin-top:3px;}
 /* liberacion chart */
-.lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;}
+.lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;overflow:visible;}
 .lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;}
-.lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;overflow:visible;}
 .lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
-.lib-bar-wrap{flex:1;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
+.lib-bar-wrap{flex:1;min-width:0;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
 .lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
 .lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-.lib-amount.outside{position:absolute;left:calc(100% + 6px);right:auto;color:var(--g);}
+.lib-amount.outside{position:static;transform:none;flex-shrink:0;color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -365,9 +365,9 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <!-- Liberación de margen -->
     <div class="lib-chart">
       <div class="lib-title">📅 Margen que se libera próximamente</div>
-      <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:25%"><span class="lib-amount outside">+$185k</span></div></div></div>
+      <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:25%"></div></div><span class="lib-amount outside">+$185k</span></div>
       <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:40%"><span class="lib-amount">+$320k</span></div></div></div>
-      <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"><span class="lib-amount outside">+$240k</span></div></div></div>
+      <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"></div></div><span class="lib-amount outside">+$240k</span></div>
       <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:55%"><span class="lib-amount">+$450k</span></div></div></div>
       <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
     </div>
@@ -697,7 +697,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.4';
+const SPRINT='S00-v3.4.1';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
