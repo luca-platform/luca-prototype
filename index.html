@@ -3,8 +3,10 @@
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.2.1</title>
-<link href="./index_files/css2" rel="stylesheet">
+<title>LUCA — Prototipo Sprint 00 v3.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 :root{
@@ -33,15 +35,16 @@
   --br:rgba(15,23,42,0.08);--brm:rgba(15,23,42,0.14);
   --sh:0 2px 16px rgba(15,23,42,0.08);
 }
-html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min-height:100vh;transition:background .3s,color .3s;}
+html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11','ss01','ss03';background:var(--bp);color:var(--tp);min-height:100vh;transition:background .3s,color .3s;}
+.mo,input.mo{font-variant-numeric:tabular-nums slashed-zero;}
 .screen{display:none;min-height:100vh;flex-direction:column;}
 .screen.active{display:flex;}
 /* topbar */
 .tb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bs);border-bottom:1px solid var(--br);position:sticky;top:0;z-index:50;}
 .logo{font-size:20px;font-weight:600;letter-spacing:-.5px;}.logo span{color:var(--g);}
 .tb-r{display:flex;align-items:center;gap:10px;}
-.btn-th{background:var(--bpi);border:1px solid var(--br);border-radius:20px;padding:5px 12px;font-family:'Sora',sans-serif;font-size:11px;color:var(--ts);cursor:pointer;}
-.btn-bk{background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:6px 12px;font-family:'Sora',sans-serif;font-size:13px;color:var(--ts);cursor:pointer;}
+.btn-th{background:var(--bpi);border:1px solid var(--br);border-radius:20px;padding:5px 12px;font-family:'Inter',system-ui,sans-serif;font-size:11px;color:var(--ts);cursor:pointer;}
+.btn-bk{background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:6px 12px;font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--ts);cursor:pointer;}
 .av{width:34px;height:34px;border-radius:50%;background:var(--bld);color:var(--bl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bl);}
 /* content */
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
@@ -89,11 +92,11 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 /* form */
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;}
-.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Sora',sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s;}
+.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s;}
 .fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);}
 .fi textarea{resize:none;min-height:80px;}
 /* btn */
-.btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Sora',sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
+.btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
 .btn:active{transform:scale(.98);}
 .btn-p{background:var(--g);color:#fff;}.btn-s{background:var(--bpi);color:var(--tp);border:1px solid var(--br);}
 /* impact */
@@ -115,7 +118,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .tc-tag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;}
 .tag-sum{background:var(--gd);color:var(--g);}.tag-nc{background:var(--bld);color:var(--bl);}
 /* date suggestion */
-.ds{background:var(--gd);border:1px solid var(--g);border-radius:var(--Rx);padding:10px 12px;margin-top:-8px;margin-bottom:14px;font-size:12px;color:var(--g);}
+.ds{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:10px 12px;margin-top:-8px;margin-bottom:14px;font-size:12px;color:var(--r);font-weight:500;}
 /* success */
 .suc-sc{text-align:center;padding:32px 20px;}
 .suc-ic{font-size:64px;margin-bottom:16px;}
@@ -183,10 +186,10 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .fb-stars{display:flex;gap:6px;margin-bottom:12px;}
 .fbs{font-size:22px;cursor:pointer;opacity:.25;transition:opacity .12s;}
 .fbs.on{opacity:1;}
-.fb-ta{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:8px 10px;font-family:'Sora',sans-serif;font-size:12px;color:var(--tp);resize:none;outline:none;min-height:60px;margin-bottom:10px;transition:border-color .2s;}
+.fb-ta{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:8px 10px;font-family:'Inter',system-ui,sans-serif;font-size:12px;color:var(--tp);resize:none;outline:none;min-height:60px;margin-bottom:10px;transition:border-color .2s;}
 .fb-ta:focus{border-color:var(--g);}
 .fb-ta::placeholder{color:var(--tm);}
-.fb-send{width:100%;padding:9px;background:var(--g);color:#fff;border:none;border-radius:var(--Rx);font-family:'Sora',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;}
+.fb-send{width:100%;padding:9px;background:var(--g);color:#fff;border:none;border-radius:var(--Rx);font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;}
 .fb-send:hover{opacity:.88;}
 .fb-ok{font-size:13px;color:var(--g);text-align:center;padding:6px 0;display:none;font-weight:500;}
 /* WHATSAPP SCREEN */
@@ -205,10 +208,10 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 .wa-msg.in .wa-time{text-align:left;}
 .wa-status-msg{font-size:11px;color:#8696a0;text-align:center;margin:4px 0;}
 .wa-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.wa-btn{background:#1e2740;border:1px solid #263252;border-radius:20px;padding:6px 14px;font-size:13px;color:#818cf8;cursor:pointer;font-family:'Sora',sans-serif;transition:background .15s;}
+.wa-btn{background:#1e2740;border:1px solid #263252;border-radius:20px;padding:6px 14px;font-size:13px;color:#818cf8;cursor:pointer;font-family:'Inter',system-ui,sans-serif;transition:background .15s;}
 .wa-btn:active{background:#263252;}
 .wa-input-area{position:fixed;bottom:0;left:0;right:0;background:#161b27;padding:10px 16px;display:flex;align-items:center;gap:10px;}
-.wa-input{flex:1;background:#1e2740;border:none;border-radius:20px;padding:10px 16px;font-family:'Sora',sans-serif;font-size:14px;color:#e9edef;outline:none;}
+.wa-input{flex:1;background:#1e2740;border:none;border-radius:20px;padding:10px 16px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:#e9edef;outline:none;}
 .wa-input::placeholder{color:#8696a0;}
 .wa-send{width:44px;height:44px;border-radius:50%;background:#6366f1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .wa-typing{background:#161b27;padding:8px 12px;border-radius:8px;align-self:flex-start;font-size:13px;color:#8696a0;display:none;}
@@ -254,7 +257,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
     <div class="os" id="os1">
       <div class="ot">Creá tu cuenta</div>
-      <div class="oss">Encriptación AES-256. LUCA nunca modifica nada en ARCA — solo lectura.</div>
+      <div class="oss">Encriptación AES-256. LUCA actúa en tu nombre para emitir comprobantes y consultar ARCA, siempre bajo tu control.</div>
       <div class="fi"><label>Nombre</label><input type="text" value="Javier Costa"></div>
       <div class="fi"><label>Email</label><input type="email" value="javier@estudiocosta.com.ar"></div>
       <div class="fi"><label>Contraseña</label><input type="password" value="••••••••"></div>
@@ -263,7 +266,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
     <div class="os" id="os2">
       <div class="ot">Conectá tu CUIT</div>
-      <div class="oss">Descargamos tus datos de ARCA automáticamente. Solo lectura — nunca modificamos nada en tu nombre.</div>
+      <div class="oss">Descargamos tus datos de ARCA automáticamente. LUCA actúa en tu nombre para emitir comprobantes y consultar ARCA, siempre bajo tu control.</div>
       <div class="fi"><label>CUIT</label><input type="text" value="20-28456791-3"></div>
       <div class="fi"><label>Clave Fiscal ARCA</label><input type="password" value="••••••••••" placeholder="Tu clave fiscal de ARCA"></div>
       <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Tu clave fiscal se encripta con AES-256 y se usa solo para conectar con ARCA. LUCA nunca modifica datos en tu nombre.</div>
@@ -277,7 +280,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
         <div class="oss">Encontramos tu cuenta. Sos <strong>Categoría F</strong> con $5.820.000 facturados en los últimos 365 días.</div>
         <div style="background:var(--gd);border:1px solid var(--g);border-radius:var(--Rs);padding:14px;margin:18px 0;text-align:left;">
           <div style="font-size:11px;color:var(--g);font-weight:500;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px;">ENCONTRAMOS EN ARCA</div>
-          <div style="font-size:13px;color:var(--ts);line-height:1.9;">✓ 31 comprobantes emitidos<br>✓ 18 comprobantes recibidos<br>✓ Próximo vencimiento: 20 abril<br>✓ Sin deuda detectada</div>
+          <div style="font-size:13px;color:var(--ts);line-height:1.9;">✓ Próximo vencimiento: 20 abril<br>✓ Sin deuda detectada</div>
         </div>
         <button class="btn btn-p" onclick="goTo(&#39;s-dash&#39;)">Ver mi panel →</button>
       </div>
@@ -306,7 +309,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
       <div>
         <div style="font-size:21px;font-weight:600;">Hola, Javier 👋</div>
-        <div style="font-size:13px;color:var(--ts);margin-top:2px;font-weight:400;">Lunes 13 de abril · Todo al día</div>
+        <div style="font-size:13px;color:var(--ts);margin-top:2px;font-weight:400;">Lunes 13 de abril</div>
       </div>
       <div class="mb2" id="dash-mb"></div>
     </div>
@@ -445,9 +448,10 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
           </select>
         </div>
         <!-- 2. Monto -->
-        <div class="fi"><label>2 · Monto</label><input type="number" id="monto-in" value="320000" oninput="updateImpact(this.value)"></div>
+        <div class="fi"><label>2 · Monto</label><input type="text" inputmode="numeric" id="monto-in" value="$320.000" placeholder="$0" autocomplete="off" oninput="formatMonto(this);updateImpact(parseMonto(this.value))"></div>
         <div class="ib" id="impact-box">
-          <div class="ib-l" id="impact-title">Impacto en tu tope</div>
+          <div style="font-size:11px;color:var(--ts);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:4px;" id="impact-title">Margen disponible</div>
+          <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;font-variant-numeric:tabular-nums;margin-bottom:6px;" id="ib-margen">$2.280.000</div>
           <div class="ib-t" id="impact-text"></div>
         </div>
 
@@ -456,7 +460,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
           <label>3 · Fecha del comprobante</label>
           <input type="text" id="fecha-in" value="13/04/2026" oninput="updateFecha(this.value)">
         </div>
-        <div class="ds" id="fecha-sugerida">💡 <strong>Sugerencia LUCA:</strong> Si querés facturar este monto sin riesgo, podés hacerlo a partir del <strong>15/04/2026</strong> cuando se liberen $185.000 del comprobante del 15/04/2025.</div>
+        <div class="ds" id="fecha-sugerida">⚠️ Superás el tope con esta fecha. Adelantá la fecha para liberar margen.</div>
 
         <!-- 4. Receptor -->
         <div class="fi"><label>4 · CUIT del receptor</label><input type="text" value="30-71456892-1" oninput="lookupCuit(this.value)"></div>
@@ -482,6 +486,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
             <div class="fi" style="margin:0;"><label>Período desde</label><input type="text" value="01/04/2026"></div>
             <div class="fi" style="margin:0;"><label>Período hasta</label><input type="text" value="30/04/2026"></div>
           </div>
+          <div style="color:var(--r);font-size:12px;margin-top:-6px;margin-bottom:12px;font-weight:500;">⚠️ Usá la misma fecha que la de emisión para evitar discrepancias en ARCA.</div>
           <div class="fi"><label>Fecha de cobro esperada</label><input type="text" value="30/04/2026"></div>
           <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);">ℹ️ Para servicios, el tope se calcula usando la fecha <strong>desde</strong> del período facturado (01/04/2026).</div>
         </div>
@@ -643,7 +648,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
     <div class="wa-msg in">
       Hola Javier 👋 Soy LUCA, tu asistente fiscal.<br><br>
-      Podés pedirme que emita comprobantes, consultar tu saldo disponible, o programar facturas recurrentes.<br><br>
+      Podés pedirme que emita comprobantes o consultar tu saldo disponible. Los recurrentes se configuran desde la app.<br><br>
       ¿En qué te ayudo hoy?
       <div class="wa-time">10:15 ✓✓</div>
     </div>
@@ -653,7 +658,6 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
         <div class="wa-btns">
           <div class="wa-btn" onclick="waStep(2,&#39;📄 Emitir comprobante&#39;)">📄 Emitir comprobante</div>
           <div class="wa-btn" onclick="waStep(10,&#39;💰 ¿Cuánto puedo facturar?&#39;)">💰 ¿Cuánto puedo facturar?</div>
-          <div class="wa-btn" onclick="waStep(20,&#39;🔁 Configurar recurrente&#39;)">🔁 Configurar recurrente</div>
         </div>
         <div class="wa-time">10:15 ✓✓</div>
       </div>
@@ -692,7 +696,7 @@ html,body{font-family:'Sora',sans-serif;background:var(--bp);color:var(--tp);min
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.2';
+const SPRINT='S00-v3.3';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
@@ -737,11 +741,34 @@ function selType(el,code,kind,name){
   el.className='tc '+(kind==='nc'?'sel-nc':'sel-sum');
   selTypeCode=code; selTypeSum=(kind==='sum'); selTypeName=name;
   document.getElementById('cbte-rest').style.display='block';
-  updateImpact(document.getElementById('monto-in').value);
+  // ADR-030: hide all non-selected type cards
+  document.querySelectorAll('.tc').forEach(t=>t.style.display = t===el ? '' : 'none');
+  // Remove existing change button if any
+  const existing=document.getElementById('change-type-btn');
+  if(existing) existing.remove();
+  // Add "cambiar tipo" button after the selected card
+  const btn=document.createElement('div');
+  btn.id='change-type-btn';
+  btn.innerHTML='← Cambiar tipo';
+  btn.style.cssText='font-size:13px;color:var(--bl);cursor:pointer;margin:4px 0 12px;';
+  btn.onclick=resetTypeSelection;
+  el.parentNode.insertBefore(btn, el.nextSibling);
+  updateImpact(parseMonto(document.getElementById('monto-in').value));
+}
+
+function resetTypeSelection(){
+  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
+  const changeBtn=document.getElementById('change-type-btn');
+  if(changeBtn) changeBtn.remove();
+  selTypeCode=''; selTypeSum=true; selTypeName='';
+  updateImpact(parseMonto(document.getElementById('monto-in').value));
 }
 
 function resetCbteForm(){
-  document.querySelectorAll('.tc').forEach(t=>t.className='tc');
+  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
+  const changeBtn=document.getElementById('change-type-btn');
+  if(changeBtn) changeBtn.remove();
+  selTypeCode=''; selTypeSum=true; selTypeName='';
   document.getElementById('cbte-rest').style.display='none';
   document.getElementById('cbte-form').style.display='block';
   document.getElementById('cbte-confirm').style.display='none';
@@ -749,17 +776,28 @@ function resetCbteForm(){
   document.getElementById('cbte-ok').style.display='none';
 }
 
+function formatMonto(input){
+  let raw=input.value.replace(/[^\d]/g,'');
+  if(!raw){input.value='';return;}
+  input.value='$'+parseInt(raw).toLocaleString('es-AR');
+}
+function parseMonto(val){
+  return parseInt(((val||'0')+'').replace(/[^\d]/g,''))||0;
+}
+
 function updateImpact(v){
   if(!selTypeCode) return;
-  const m=parseFloat(v)||0, base=7718000, lim=8100000;
+  const m=(typeof v==='number'?v:parseMonto(v))||0, base=7718000, lim=8100000;
   const box=document.getElementById('impact-box');
   const title=document.getElementById('impact-title');
+  const margen=document.getElementById('ib-margen');
   const text=document.getElementById('impact-text');
   const ds=document.getElementById('fecha-sugerida');
 
   if(!selTypeSum){
     box.className='ib ok';
-    title.textContent='Esta Nota de Crédito no consume tu tope';
+    title.textContent='Nota de Crédito — no consume tope';
+    margen.textContent='$'+(lim-base).toLocaleString('es-AR');
     text.textContent='Las Notas de Crédito no afectan el cálculo de categoría. Podés emitirla sin restricciones.';
     ds.style.display='none';
     return;
@@ -769,9 +807,10 @@ function updateImpact(v){
   if(pct>=95){box.className='ib danger';}
   else if(pct>=80){box.className='ib warn';}
   else{box.className='ib ok';}
-  title.textContent='Impacto en tu tope';
-  text.innerHTML=`Después de este comprobante: <strong>$${nuevo.toLocaleString('es-AR')}</strong> / $8.100.000 (${pct}%) — te quedan <strong>$${rest.toLocaleString('es-AR')}</strong>`;
-  ds.style.display=pct>=80?'block':'none';
+  title.textContent='Margen disponible tras emitir';
+  margen.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');
+  text.innerHTML=`Facturado: <strong>$${nuevo.toLocaleString('es-AR')}</strong> / $8.100.000 (${pct}%)`;
+  ds.style.display=pct>=95?'block':'none';
 }
 
 function updateFecha(v){
@@ -785,7 +824,7 @@ function updateConcepto(v){
 function showConfirm(){
   if(!selTypeCode){alert('Seleccioná un tipo de comprobante primero.');return;}
   document.getElementById('conf-tipo').textContent=selTypeName;
-  document.getElementById('conf-monto').textContent='$'+((parseFloat(document.getElementById('monto-in').value)||0).toLocaleString('es-AR'));
+  document.getElementById('conf-monto').textContent='$'+parseMonto(document.getElementById('monto-in').value).toLocaleString('es-AR');
   document.getElementById('cbte-form').style.display='none';
   document.getElementById('cbte-confirm').style.display='block';
 }
@@ -843,37 +882,15 @@ const waFlows = {
     in:'¿Para qué fecha querés simular?\n\nCon fecha 22/04 tendrías un margen de $702.000 (liberados $320.000 del 22/04/2025).',
     btns:[{t:'Crear comprobante al 22/04',s:3},{t:'Volver al menú',s:1}]
   },
-  20: {
-    out: '🔁 Configurar recurrente',
-    in: '¿Cómo querés configurar la recurrencia?\n\nEjemplo: "Facturale a Constructora los días 10 de cada mes por $320.000 durante 6 meses"',
-    btns:[{t:'Constructora, día 10, $320k, 6 meses',s:21}]
-  },
-  21: {
-    out:'Constructora, día 10, $320k, 6 meses',
-    typing:true,
-    in:'✅ Recurrente configurado:\n\n📋 Factura C — Constructora del Norte S.A.\n💰 $320.000 por mes\n📅 Todos los días 10 (próxima: 10/05)\n🔁 6 meses (mayo — octubre 2026)\n\n¿Querés agregar ajuste por inflación?',
-    btns:[{t:'Sí, ajuste IPC cada 3 meses',s:22},{t:'No, monto fijo',s:23}]
-  },
-  22: {
-    out:'Sí, ajuste IPC cada 3 meses',
-    in:'Perfecto. Cada 3 meses LUCA consultará el IPC del INDEC y actualizará el monto automáticamente. Te avisaré antes de cada ajuste para que puedas confirmarlo.\n\n¿Confirmamos la recurrente?',
-    btns:[{t:'✓ Confirmar recurrente con IPC',s:24},{t:'Cancelar',s:1}]
-  },
-  23: {
-    out:'No, monto fijo',
-    in:'Entendido, monto fijo de $320.000 durante 6 meses.\n\n¿Confirmamos?',
-    btns:[{t:'✓ Confirmar',s:24},{t:'Cancelar',s:1}]
-  },
-  24: {
-    out:'✓ Confirmar recurrente con IPC',
-    typing:true,
-    in:'🔁 ¡Recurrente configurada!\n\nLUCA emitirá automáticamente Facturas C a Constructora del Norte S.A. los días 10 de cada mes. Te avisaré 24hs antes de cada emisión para que puedas cancelar si es necesario.\n\n¿Algo más?',
+  'app-redirect': {
+    out:'Ver en la app',
+    in:'Para configurar recurrentes, ingresá a la app LUCA.\n\nLa configuración de comprobantes recurrentes solo puede hacerse desde la app web/mobile (ADR-035). Desde WhatsApp solo vas a poder aprobar propuestas cuando llegue la fecha de emisión.',
     btns:[{t:'Volver al menú',s:1}]
   },
   1: {
     out:'Volver al menú',
     in:'¿En qué más te ayudo?',
-    btns:[{t:'📄 Emitir comprobante',s:2},{t:'💰 ¿Cuánto puedo facturar?',s:10},{t:'🔁 Configurar recurrente',s:20}]
+    btns:[{t:'📄 Emitir comprobante',s:2},{t:'💰 ¿Cuánto puedo facturar?',s:10}]
   }
 };
 
@@ -924,7 +941,7 @@ function waSend(){
   // simple NLU simulation
   if(v.toLowerCase().includes('factur')||v.toLowerCase().includes('comprobante')){waStep(2,v);}
   else if(v.toLowerCase().includes('cuánto')||v.toLowerCase().includes('cuanto')||v.toLowerCase().includes('saldo')){waStep(10,v);}
-  else if(v.toLowerCase().includes('recurrent')||v.toLowerCase().includes('program')){waStep(20,v);}
+  else if(v.toLowerCase().includes('recurrent')||v.toLowerCase().includes('program')){waStep('app-redirect',v);}
   else{
     const msgs=document.getElementById('wa-msgs');
     const out=document.createElement('div');
@@ -934,7 +951,7 @@ function waSend(){
     setTimeout(()=>{
       const resp=document.createElement('div');
       resp.className='wa-msg in';
-      resp.innerHTML='Entendido. ¿Querés que emita un comprobante, consultar tu saldo, o configurar una recurrente?<div class="wa-btns"><div class="wa-btn" onclick="waStep(2,\'📄 Emitir comprobante\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(10,\'💰 Saldo\')">💰 Saldo</div><div class="wa-btn" onclick="waStep(20,\'🔁 Recurrente\')">🔁 Recurrente</div></div><div class="wa-time">ahora ✓✓</div>';
+      resp.innerHTML='Entendido. ¿Querés que emita un comprobante o consultar tu saldo?<div class="wa-btns"><div class="wa-btn" onclick="waStep(2,\'📄 Emitir comprobante\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(10,\'💰 Saldo\')">💰 Saldo</div></div><div class="wa-time">ahora ✓✓</div>';
       msgs.appendChild(resp);
       msgs.scrollTop=msgs.scrollHeight;
     },1000);
@@ -962,7 +979,7 @@ function submitFb(){
 
 // init impact
 setTimeout(()=>{
-  if(document.getElementById('monto-in')){updateImpact('320000');}
+  if(document.getElementById('monto-in')){updateImpact(320000);}
 },100);
 </script>
 
