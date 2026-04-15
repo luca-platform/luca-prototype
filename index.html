@@ -3,7 +3,7 @@
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.3</title>
+<title>LUCA — Prototipo Sprint 00 v3.4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -230,9 +230,10 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;}
 .lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
 .lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
-.lib-bar-wrap{flex:1;height:20px;background:var(--bpi);border-radius:4px;overflow:hidden;position:relative;}
-.lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;}
-.lib-amount{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;width:70px;text-align:right;flex-shrink:0;font-weight:700;}
+.lib-bar-wrap{flex:1;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
+.lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
+.lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+.lib-amount.outside{position:absolute;left:calc(100% + 6px);right:auto;color:var(--g);}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -269,7 +270,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="oss">Descargamos tus datos de ARCA automáticamente. LUCA actúa en tu nombre para emitir comprobantes y consultar ARCA, siempre bajo tu control.</div>
       <div class="fi"><label>CUIT</label><input type="text" value="20-28456791-3"></div>
       <div class="fi"><label>Clave Fiscal ARCA</label><input type="password" value="••••••••••" placeholder="Tu clave fiscal de ARCA"></div>
-      <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Tu clave fiscal se encripta con AES-256 y se usa solo para conectar con ARCA. LUCA nunca modifica datos en tu nombre.</div>
+      <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);line-height:1.6;">🔒 Tu clave fiscal se encripta con AES-256 y se usa solo para conectarse con ARCA.</div>
       <button class="btn btn-p" onclick="onbNext()">Conectar con ARCA →</button>
     </div>
 
@@ -364,10 +365,10 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <!-- Liberación de margen -->
     <div class="lib-chart">
       <div class="lib-title">📅 Margen que se libera próximamente</div>
-      <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:25%"></div></div><div class="lib-amount">+$185k</div></div>
-      <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:40%"></div></div><div class="lib-amount">+$320k</div></div>
-      <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"></div></div><div class="lib-amount">+$240k</div></div>
-      <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:55%"></div></div><div class="lib-amount">+$450k</div></div>
+      <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:25%"><span class="lib-amount outside">+$185k</span></div></div></div>
+      <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:40%"><span class="lib-amount">+$320k</span></div></div></div>
+      <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"><span class="lib-amount outside">+$240k</span></div></div></div>
+      <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:55%"><span class="lib-amount">+$450k</span></div></div></div>
       <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">A medida que los comprobantes cumplen 365 días, salen de la ventana y liberan margen.</div>
     </div>
 
@@ -696,7 +697,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.3';
+const SPRINT='S00-v3.4';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
