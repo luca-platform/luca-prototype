@@ -2,6 +2,23 @@
 
 All notable changes to the LUCA prototype. Newest at top.
 
+## [v4.1] — 2026-04-15
+### Changed
+- Restored comprobante type cards with show/hide UX (select one → others disappear, "Cambiar tipo" to reset)
+- Replaced bar chart with invoice liberation table showing 5 oldest invoices that will free margen
+- Liberation section collapsed by default with intuitive expand affordance (▾ chevron + "5 facturas" hint)
+- Exclusion detail in Recategorización also uses collapsible pattern
+- LUCA logo: non-selectable text, click/tap navigates to Inicio on all screens
+### Improved
+- Light mode: better contrast on secondary text (#475569 vs #334155), warmer amber (#D97706)
+- Softer shadows across both themes (lighter, less aggressive)
+- Focus states on inputs: emerald glow ring (box-shadow) for better accessibility
+- Hover transitions on cards, buttons, nav items, FAB, avatar
+- Topbar and bottom nav: backdrop-filter blur for depth
+- Form labels: font-weight 500 for better readability
+- Button hover states: primary buttons dim slightly, secondary show border change
+- Card hover: subtle border brightening
+
 ## [v4.0] — 2026-04-15
 ### Added
 - FB-004: Dashboard — dual limit toggle (actual vs IPC), two progress bars (recategorización + exclusión), CCMA card, collapsible chart

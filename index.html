@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v4.0</title>
+<title>LUCA — Prototipo Sprint 00 v4.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,37 +15,42 @@
   --r:#F87171;--rd:rgba(248,113,113,0.15);
   --bl:#818CF8;--bld:rgba(129,140,248,0.15);
   --br:rgba(255,255,255,0.08);--brm:rgba(255,255,255,0.15);
-  --sh:0 4px 24px rgba(0,0,0,0.5);--R:14px;--Rs:10px;--Rx:8px;
+  --sh:0 2px 12px rgba(0,0,0,0.3);--R:14px;--Rs:10px;--Rx:8px;
 }
 .light{
   --bp:#F8FAFC;--bs:#FFFFFF;--bc:#FFFFFF;--bh:#F1F5F9;--bpi:#EEF2F8;
-  --tp:#0F172A;--ts:#334155;--tm:#64748B;
-  --g:#059669;--gd:rgba(5,150,105,0.1);
-  --a:#EA580C;--ad:rgba(234,88,12,0.1);
-  --r:#DC2626;--rd:rgba(220,38,38,0.1);
-  --bl:#4F46E5;--bld:rgba(79,70,229,0.1);
-  --br:rgba(15,23,42,0.08);--brm:rgba(15,23,42,0.14);
-  --sh:0 2px 16px rgba(15,23,42,0.08);
+  --tp:#0F172A;--ts:#475569;--tm:#64748B;
+  --g:#059669;--gd:rgba(5,150,105,0.08);
+  --a:#D97706;--ad:rgba(217,119,6,0.08);
+  --r:#DC2626;--rd:rgba(220,38,38,0.06);
+  --bl:#4F46E5;--bld:rgba(79,70,229,0.08);
+  --br:rgba(15,23,42,0.1);--brm:rgba(15,23,42,0.16);
+  --sh:0 1px 8px rgba(15,23,42,0.06);
 }
 html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11','ss01','ss03';background:var(--bp);color:var(--tp);min-height:100vh;transition:background .3s,color .3s;}
 .mo,input.mo{font-variant-numeric:tabular-nums slashed-zero;}
 .screen{display:none;min-height:100vh;flex-direction:column;}
 .screen.active{display:flex;}
-.tb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bs);border-bottom:1px solid var(--br);position:sticky;top:0;z-index:50;}
-.logo{font-size:20px;font-weight:600;letter-spacing:-.5px;}.logo span{color:var(--g);}
+.tb{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:var(--bs);border-bottom:1px solid var(--br);position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.logo{font-size:20px;font-weight:600;letter-spacing:-.5px;cursor:pointer;user-select:none;-webkit-user-select:none;transition:opacity .15s;}.logo:active{opacity:.7;}.logo span{color:var(--g);}
 .tb-r{display:flex;align-items:center;gap:10px;}
-.btn-th{background:var(--bpi);border:1px solid var(--br);border-radius:20px;padding:5px 12px;font-family:'Inter',system-ui,sans-serif;font-size:11px;color:var(--ts);cursor:pointer;}
-.btn-bk{background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:6px 12px;font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--ts);cursor:pointer;}
-.av{width:34px;height:34px;border-radius:50%;background:var(--bld);color:var(--bl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bl);cursor:pointer;}
+.btn-th{background:var(--bpi);border:1px solid var(--br);border-radius:20px;padding:5px 12px;font-family:'Inter',system-ui,sans-serif;font-size:11px;color:var(--ts);cursor:pointer;transition:all .15s;}
+.btn-th:hover{border-color:var(--brm);color:var(--tp);}
+.btn-bk{background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:6px 12px;font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--ts);cursor:pointer;transition:all .15s;}
+.btn-bk:hover{border-color:var(--brm);color:var(--tp);}
+.av{width:34px;height:34px;border-radius:50%;background:var(--bld);color:var(--bl);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;border:1.5px solid var(--bl);cursor:pointer;transition:transform .15s;}
+.av:hover{transform:scale(1.08);}
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
-.card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);}
+.card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);transition:border-color .2s;}
 .cl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;}
-.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;transition:opacity .15s;}
+.ni:active{opacity:.6;}
 .ni-i{font-size:20px;}.ni-l{font-size:10px;color:var(--tm);}
 .ni.active .ni-l{color:var(--g);font-weight:500;}
 .sn{height:80px;}
-.fab{position:fixed;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(45,206,122,.45);font-size:26px;color:#fff;z-index:49;transition:transform .15s;}
+.fab{position:fixed;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(45,206,122,.35);font-size:26px;color:#fff;z-index:49;transition:transform .15s,box-shadow .15s;}
+.fab:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(45,206,122,.5);}
 .fab:active{transform:scale(.94);}
 .pt{height:8px;background:var(--bpi);border-radius:100px;overflow:hidden;margin:8px 0;}
 .pf{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1);}
@@ -55,28 +60,31 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .ba{background:var(--ad);color:var(--a);border:1px solid rgba(249,115,22,0.3);}
 .br2{background:var(--rd);color:var(--r);border:1px solid rgba(239,68,68,0.3);}
 .mo{font-family:'JetBrains Mono',monospace;}
-.ab{background:var(--ad);border:1px solid var(--a);border-radius:var(--Rs);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;}
+.ab{background:var(--ad);border:1px solid var(--a);border-radius:var(--Rs);padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:14px;cursor:pointer;transition:background .15s;}
+.ab:hover{background:rgba(251,146,60,0.2);}
 .ad2{width:7px;height:7px;border-radius:50%;background:var(--a);flex-shrink:0;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .tw{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);overflow:hidden;}
-.tr2{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--br);cursor:pointer;}
+.tr2{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--br);cursor:pointer;transition:background .1s;}
 .tr2:last-child{border-bottom:none;}.tr2:active{background:var(--bh);}
 .tm2{flex:1;font-size:13px;font-weight:500;}.ts2{font-size:11px;color:var(--ts);font-family:'JetBrains Mono',monospace;}
 .tr2-r{text-align:right;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.sc{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;box-shadow:var(--sh);}
+.sc{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;box-shadow:var(--sh);cursor:pointer;transition:border-color .15s;}
+.sc:hover{border-color:var(--brm);}
 .sl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
 .sv{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--tp);}
 .ss{font-size:11px;color:var(--ts);margin-top:3px;}
 .sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--brm);}
 .fi{margin-bottom:14px;}
-.fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;}
-.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s;}
-.fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);}
+.fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;font-weight:500;}
+.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s,box-shadow .2s;}
+.fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gd);}
 .fi textarea{resize:none;min-height:80px;}
 .btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
 .btn:active{transform:scale(.98);}
-.btn-p{background:var(--g);color:#fff;}.btn-s{background:var(--bpi);color:var(--tp);border:1px solid var(--br);}
+.btn-p{background:var(--g);color:#fff;}.btn-p:hover{opacity:.92;}
+.btn-s{background:var(--bpi);color:var(--tp);border:1px solid var(--br);}.btn-s:hover{border-color:var(--brm);}
 .ib{border-radius:var(--Rs);padding:12px 14px;margin-bottom:14px;}
 .ib.warn{background:var(--ad);border:1px solid var(--a);}
 .ib.ok{background:var(--gd);border:1px solid var(--g);}
@@ -84,16 +92,18 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .ib-l{font-size:12px;font-weight:500;margin-bottom:4px;}
 .ib.warn .ib-l{color:var(--a);}.ib.ok .ib-l{color:var(--g);}.ib.danger .ib-l{color:var(--r);}
 .ib-t{font-size:13px;color:var(--tp);}
-/* type selector (kept for fallback) */
+/* type selector cards */
 .ts3{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
-.tc{background:var(--bpi);border:1.5px solid var(--br);border-radius:var(--Rx);padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .15s;}
-.tc:active{opacity:.8;}
+.tc{background:var(--bpi);border:1.5px solid var(--br);border-radius:var(--Rx);padding:10px 14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s;}
+.tc:hover{border-color:var(--brm);}
+.tc:active{opacity:.8;transform:scale(.99);}
 .tc.sel-sum{border-color:var(--g);background:var(--gd);}
 .tc.sel-nc{border-color:var(--bl);background:var(--bld);}
-.tc-name{font-size:13px;font-weight:600;color:var(--tp);}
+.tc-name{font-size:13px;font-weight:600;color:var(--tp);transition:color .15s;}
 .tc.sel-sum .tc-name{font-weight:700;color:var(--g);}.tc.sel-nc .tc-name{font-weight:700;color:var(--bl);}
 .tc-tag{font-size:10px;padding:2px 7px;border-radius:5px;font-weight:500;}
 .tag-sum{background:var(--gd);color:var(--g);}.tag-nc{background:var(--bld);color:var(--bl);}
+.tc-hide{display:none;}
 .ds{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:14px 16px;margin-top:-8px;margin-bottom:14px;font-size:15px;color:var(--r);font-weight:600;text-align:center;}
 .suc-sc{text-align:center;padding:32px 20px;}
 .suc-ic{font-size:64px;margin-bottom:16px;}
@@ -130,25 +140,31 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .mb2{display:inline-flex;align-items:center;gap:5px;font-size:10px;padding:4px 10px;border-radius:20px;font-weight:500;}
 .mb-u{background:var(--gd);color:var(--g);border:1px solid rgba(16,185,129,0.4);font-weight:600;}
 .mb-e{background:var(--bld);color:var(--bl);border:1px solid rgba(99,102,241,0.4);font-weight:600;}
-/* cat card v4 */
+/* cat card */
 .cat-main{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
 .cat-letter{font-size:42px;font-weight:700;color:var(--g);font-family:'JetBrains Mono',monospace;line-height:1;}
 .cat-text{font-size:14px;color:var(--ts);line-height:1.5;}
 .cat-toggle{display:flex;border:1px solid var(--br);border-radius:var(--Rx);overflow:hidden;margin:10px 0;}
 .cat-toggle-btn{flex:1;padding:8px;font-size:12px;text-align:center;cursor:pointer;background:var(--bpi);border:none;color:var(--ts);font-family:'Inter',system-ui,sans-serif;transition:all .15s;}
 .cat-toggle-btn.active{background:var(--gd);color:var(--g);font-weight:600;}
-/* collapsible chart */
-.lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;overflow:visible;}
-.lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
-.lib-chevron{transition:transform .2s;font-size:14px;color:var(--tm);}
-.lib-chevron.collapsed{transform:rotate(-90deg);}
-.lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;overflow:visible;}
-.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:52px;flex-shrink:0;font-weight:500;}
-.lib-bar-wrap{flex:1;min-width:0;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
-.lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
-.lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-.lib-amount.outside{position:absolute;left:calc(100% + 6px);right:auto;top:50%;transform:translateY(-50%);color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-.lib-cumul{position:absolute;right:-70px;top:50%;transform:translateY(-50%);color:var(--tm);font-size:10px;white-space:nowrap;font-family:'JetBrains Mono',monospace;}
+/* collapsible section */
+.collapsible{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);margin-bottom:14px;overflow:hidden;transition:border-color .15s;}
+.collapsible:hover{border-color:var(--brm);}
+.coll-header{padding:14px 16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;-webkit-user-select:none;}
+.coll-title{font-size:13px;font-weight:600;color:var(--tp);}
+.coll-hint{font-size:11px;color:var(--tm);display:flex;align-items:center;gap:6px;}
+.coll-chevron{font-size:10px;color:var(--tm);transition:transform .25s ease;display:inline-block;}
+.coll-chevron.open{transform:rotate(180deg);}
+.coll-body{padding:0 16px 16px;display:none;}
+.coll-body.open{display:block;}
+/* liberation table */
+.lib-row2{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid var(--br);gap:10px;}
+.lib-row2:last-child{border-bottom:none;}
+.lib-date2{font-size:11px;color:var(--tm);font-family:'JetBrains Mono',monospace;width:58px;flex-shrink:0;}
+.lib-client{font-size:12px;color:var(--tp);flex:1;font-weight:500;}
+.lib-invoice-amt{font-size:12px;color:var(--ts);font-family:'JetBrains Mono',monospace;width:80px;text-align:right;flex-shrink:0;}
+.lib-freed{font-size:12px;color:var(--g);font-family:'JetBrains Mono',monospace;font-weight:600;width:90px;text-align:right;flex-shrink:0;}
+.lib-summary{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;margin-top:4px;border-top:1px solid var(--br);}
 /* margen hero */
 .margen-hero{text-align:center;padding:20px;margin-bottom:14px;}
 .margen-amount{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;margin:4px 0;}
@@ -157,8 +173,8 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 /* service date warning */
 .ds-service{background:var(--rd);border:1px solid var(--r);border-radius:var(--Rx);padding:14px 16px;margin-top:-6px;margin-bottom:14px;font-size:14px;color:var(--r);font-weight:600;}
 /* feedback history */
-.fbh-item{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;margin-bottom:10px;border-left:3px solid var(--a);}
-.fbh-item.resolved{border-left-color:var(--g);opacity:.7;}
+.fbh-item{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:14px;margin-bottom:10px;border-left:3px solid var(--a);transition:opacity .2s;}
+.fbh-item.resolved{border-left-color:var(--g);opacity:.65;}
 .fbh-text{font-size:13px;color:var(--tp);margin:8px 0;line-height:1.5;}
 .fbh-meta{font-size:11px;color:var(--tm);}
 .fbh-btn{font-size:12px;padding:6px 14px;border-radius:var(--Rx);border:1px solid var(--br);cursor:pointer;background:var(--bpi);color:var(--ts);font-family:'Inter',system-ui,sans-serif;transition:all .15s;}
@@ -167,7 +183,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 /* metrics row */
 .metrics-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
 @media(max-width:400px){.metrics-row{grid-template-columns:1fr 1fr;}}
-.metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;}
+.metric-card{background:var(--bc);border:1px solid var(--br);border-radius:var(--Rs);padding:12px;transition:border-color .15s;}
 .metric-label{font-size:9px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px;}
 .metric-value{font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;color:var(--tp);}
 .metric-value.ok{color:var(--g);}.metric-value.warn{color:var(--a);}.metric-value.danger{color:var(--r);}
@@ -210,9 +226,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .wa-bg{background:#0d1117;min-height:100vh;}
 .wa-tb{background:#161b27;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10;}
 .wa-av{width:40px;height:40px;border-radius:50%;background:#1e2740;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:#8696a0;}
-.wa-info{flex:1;}
-.wa-name{font-size:15px;font-weight:600;color:#F1F5F9;}
-.wa-status{font-size:12px;color:#94A3B8;}
+.wa-info{flex:1;}.wa-name{font-size:15px;font-weight:600;color:#F1F5F9;}.wa-status{font-size:12px;color:#94A3B8;}
 .wa-back{font-size:20px;color:#8696a0;cursor:pointer;padding:4px;}
 .wa-msgs{padding:12px 16px;display:flex;flex-direction:column;gap:8px;padding-bottom:80px;}
 .wa-msg{max-width:85%;padding:8px 12px;border-radius:8px;font-size:14px;line-height:1.5;position:relative;}
@@ -230,7 +244,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .wa-send{width:44px;height:44px;border-radius:50%;background:#6366f1;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;}
 .wa-typing{background:#161b27;padding:8px 12px;border-radius:8px;align-self:flex-start;font-size:13px;color:#8696a0;display:none;}
 .wa-typing.show{display:block;}
-.wa-warn{background:#1e2740;border-left:3px solid var(--a);border-radius:0 8px 8px 0;padding:8px 12px;margin-top:6px;font-size:12px;color:var(--a);}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -238,7 +251,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <!-- ══ ONBOARDING ══ -->
 <div class="screen active" id="s-onb">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-th" onclick="toggleTheme()">☀</button></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-th" onclick="toggleTheme()">☀</button></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 1 — Onboarding</div>
     <div class="op"><div class="od done" id="od0"></div><div class="od" id="od1"></div><div class="od" id="od2"></div><div class="od" id="od3"></div></div>
@@ -282,10 +295,10 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   </div>
 </div>
 
-<!-- ══ DASHBOARD (FB-004) ══ -->
+<!-- ══ DASHBOARD ══ -->
 <div class="screen" id="s-dash">
   <div class="tb">
-    <div class="logo">LUC<span>A</span></div>
+    <div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div>
     <div class="tb-r">
       <nav class="dnav">
         <div class="dn active" onclick="goTo('s-dash')">Inicio</div>
@@ -304,7 +317,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;">
       <div>
         <div style="font-size:21px;font-weight:600;">Hola, Javier 👋</div>
-        <div style="font-size:13px;color:var(--ts);margin-top:2px;font-weight:400;">Lunes 13 de abril</div>
+        <div style="font-size:13px;color:var(--ts);margin-top:2px;">Lunes 13 de abril</div>
       </div>
       <div class="mb2" id="dash-mb"></div>
     </div>
@@ -315,33 +328,19 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div style="font-size:12px;color:var(--a);font-weight:500;">Ver →</div>
     </div>
 
-    <!-- 3 métricas -->
     <div class="metrics-row">
-      <div class="metric-card">
-        <div class="metric-label">Margen disponible</div>
-        <div class="metric-value warn">$2.280k</div>
-        <div class="metric-sub" style="color:var(--ts);">en cat. actual</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Total facturado</div>
-        <div class="metric-value">$5.820k</div>
-        <div class="metric-sub" style="color:var(--ts);">últimos 365 días</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Margen exclusión</div>
-        <div class="metric-value danger">$382k</div>
-        <div class="metric-sub" style="color:var(--ts);">riesgo alto</div>
-      </div>
+      <div class="metric-card"><div class="metric-label">Margen disponible</div><div class="metric-value warn">$2.280k</div><div class="metric-sub">en cat. actual</div></div>
+      <div class="metric-card"><div class="metric-label">Total facturado</div><div class="metric-value">$5.820k</div><div class="metric-sub">últimos 365 días</div></div>
+      <div class="metric-card"><div class="metric-label">Margen exclusión</div><div class="metric-value danger">$382k</div><div class="metric-sub">riesgo alto</div></div>
     </div>
 
-    <!-- Categoría card — FB-004 restructured -->
+    <!-- Categoría card -->
     <div class="card">
       <div class="cl">Tu categoría</div>
       <div class="cat-main">
         <div class="cat-letter">F</div>
         <div class="cat-text">Sos <strong>Categoría F</strong> con <strong class="mo">$5.820.000</strong> facturados en los últimos 365 días.<br>Cuota mensual: <strong class="mo">$68.500</strong></div>
       </div>
-
       <div class="cat-toggle">
         <button class="cat-toggle-btn active" onclick="toggleCatLimit('actual')">Límite actual</button>
         <button class="cat-toggle-btn" onclick="toggleCatLimit('ipc')">Proyectado IPC</button>
@@ -350,8 +349,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <span class="mo" style="font-size:20px;font-weight:600;" id="cat-limit-val">$8.100.000</span>
         <span style="font-size:12px;color:var(--tm);margin-left:6px;" id="cat-limit-label">límite Cat F</span>
       </div>
-
-      <!-- Progress: Recategorización -->
       <div style="margin-bottom:16px;">
         <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
           <span>Progreso recategorización</span><span class="mo" id="recat-pct">72%</span>
@@ -363,8 +360,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         </div>
         <div style="font-size:10px;color:var(--tm);margin-top:4px;">Desde última recategorización a la fecha</div>
       </div>
-
-      <!-- Progress: Exclusión -->
       <div>
         <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--tp);font-weight:500;margin-bottom:5px;">
           <span>Progreso exclusión (365 días)</span><span class="mo" style="color:var(--r);">95%</span>
@@ -378,29 +373,61 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       </div>
     </div>
 
-    <!-- Chart — FB-004 collapsible + cumulative -->
-    <div class="lib-chart">
-      <div class="lib-title" onclick="toggleChart()">
-        <span>📅 Evolución del Margen de Facturación Disponible</span>
-        <span class="lib-chevron" id="chart-chevron">▼</span>
+    <!-- Próximas liberaciones — collapsed by default -->
+    <div class="collapsible" id="lib-section">
+      <div class="coll-header" onclick="toggleColl('lib-section')">
+        <div class="coll-title">📅 Próximas liberaciones de margen</div>
+        <div class="coll-hint"><span style="font-size:12px;">5 facturas</span> <span class="coll-chevron" id="lib-section-chev">▾</span></div>
       </div>
-      <div id="chart-body">
-        <div class="lib-row"><div class="lib-date">hoy</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:28%"><span class="lib-amount">$2.280.000</span></div></div></div>
-        <div class="lib-row"><div class="lib-date">15 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:30%"><span class="lib-amount">$2.465.000</span></div></div></div>
-        <div class="lib-row"><div class="lib-date">22 abr</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:34%"><span class="lib-amount">$2.785.000</span></div></div></div>
-        <div class="lib-row"><div class="lib-date">1 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:37%"><span class="lib-amount">$3.025.000</span></div></div></div>
-        <div class="lib-row"><div class="lib-date">10 may</div><div class="lib-bar-wrap"><div class="lib-bar-fill" style="width:43%"><span class="lib-amount">$3.475.000</span></div></div></div>
-        <div style="font-size:11px;color:var(--tm);margin-top:8px;line-height:1.5;font-style:italic;">Margen que tendrás disponible a medida que vencen los 365 días de comprobantes anteriores.</div>
+      <div class="coll-body" id="lib-section-body">
+        <div style="font-size:11px;color:var(--tm);margin-bottom:10px;">Las 5 facturas más antiguas que liberarán margen al cumplir 365 días.</div>
+        <div class="lib-row2">
+          <div class="lib-date2">15 abr</div>
+          <div class="lib-client">Farmacia Belgrano S.R.L.</div>
+          <div class="lib-invoice-amt">$185.000</div>
+          <div class="lib-freed">→ $2.465k</div>
+        </div>
+        <div class="lib-row2">
+          <div class="lib-date2">22 abr</div>
+          <div class="lib-client">Recursos Humanos Plus</div>
+          <div class="lib-invoice-amt">$320.000</div>
+          <div class="lib-freed">→ $2.785k</div>
+        </div>
+        <div class="lib-row2">
+          <div class="lib-date2">1 may</div>
+          <div class="lib-client">Coworking Centro S.A.</div>
+          <div class="lib-invoice-amt">$240.000</div>
+          <div class="lib-freed">→ $3.025k</div>
+        </div>
+        <div class="lib-row2">
+          <div class="lib-date2">10 may</div>
+          <div class="lib-client">Telecom Argentina</div>
+          <div class="lib-invoice-amt">$450.000</div>
+          <div class="lib-freed">→ $3.475k</div>
+        </div>
+        <div class="lib-row2">
+          <div class="lib-date2">18 may</div>
+          <div class="lib-client">Constructora del Norte</div>
+          <div class="lib-invoice-amt">$280.000</div>
+          <div class="lib-freed">→ $3.755k</div>
+        </div>
+        <div class="lib-summary">
+          <span style="font-size:12px;color:var(--ts);">Margen hoy</span>
+          <span class="mo" style="font-size:14px;font-weight:600;color:var(--a);">$2.280.000</span>
+        </div>
+        <div class="lib-summary" style="border-top:none;padding-top:4px;">
+          <span style="font-size:12px;color:var(--ts);">Margen al 18 may</span>
+          <span class="mo" style="font-size:14px;font-weight:600;color:var(--g);">$3.755.000</span>
+        </div>
       </div>
     </div>
 
-    <!-- Compras — FB-004 últimos 12 meses + límite -->
     <div class="g2">
       <div class="sc" onclick="goTo('s-panel')"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
-      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">Límite 40% Cat K: $10.9M</div></div>
+      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss">Límite 40% Cat K: $10.9M</div></div>
     </div>
 
-    <!-- CCMA card — FB-004 new -->
+    <!-- CCMA -->
     <div class="card">
       <div class="cl">Cuenta Corriente Monotributistas (CCMA)</div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -412,7 +439,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
 
     <div class="card" style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="goTo('s-recat')">
-      <div><div class="cl">Próximo vencimiento</div><div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div><div style="font-size:12px;color:var(--ts);font-weight:400;">Cuota abril 2026 · $68.500</div></div>
+      <div><div class="cl">Próximo vencimiento</div><div style="font-size:15px;font-weight:500;">Pago mensual monotributo</div><div style="font-size:12px;color:var(--ts);">Cuota abril 2026 · $68.500</div></div>
       <div style="background:var(--ad);color:var(--a);border-radius:var(--Rx);padding:8px 14px;font-size:13px;font-weight:500;" class="mo">20 abr</div>
     </div>
 
@@ -426,7 +453,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="tr2"><div class="tm2"><div>Recursos Humanos Plus</div><div class="ts2">FC-C 0001-00000029 · 07/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;font-weight:500;">$240.000</div><span class="bdg bg">Autorizado</span></div></div>
     </div>
 
-    <!-- WhatsApp CTA -->
     <div class="card" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border-color:var(--bl);margin-top:14px;cursor:pointer;" onclick="goTo('s-wa')">
       <div style="display:flex;align-items:center;gap:12px;">
         <div style="font-size:32px;">💬</div>
@@ -437,7 +463,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <div style="margin-left:auto;color:#818cf8;font-size:18px;">→</div>
       </div>
     </div>
-
     <div class="sn"></div>
   </div>
   <div class="bnav">
@@ -450,17 +475,16 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <button class="fab" onclick="goTo('s-cbte')">+</button>
 </div>
 
-<!-- ══ CREAR COMPROBANTE (FB-005) ══ -->
+<!-- ══ CREAR COMPROBANTE ══ -->
 <div class="screen" id="s-cbte">
   <div class="tb">
-    <div class="logo">LUC<span>A</span></div>
+    <div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div>
     <div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Volver</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div>
   </div>
   <div class="cnt">
     <div class="sp">Pantalla 3 — Crear Comprobante</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Crear Comprobante</div>
 
-    <!-- Margen hero — FB-005 -->
     <div class="card margen-hero" id="margen-hero">
       <div class="cl">Margen disponible</div>
       <div class="margen-amount" id="margen-hero-val" style="color:var(--a);">$2.280.000</div>
@@ -469,44 +493,30 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
 
     <div id="cbte-form">
-      <!-- 1. Tipo — FB-005: dropdown instead of cards -->
-      <div class="fi">
-        <label>1 · Tipo de comprobante</label>
-        <select id="type-select" onchange="selTypeDropdown(this)">
-          <option value="">Seleccioná tipo...</option>
-          <option value="FC-C" data-kind="sum">Factura C — Suma al tope</option>
-          <option value="ND-C" data-kind="sum">Nota de Débito C — Suma al tope</option>
-          <option value="NC-C" data-kind="nc">Nota de Crédito C — No suma</option>
-          <option value="RC-C" data-kind="sum">Recibo C — Suma al tope</option>
-          <option value="FCE-C" data-kind="sum">FCE MiPyME C — Suma al tope</option>
-          <option value="ND-FCE-C" data-kind="sum">ND FCE MiPyME C — Suma al tope</option>
-          <option value="NC-FCE-C" data-kind="nc">NC FCE MiPyME C — No suma</option>
-        </select>
+      <!-- 1. Tipo — card selection with show/hide -->
+      <div class="fi"><label>1 · Tipo de comprobante</label></div>
+      <div class="ts3" id="type-list">
+        <div class="tc" onclick="selType(this,'FC-C','sum','Factura C')"><div><div class="tc-name">Factura C</div><div style="font-size:11px;color:var(--tm);">El más común para monotributistas</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,'ND-C','sum','Nota de Débito C')"><div><div class="tc-name">Nota de Débito C</div><div style="font-size:11px;color:var(--tm);">Incrementa un comprobante previo</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,'NC-C','nc','Nota de Crédito C')"><div><div class="tc-name">Nota de Crédito C</div><div style="font-size:11px;color:var(--tm);">Anula o reduce un comprobante previo</div></div><span class="tc-tag tag-nc">No suma</span></div>
+        <div class="tc" onclick="selType(this,'RC-C','sum','Recibo C')"><div><div class="tc-name">Recibo C</div><div style="font-size:11px;color:var(--tm);">Documenta el cobro de servicios</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,'FCE-C','sum','FCE MiPyME C')"><div><div class="tc-name">FCE MiPyME C</div><div style="font-size:11px;color:var(--tm);">Operaciones con empresas grandes &gt;$500k</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,'ND-FCE-C','sum','ND FCE MiPyME C')"><div><div class="tc-name">Nota de Débito FCE MiPyME C</div></div><span class="tc-tag tag-sum">Suma al tope</span></div>
+        <div class="tc" onclick="selType(this,'NC-FCE-C','nc','NC FCE MiPyME C')"><div><div class="tc-name">Nota de Crédito FCE MiPyME C</div></div><span class="tc-tag tag-nc">No suma</span></div>
       </div>
 
       <div id="cbte-rest" style="display:none;">
         <div class="fi"><label>Punto de venta</label>
-          <select>
-            <option value="1">0001 — Comprobantes en línea</option>
-            <option value="2">0002 — Facturador móvil</option>
-          </select>
+          <select><option value="1">0001 — Comprobantes en línea</option><option value="2">0002 — Facturador móvil</option></select>
         </div>
-        <!-- 2. Monto -->
         <div class="fi"><label>2 · Monto</label><input type="text" inputmode="numeric" id="monto-in" value="$320.000" placeholder="$0" autocomplete="off" oninput="formatMonto(this);updateImpact(parseMonto(this.value))"></div>
         <div class="ib" id="impact-box">
           <div style="font-size:11px;color:var(--ts);text-transform:uppercase;letter-spacing:0.05em;font-weight:700;margin-bottom:4px;" id="impact-title">Margen disponible</div>
           <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;font-variant-numeric:tabular-nums;margin-bottom:6px;" id="ib-margen">$2.280.000</div>
           <div class="ib-t" id="impact-text"></div>
         </div>
-
-        <!-- 3. Fecha -->
-        <div class="fi">
-          <label>3 · Fecha del comprobante</label>
-          <input type="text" id="fecha-in" value="13/04/2026" oninput="updateFecha(this.value)">
-        </div>
+        <div class="fi"><label>3 · Fecha del comprobante</label><input type="text" id="fecha-in" value="13/04/2026" oninput="updateFecha(this.value)"></div>
         <div class="ds" id="fecha-sugerida">Este comprobante supera el tope de tu categoría. Considerá adelantar la fecha.</div>
-
-        <!-- 4. Receptor -->
         <div class="fi">
           <label>4 · CUIT del receptor</label>
           <input type="text" value="30-71456892-1" oninput="lookupCuit(this.value)">
@@ -516,19 +526,10 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <div style="font-size:13px;font-weight:500;">Constructora del Norte S.A.</div>
           <div style="font-size:11px;color:var(--tm);">Responsable Inscripto · CABA · Padrón ARCA ✓</div>
         </div>
-
-        <!-- 5. Concepto -->
-        <div class="fi">
-          <label>5 · Concepto</label>
-          <select id="concepto-sel" onchange="updateConcepto(this.value)">
-            <option value="prod">Productos</option>
-            <option value="serv" selected>Servicios</option>
-            <option value="mixto">Productos y Servicios</option>
-          </select>
+        <div class="fi"><label>5 · Concepto</label>
+          <select id="concepto-sel" onchange="updateConcepto(this.value)"><option value="prod">Productos</option><option value="serv" selected>Servicios</option><option value="mixto">Productos y Servicios</option></select>
         </div>
         <div class="fi"><label>Descripción</label><input type="text" value="Servicios contables — Abril 2026"></div>
-
-        <!-- Período -->
         <div id="periodo-box">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
             <div class="fi" style="margin:0;"><label>Período desde</label><input type="text" value="01/04/2026"></div>
@@ -538,7 +539,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <div class="fi"><label>Fecha de cobro esperada</label><input type="text" value="30/04/2026"></div>
           <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);">ℹ️ Para servicios, el tope se calcula usando la fecha <strong>desde</strong> del período facturado (01/04/2026).</div>
         </div>
-
         <button class="btn btn-p" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
         <button class="btn btn-s" onclick="goTo('s-dash')">Cancelar</button>
       </div>
@@ -563,7 +563,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div style="font-size:13px;color:var(--ts);margin-top:6px;">Esto tarda unos segundos</div>
     </div>
 
-    <!-- Success — FB-006: WhatsApp send button added -->
     <div id="cbte-ok" style="display:none;">
       <div class="suc-sc">
         <div class="suc-ic">🎉</div>
@@ -591,7 +590,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <!-- ══ ERROR AFIP ══ -->
 <div class="screen" id="s-error">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-cbte')">← Volver</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-cbte')">← Volver</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 4 — Error AFIP</div>
     <div class="er-ic">⚠️</div>
@@ -610,15 +609,13 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   </div>
 </div>
 
-<!-- ══ RECATEGORIZACIÓN (FB-007 — replaces Alerta Exclusión) ══ -->
+<!-- ══ RECATEGORIZACIÓN ══ -->
 <div class="screen" id="s-recat">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 5 — Recategorización</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Recategorización</div>
     <div style="font-size:13px;color:var(--ts);margin-bottom:16px;">Período abierto: enero y julio de cada año</div>
-
-    <!-- Current situation -->
     <div class="card">
       <div class="cl" style="margin-bottom:10px;">Tu situación actual</div>
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Categoría actual</span><span>F · hasta $8.100.000</span></div>
@@ -627,8 +624,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Categoría sugerida</span><span class="bdg bb">→ Categoría G</span></div>
       <div class="pt" style="margin-top:10px;"><div class="pf" style="width:72%;background:var(--a);"></div></div>
     </div>
-
-    <!-- Steps -->
     <div class="card">
       <div class="cl" style="margin-bottom:12px;">Pasos para recategorizar</div>
       <div class="er-step"><div class="sn2">1</div><div class="st">Verificá tu facturación de los últimos 12 meses en el Panel Fiscal</div></div>
@@ -636,32 +631,25 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="er-step"><div class="sn2">3</div><div class="st">Seleccioná <strong>Monotributo > Recategorización</strong> y seguí los pasos</div></div>
       <div class="er-step"><div class="sn2">4</div><div class="st">Confirmá la nueva categoría y pagá la diferencia de cuota si corresponde</div></div>
     </div>
-
-    <!-- Important dates -->
     <div class="card">
       <div class="cl" style="margin-bottom:10px;">Fechas importantes</div>
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Próximo período</span><span>Julio 2026</span></div>
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Fecha límite</span><span class="mo">31/07/2026</span></div>
       <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Vigencia nueva cat.</span><span>Agosto 2026 — Enero 2027</span></div>
     </div>
-
-    <!-- Exclusion risk (collapsed) -->
-    <div class="eh" style="cursor:pointer;" onclick="document.getElementById('excl-detail').style.display=document.getElementById('excl-detail').style.display==='none'?'block':'none'">
-      <div style="font-size:32px;margin-bottom:8px;">⚠️</div>
-      <div class="et">Riesgo de exclusión</div>
-      <div class="es">Tu facturación superó el 90% del tope. Tocá para ver detalles.</div>
-    </div>
-    <div id="excl-detail" style="display:none;">
-      <div class="cd">$382.000</div>
-      <div class="cdl">para llegar al límite de exclusión</div>
-      <div class="card">
+    <div class="collapsible" id="excl-section">
+      <div class="coll-header" onclick="toggleColl('excl-section')">
+        <div class="coll-title" style="color:var(--r);">⚠️ Riesgo de exclusión</div>
+        <div class="coll-hint"><span style="font-size:12px;color:var(--r);">$382k restantes</span> <span class="coll-chevron" id="excl-section-chev">▾</span></div>
+      </div>
+      <div class="coll-body" id="excl-section-body">
+        <div class="cd">$382.000</div>
+        <div class="cdl">para llegar al límite de exclusión</div>
         <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--br);"><span style="color:var(--ts);">Total facturado (365 días)</span><span class="mo">$7.718.000</span></div>
         <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;"><span style="color:var(--ts);">Margen para exclusión</span><span class="mo" style="color:var(--r);font-weight:500;">$382.000</span></div>
         <div class="pt" style="margin-top:10px;"><div class="pf" style="width:95%;background:var(--r);"></div></div>
       </div>
     </div>
-
-    <!-- Other alerts -->
     <div style="margin-top:14px;">
       <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Vencimientos</div>
       <div class="tw">
@@ -669,7 +657,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <div class="tr2"><div class="tm2"><div>Período recategorización</div><div class="ts2">Julio 2026</div></div><span class="bdg bb">Abierto</span></div>
       </div>
     </div>
-
     <div class="sn"></div>
   </div>
   <div class="bnav">
@@ -683,13 +670,13 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <!-- ══ PANEL FISCAL ══ -->
 <div class="screen" id="s-panel">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Panel Fiscal — Abril 2026</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Panel Fiscal</div>
     <div class="g2">
       <div class="sc"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
-      <div class="sc"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss" style="color:var(--ts);">Límite 40% Cat K: $10.9M</div></div>
+      <div class="sc"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss">Límite 40% Cat K: $10.9M</div></div>
     </div>
     <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Comprobantes emitidos</div>
     <div class="tw" style="margin-bottom:14px;">
@@ -713,25 +700,19 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   </div>
 </div>
 
-<!-- ══ AGENDA DE CLIENTES (FB-006) ══ -->
+<!-- ══ AGENDA DE CLIENTES ══ -->
 <div class="screen" id="s-agenda">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Pantalla 7 — Agenda de Clientes</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Agenda de Clientes</div>
-
-    <div class="fi">
-      <input type="text" id="agenda-search" placeholder="Buscar por nombre o CUIT..." oninput="filterAgenda(this.value)">
-    </div>
-
+    <div class="fi"><input type="text" id="agenda-search" placeholder="Buscar por nombre o CUIT..." oninput="filterAgenda(this.value)"></div>
     <div id="agenda-list" class="tw" style="margin-bottom:14px;">
       <div class="tr2 agenda-row"><div class="tm2"><div>Constructora del Norte S.A.</div><div class="ts2">30-71456892-1 · constructora@norte.com.ar</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('30-71456892-1')">Facturar</button></div></div>
       <div class="tr2 agenda-row"><div class="tm2"><div>Farmacia Belgrano S.R.L.</div><div class="ts2">30-65432198-7 · admin@farmaciabelgrano.com</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('30-65432198-7')">Facturar</button></div></div>
       <div class="tr2 agenda-row"><div class="tm2"><div>Recursos Humanos Plus</div><div class="ts2">20-34567891-2 · rrhh@rhplus.com.ar</div></div><div class="tr2-r"><button class="btn-bk" onclick="agendaFacturar('20-34567891-2')">Facturar</button></div></div>
     </div>
-
     <button class="btn btn-s" id="agenda-add-btn" onclick="showAgendaForm()" style="margin-bottom:14px;">+ Agregar cliente</button>
-
     <div id="agenda-form" style="display:none;">
       <div class="card">
         <div class="cl" style="margin-bottom:12px;">Nuevo cliente</div>
@@ -743,7 +724,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <button class="btn btn-s" onclick="hideAgendaForm()">Cancelar</button>
       </div>
     </div>
-
     <div class="sn"></div>
   </div>
   <div class="bnav">
@@ -755,46 +735,32 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   </div>
 </div>
 
-<!-- ══ WHATSAPP SCREEN (FB-008) ══ -->
+<!-- ══ WHATSAPP SCREEN ══ -->
 <div class="screen wa-bg" id="s-wa">
   <div class="wa-tb">
     <div class="wa-back" onclick="goTo('s-dash')">←</div>
     <div class="wa-av">L</div>
-    <div class="wa-info">
-      <div class="wa-name">LUCA Fiscal</div>
-      <div class="wa-status" id="wa-status">en línea</div>
-    </div>
+    <div class="wa-info"><div class="wa-name">LUCA Fiscal</div><div class="wa-status" id="wa-status">en línea</div></div>
     <div style="font-size:11px;color:#8696a0;background:#1a3a2a;padding:3px 8px;border-radius:10px;border:1px solid var(--bl);">Beta · Iteración 2</div>
   </div>
-
   <div class="wa-msgs" id="wa-msgs">
     <div class="wa-status-msg">13 de abril de 2026</div>
-    <div class="wa-msg in">
-      Hola Javier 👋 Soy LUCA, tu asistente fiscal.<br><br>
-      ¿En qué te ayudo hoy?
-      <div class="wa-time">10:15 ✓✓</div>
-    </div>
-    <div id="wa-step-1">
-      <div class="wa-msg in">
-        <div class="wa-btns">
-          <div class="wa-btn" onclick="waStep(100,'📄 Emitir Comprobante')">📄 Emitir Comprobante</div>
-          <div class="wa-btn" onclick="waStep(200,'📊 Consultas')">📊 Consultas</div>
-          <div class="wa-btn" onclick="waStep(300,'🤖 Asesor')">🤖 Asesor</div>
-        </div>
-        <div class="wa-time">10:15 ✓✓</div>
-      </div>
-    </div>
+    <div class="wa-msg in">Hola Javier 👋 Soy LUCA, tu asistente fiscal.<br><br>¿En qué te ayudo hoy?<div class="wa-time">10:15 ✓✓</div></div>
+    <div id="wa-step-1"><div class="wa-msg in"><div class="wa-btns">
+      <div class="wa-btn" onclick="waStep(100,'📄 Emitir Comprobante')">📄 Emitir Comprobante</div>
+      <div class="wa-btn" onclick="waStep(200,'📊 Consultas')">📊 Consultas</div>
+      <div class="wa-btn" onclick="waStep(300,'🤖 Asesor')">🤖 Asesor</div>
+    </div><div class="wa-time">10:15 ✓✓</div></div></div>
   </div>
-
   <div class="wa-input-area">
     <input class="wa-input" id="wa-input" placeholder="Escribí un mensaje..." onkeydown="if(event.key==='Enter')waSend()">
     <button class="wa-send" onclick="waSend()">➤</button>
   </div>
 </div>
 
-<!-- ══ FEEDBACK HISTORY (NEW) ══ -->
+<!-- ══ FEEDBACK HISTORY ══ -->
 <div class="screen" id="s-fbhist">
-  <div class="tb"><div class="logo">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
   <div class="cnt">
     <div class="sp">Historial de Feedback</div>
     <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Tu feedback enviado</div>
@@ -836,20 +802,19 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v4.0';
+const SPRINT='S00-v4.1';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','recat':'Recategorización','panel':'Panel Fiscal','wa':'WhatsApp','agenda':'Agenda de Clientes','fbhist':'Historial Feedback'};
 
-let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
-let waConv=[], waStepId=0;
+let curS='onb',fbStar=0,fbType='',isDark=true,mode='',obStep=0,selTypeCode='',selTypeSum=true,selTypeName='';
 
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   curS=id.replace('s-','');
   document.getElementById('fb-ctx').textContent='Pantalla: '+(SNAMES[curS]||curS);
-  closeFb(); window.scrollTo(0,0);
-  if(id==='s-cbte'){resetCbteForm();}
-  if(id==='s-fbhist'){renderFbHistory();}
+  closeFb();window.scrollTo(0,0);
+  if(id==='s-cbte') resetCbteForm();
+  if(id==='s-fbhist') renderFbHistory();
 }
 
 function toggleTheme(){
@@ -875,7 +840,16 @@ function onbNext(){
   document.querySelectorAll('[id^=od]').forEach((d,i)=>d.classList.toggle('done',i<=obStep));
 }
 
-// ── DASHBOARD: category limit toggle (FB-004)
+// ── COLLAPSIBLE SECTIONS
+function toggleColl(id){
+  const body=document.getElementById(id+'-body');
+  const chev=document.getElementById(id+'-chev');
+  const isOpen=body.classList.contains('open');
+  body.classList.toggle('open');
+  chev.classList.toggle('open');
+}
+
+// ── DASHBOARD
 function toggleCatLimit(type){
   const btns=document.querySelectorAll('.cat-toggle-btn');
   btns[0].classList.toggle('active',type==='actual');
@@ -886,43 +860,48 @@ function toggleCatLimit(type){
   const recatBar=document.getElementById('recat-bar');
   const recatLim=document.getElementById('recat-lim');
   if(type==='ipc'){
-    limVal.textContent='$8.910.000';
-    limLabel.textContent='proyectado IPC (+10%)';
-    recatPct.textContent='65%';
-    recatBar.style.width='65%';recatBar.style.background='var(--g)';
+    limVal.textContent='$8.910.000';limLabel.textContent='proyectado IPC (+10%)';
+    recatPct.textContent='65%';recatBar.style.width='65%';recatBar.style.background='var(--g)';
     recatLim.textContent='límite $8.910.000';
   } else {
-    limVal.textContent='$8.100.000';
-    limLabel.textContent='límite Cat F';
-    recatPct.textContent='72%';
-    recatBar.style.width='72%';recatBar.style.background='var(--a)';
+    limVal.textContent='$8.100.000';limLabel.textContent='límite Cat F';
+    recatPct.textContent='72%';recatBar.style.width='72%';recatBar.style.background='var(--a)';
     recatLim.textContent='límite $8.100.000';
   }
 }
 
-// ── DASHBOARD: collapsible chart (FB-004)
-function toggleChart(){
-  const body=document.getElementById('chart-body');
-  const chev=document.getElementById('chart-chevron');
-  if(body.style.display==='none'){body.style.display='block';chev.classList.remove('collapsed');}
-  else{body.style.display='none';chev.classList.add('collapsed');}
+// ── COMPROBANTE — type cards with show/hide
+function selType(el,code,kind,name){
+  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';});
+  el.className='tc '+(kind==='nc'?'sel-nc':'sel-sum');
+  selTypeCode=code;selTypeSum=(kind==='sum');selTypeName=name;
+  document.getElementById('cbte-rest').style.display='block';
+  document.querySelectorAll('.tc').forEach(t=>t.style.display=t===el?'':'none');
+  const existing=document.getElementById('change-type-btn');
+  if(existing) existing.remove();
+  const btn=document.createElement('div');
+  btn.id='change-type-btn';
+  btn.innerHTML='← Cambiar tipo';
+  btn.style.cssText='font-size:13px;color:var(--bl);cursor:pointer;margin:4px 0 12px;font-weight:500;';
+  btn.onclick=resetTypeSelection;
+  el.parentNode.insertBefore(btn,el.nextSibling);
+  updateImpact(parseMonto(document.getElementById('monto-in').value));
 }
 
-// ── COMPROBANTE (FB-005)
-function selTypeDropdown(sel){
-  const opt=sel.selectedOptions[0];
-  if(!opt||!opt.value){selTypeCode='';selTypeSum=true;selTypeName='';document.getElementById('cbte-rest').style.display='none';return;}
-  selTypeCode=opt.value;
-  selTypeSum=opt.dataset.kind==='sum';
-  selTypeName=opt.textContent.split(' — ')[0];
-  document.getElementById('cbte-rest').style.display='block';
+function resetTypeSelection(){
+  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
+  const changeBtn=document.getElementById('change-type-btn');
+  if(changeBtn) changeBtn.remove();
+  selTypeCode='';selTypeSum=true;selTypeName='';
+  document.getElementById('cbte-rest').style.display='none';
   updateImpact(parseMonto(document.getElementById('monto-in').value));
 }
 
 function resetCbteForm(){
-  const sel=document.getElementById('type-select');
-  if(sel)sel.selectedIndex=0;
-  selTypeCode=''; selTypeSum=true; selTypeName='';
+  document.querySelectorAll('.tc').forEach(t=>{t.className='tc';t.style.display='';});
+  const changeBtn=document.getElementById('change-type-btn');
+  if(changeBtn) changeBtn.remove();
+  selTypeCode='';selTypeSum=true;selTypeName='';
   document.getElementById('cbte-rest').style.display='none';
   document.getElementById('cbte-form').style.display='block';
   document.getElementById('cbte-confirm').style.display='none';
@@ -935,49 +914,35 @@ function formatMonto(input){
   if(!raw){input.value='';return;}
   input.value='$'+parseInt(raw).toLocaleString('es-AR');
 }
-function parseMonto(val){
-  return parseInt(((val||'0')+'').replace(/[^\d]/g,''))||0;
-}
+function parseMonto(val){return parseInt(((val||'0')+'').replace(/[^\d]/g,''))||0;}
 
 function updateImpact(v){
   if(!selTypeCode) return;
-  const m=(typeof v==='number'?v:parseMonto(v))||0, base=7718000, lim=8100000;
-  const box=document.getElementById('impact-box');
-  const title=document.getElementById('impact-title');
-  const margen=document.getElementById('ib-margen');
-  const text=document.getElementById('impact-text');
-  const ds=document.getElementById('fecha-sugerida');
-  const hero=document.getElementById('margen-hero-val');
-
+  const m=(typeof v==='number'?v:parseMonto(v))||0,base=7718000,lim=8100000;
+  const box=document.getElementById('impact-box'),title=document.getElementById('impact-title');
+  const margen=document.getElementById('ib-margen'),text=document.getElementById('impact-text');
+  const ds=document.getElementById('fecha-sugerida'),hero=document.getElementById('margen-hero-val');
   if(!selTypeSum){
-    box.className='ib ok';
-    title.textContent='Nota de Crédito — no consume tope';
+    box.className='ib ok';title.textContent='Nota de Crédito — no consume tope';
     margen.textContent='$'+(lim-base).toLocaleString('es-AR');
     text.textContent='Las Notas de Crédito no afectan el cálculo de categoría. Podés emitirla sin restricciones.';
     ds.style.display='none';
     if(hero){hero.textContent='$'+(lim-base).toLocaleString('es-AR');hero.style.color='var(--g)';}
     return;
   }
-
-  const nuevo=base+m, pct=Math.round(nuevo/lim*100), rest=lim-nuevo;
-  if(pct>=95){box.className='ib danger';}
-  else if(pct>=80){box.className='ib warn';}
-  else{box.className='ib ok';}
+  const nuevo=base+m,pct=Math.round(nuevo/lim*100),rest=lim-nuevo;
+  if(pct>=95) box.className='ib danger';
+  else if(pct>=80) box.className='ib warn';
+  else box.className='ib ok';
   title.textContent='Margen disponible tras emitir';
   margen.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');
   text.innerHTML='Facturado: <strong>$'+nuevo.toLocaleString('es-AR')+'</strong> / $8.100.000 ('+pct+'%)';
   ds.style.display=pct>=95?'block':'none';
-  if(hero){
-    hero.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');
-    hero.style.color=pct>=95?'var(--r)':pct>=80?'var(--a)':'var(--g)';
-  }
+  if(hero){hero.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');hero.style.color=pct>=95?'var(--r)':pct>=80?'var(--a)':'var(--g)';}
 }
 
 function updateFecha(v){}
-function updateConcepto(v){
-  document.getElementById('periodo-box').style.display=v==='prod'?'none':'block';
-}
-
+function updateConcepto(v){document.getElementById('periodo-box').style.display=v==='prod'?'none':'block';}
 function showConfirm(){
   if(!selTypeCode){alert('Seleccioná un tipo de comprobante primero.');return;}
   document.getElementById('conf-tipo').textContent=selTypeName;
@@ -985,47 +950,27 @@ function showConfirm(){
   document.getElementById('cbte-form').style.display='none';
   document.getElementById('cbte-confirm').style.display='block';
 }
-function backToForm(){
-  document.getElementById('cbte-form').style.display='block';
-  document.getElementById('cbte-confirm').style.display='none';
-}
+function backToForm(){document.getElementById('cbte-form').style.display='block';document.getElementById('cbte-confirm').style.display='none';}
 function emitir(){
   document.getElementById('cbte-confirm').style.display='none';
   document.getElementById('cbte-loading').style.display='block';
-  setTimeout(()=>{
-    document.getElementById('cbte-loading').style.display='none';
-    document.getElementById('cbte-ok').style.display='block';
-  },2200);
+  setTimeout(()=>{document.getElementById('cbte-loading').style.display='none';document.getElementById('cbte-ok').style.display='block';},2200);
 }
 function lookupCuit(){}
-function sendWhatsApp(){
-  alert('Se abriría wa.me con el comprobante pre-armado.\n\nFactura C — Constructora del Norte S.A.\n$320.000 · CAE: 74023456789012\n\n(Simulación del prototipo)');
-}
+function sendWhatsApp(){alert('Se abriría wa.me con el comprobante pre-armado.\n\nFactura C — Constructora del Norte S.A.\n$320.000 · CAE: 74023456789012\n\n(Simulación del prototipo)');}
 
-// ── AGENDA (FB-006)
-function filterAgenda(q){
-  const rows=document.querySelectorAll('.agenda-row');
-  const ql=q.toLowerCase();
-  rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(ql)?'':'none';});
-}
-function showAgendaForm(){
-  document.getElementById('agenda-form').style.display='block';
-  document.getElementById('agenda-add-btn').style.display='none';
-}
-function hideAgendaForm(){
-  document.getElementById('agenda-form').style.display='none';
-  document.getElementById('agenda-add-btn').style.display='block';
-}
+// ── AGENDA
+function filterAgenda(q){const rows=document.querySelectorAll('.agenda-row');const ql=q.toLowerCase();rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(ql)?'':'none';});}
+function showAgendaForm(){document.getElementById('agenda-form').style.display='block';document.getElementById('agenda-add-btn').style.display='none';}
+function hideAgendaForm(){document.getElementById('agenda-form').style.display='none';document.getElementById('agenda-add-btn').style.display='block';}
 function agendaFacturar(cuit){goTo('s-cbte');}
 
-// ── WHATSAPP (FB-008 — menu per Javier spec)
-const waFlows = {
-  // ROOT
+// ── WHATSAPP
+const waFlows={
   1:{out:'Volver al menú',in:'¿En qué más te ayudo?',btns:[{t:'📄 Emitir Comprobante',s:100},{t:'📊 Consultas',s:200},{t:'🤖 Asesor',s:300}]},
-  // EMITIR
   100:{out:'📄 Emitir Comprobante',in:'¿Cómo querés emitir?\n\nPodés escribir los datos o mandar un audio.',btns:[{t:'✍️ Por texto',s:101},{t:'🎤 Por voz',s:102}]},
   101:{out:'✍️ Por texto',in:'¿A quién le facturamos y por cuánto?\n\nEscribime algo como:\n"facturale a Constructora del Norte 320000"\n\n(Nota de Crédito solo desde la app web)',btns:[{t:'Constructora del Norte $320.000',s:103}]},
-  102:{out:'🎤 Por voz',in:'🎙️ Mandá un audio con los datos del comprobante.\n\nDecime: receptor, monto y concepto.\n\nEjemplo: "Facturale trescientos veinte mil a Constructora del Norte por servicios contables de abril"\n\n(Nota de Crédito solo desde la app web)',btns:[{t:'(simular audio) Constructora $320k',s:103}]},
+  102:{out:'🎤 Por voz',in:'🎙️ Mandá un audio con los datos del comprobante.\n\nDecime: receptor, monto y concepto.\n\n(Nota de Crédito solo desde la app web)',btns:[{t:'(simular audio) Constructora $320k',s:103}]},
   103:{out:'Constructora del Norte $320.000',typing:true,in:'¿Confirmás?\n\n📄 Factura C\n📋 Constructora del Norte S.A.\n   CUIT: 30-71456892-1\n💰 $320.000\n📅 Hoy, 13/04/2026\n\n⚠️ Después de emitir te quedan $1.960.000 de margen.\n\n✅ Todo en orden.',btns:[{t:'✓ Confirmar',s:104},{t:'✏️ Editar',s:105}]},
   104:{out:'✓ Confirmar',typing:true,in:'✅ ¡Comprobante emitido!\n\n📋 Factura C — Constructora del Norte S.A.\n💰 $320.000\n📄 CAE: 74023456789012\n📅 Vence: 23/04/2026\n\n¿Qué hacemos con el PDF?',btns:[{t:'📤 Enviar al cliente',s:106},{t:'↓ Descargar PDF',s:107},{t:'Volver al menú',s:1}]},
   105:{out:'✏️ Editar',in:'¿Qué querés cambiar?',btns:[{t:'Cambiar monto',s:108},{t:'Cambiar fecha',s:109},{t:'Cambiar receptor',s:110}]},
@@ -1034,80 +979,38 @@ const waFlows = {
   108:{out:'Cambiar monto',in:'¿Cuál es el nuevo monto?',btns:[{t:'$285.000',s:103}]},
   109:{out:'Cambiar fecha',in:'¿Qué fecha querés usar?',btns:[{t:'15/04/2026',s:103}]},
   110:{out:'Cambiar receptor',in:'Escribí el nombre o CUIT.',btns:[{t:'Farmacia Belgrano',s:103}]},
-  // CONSULTAS
   200:{out:'📊 Consultas',in:'¿Qué querés consultar?',btns:[{t:'💰 Montos facturados',s:201},{t:'📈 Montos disponibles',s:202},{t:'🏷️ Categoría actual',s:203},{t:'💳 Deuda CCMA',s:204},{t:'🪪 Obtener credencial',s:205}]},
   201:{out:'💰 Montos facturados',typing:true,in:'📊 Facturación últimos 365 días:\n\n• Total: $5.820.000\n• Este mes: $505.000 (8 comprobantes)\n• Mes anterior: $1.420.000',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
   202:{out:'📈 Montos disponibles',typing:true,in:'📊 Margen disponible hoy:\n\n🟡 Categoría F — límite $8.100.000\n• Margen recategorización: $2.280.000\n• Margen exclusión: $382.000 ⚠️\n\n📅 Próximas liberaciones:\n• 15 abr → +$185.000\n• 22 abr → +$320.000',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
-  203:{out:'🏷️ Categoría actual',typing:true,in:'🏷️ Tu categoría:\n\nCategoría F\nCuota mensual: $68.500\nLímite anual: $8.100.000\nFacturado al período: $5.820.000\nDisponible: $2.280.000\nPróxima recategorización: Julio 2026',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
+  203:{out:'🏷️ Categoría actual',typing:true,in:'🏷️ Tu categoría:\n\nCategoría F\nCuota mensual: $68.500\nLímite anual: $8.100.000\nFacturado: $5.820.000\nDisponible: $2.280.000\nPróxima recategorización: Julio 2026',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
   204:{out:'💳 Deuda CCMA',typing:true,in:'💳 Cuenta Corriente Monotributista:\n\nSaldo: $0\n✅ Sin deuda detectada.\n\nÚltima consulta ARCA: hoy 10:15',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
   205:{out:'🪪 Obtener credencial',typing:true,in:'🪪 Tu credencial de Monotributo:\n\nCUIT: 20-28456791-3\nCategoría: F\nActividad: Servicios contables\nVigencia: Enero 2026 — Julio 2026\n\n📄 Descargando PDF de credencial...',btns:[{t:'📊 Más consultas',s:200},{t:'Volver al menú',s:1}]},
-  // ASESOR
-  300:{out:'🤖 Asesor',in:'🤖 Soy el asesor de LUCA. Preguntame lo que necesites sobre Monotributo.\n\nEjemplos:\n• "¿Cuándo es la próxima recategorización?"\n• "¿Qué pasa si supero el tope?"\n• "¿Puedo tener empleados?"',btns:[{t:'¿Cuándo recategorizo?',s:301},{t:'¿Qué pasa si supero el tope?',s:302},{t:'Volver al menú',s:1}]},
-  301:{out:'¿Cuándo recategorizo?',typing:true,in:'📅 Recategorización:\n\nSe hace en enero y julio. El próximo período es julio 2026 (del 1 al 31).\n\nSe evalúan los últimos 12 meses de facturación, alquileres y consumo eléctrico.\n\nLUCA te va a avisar cuando se abra el período.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]},
-  302:{out:'¿Qué pasa si supero el tope?',typing:true,in:'⚠️ Exclusión del Monotributo:\n\nSi tu facturación de los últimos 365 días supera el tope de la categoría máxima (K = $27.300.000 para servicios), quedás excluido automáticamente.\n\nTenés que inscribirte como Responsable Inscripto. LUCA te alerta antes de llegar al límite.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]}
+  300:{out:'🤖 Asesor',in:'🤖 Soy el asesor de LUCA. Preguntame lo que necesites sobre Monotributo.',btns:[{t:'¿Cuándo recategorizo?',s:301},{t:'¿Qué pasa si supero el tope?',s:302},{t:'Volver al menú',s:1}]},
+  301:{out:'¿Cuándo recategorizo?',typing:true,in:'📅 Se hace en enero y julio. El próximo período es julio 2026 (del 1 al 31).\n\nSe evalúan los últimos 12 meses de facturación, alquileres y consumo eléctrico.\n\nLUCA te va a avisar cuando se abra el período.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]},
+  302:{out:'¿Qué pasa si supero el tope?',typing:true,in:'⚠️ Si tu facturación de los últimos 365 días supera el tope de la categoría máxima (K = $27.300.000 para servicios), quedás excluido automáticamente.\n\nTenés que inscribirte como Responsable Inscripto. LUCA te alerta antes de llegar al límite.',btns:[{t:'Otra pregunta',s:300},{t:'Volver al menú',s:1}]}
 };
 
-function waStep(s, outText){
-  const msgs=document.getElementById('wa-msgs');
-  const flow=waFlows[s];
-  if(!flow) return;
-  if(outText||flow.out){
-    const div=document.createElement('div');
-    div.className='wa-msg out';
-    div.innerHTML=(outText||flow.out).replace(/\n/g,'<br>')+'<div class="wa-time">ahora ✓✓</div>';
-    msgs.appendChild(div);
-  }
-  const typing=document.createElement('div');
-  typing.className='wa-typing show';
-  typing.textContent='LUCA está escribiendo...';
-  msgs.appendChild(typing);
-  msgs.scrollTop=msgs.scrollHeight;
-  setTimeout(()=>{
-    typing.remove();
-    const inDiv=document.createElement('div');
-    inDiv.className='wa-msg in';
-    let html=flow.in.replace(/\n/g,'<br>');
-    if(flow.btns&&flow.btns.length){
-      html+='<div class="wa-btns">';
-      flow.btns.forEach(b=>{
-        html+='<div class="wa-btn" onclick="waStep('+b.s+',\''+b.t.replace(/'/g,"\\'")+'\')">' +b.t+'</div>';
-      });
-      html+='</div>';
-    }
-    html+='<div class="wa-time">ahora ✓✓</div>';
-    inDiv.innerHTML=html;
-    msgs.appendChild(inDiv);
-    msgs.scrollTop=msgs.scrollHeight;
-  }, flow.typing?1400:600);
+function waStep(s,outText){
+  const msgs=document.getElementById('wa-msgs'),flow=waFlows[s];
+  if(!flow)return;
+  if(outText||flow.out){const div=document.createElement('div');div.className='wa-msg out';div.innerHTML=(outText||flow.out).replace(/\n/g,'<br>')+'<div class="wa-time">ahora ✓✓</div>';msgs.appendChild(div);}
+  const typing=document.createElement('div');typing.className='wa-typing show';typing.textContent='LUCA está escribiendo...';msgs.appendChild(typing);msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{typing.remove();const inDiv=document.createElement('div');inDiv.className='wa-msg in';let html=flow.in.replace(/\n/g,'<br>');
+    if(flow.btns&&flow.btns.length){html+='<div class="wa-btns">';flow.btns.forEach(b=>{html+='<div class="wa-btn" onclick="waStep('+b.s+',\''+b.t.replace(/'/g,"\\'")+'\')">' +b.t+'</div>';});html+='</div>';}
+    html+='<div class="wa-time">ahora ✓✓</div>';inDiv.innerHTML=html;msgs.appendChild(inDiv);msgs.scrollTop=msgs.scrollHeight;
+  },flow.typing?1400:600);
 }
 
 function waSend(){
-  const inp=document.getElementById('wa-input');
-  const v=inp.value.trim();
-  if(!v) return;
-  inp.value='';
-  const vl=v.toLowerCase();
+  const inp=document.getElementById('wa-input'),v=inp.value.trim();if(!v)return;inp.value='';const vl=v.toLowerCase();
   if(vl.includes('factur')||vl.includes('comprobante')||vl.includes('emitir')){waStep(100,v);}
-  else if(vl.includes('cuánto')||vl.includes('cuanto')||vl.includes('saldo')||vl.includes('consulta')||vl.includes('disponible')||vl.includes('facturado')){waStep(200,v);}
-  else if(vl.includes('asesor')||vl.includes('ayuda')||vl.includes('monotributo')){waStep(300,v);}
+  else if(vl.includes('cuánto')||vl.includes('cuanto')||vl.includes('saldo')||vl.includes('consulta')||vl.includes('disponible')){waStep(200,v);}
+  else if(vl.includes('asesor')||vl.includes('ayuda')){waStep(300,v);}
   else if(vl.includes('credencial')){waStep(205,v);}
   else if(vl.includes('deuda')||vl.includes('ccma')){waStep(204,v);}
   else if(vl.includes('categoría')||vl.includes('categoria')){waStep(203,v);}
-  else{
-    const msgs=document.getElementById('wa-msgs');
-    const out=document.createElement('div');
-    out.className='wa-msg out';
-    out.innerHTML=v+'<div class="wa-time">ahora ✓✓</div>';
-    msgs.appendChild(out);
-    setTimeout(()=>{
-      const resp=document.createElement('div');
-      resp.className='wa-msg in';
-      resp.innerHTML='No entendí tu mensaje. ¿Qué necesitás?<div class="wa-btns"><div class="wa-btn" onclick="waStep(100,\'📄 Emitir\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(200,\'📊 Consultas\')">📊 Consultas</div><div class="wa-btn" onclick="waStep(300,\'🤖 Asesor\')">🤖 Asesor</div></div><div class="wa-time">ahora ✓✓</div>';
-      msgs.appendChild(resp);
-      msgs.scrollTop=msgs.scrollHeight;
-    },1000);
-    msgs.scrollTop=msgs.scrollHeight;
-  }
+  else{const msgs=document.getElementById('wa-msgs');const out=document.createElement('div');out.className='wa-msg out';out.innerHTML=v+'<div class="wa-time">ahora ✓✓</div>';msgs.appendChild(out);
+    setTimeout(()=>{const resp=document.createElement('div');resp.className='wa-msg in';resp.innerHTML='No entendí tu mensaje. ¿Qué necesitás?<div class="wa-btns"><div class="wa-btn" onclick="waStep(100,\'📄 Emitir\')">📄 Emitir</div><div class="wa-btn" onclick="waStep(200,\'📊 Consultas\')">📊 Consultas</div><div class="wa-btn" onclick="waStep(300,\'🤖 Asesor\')">🤖 Asesor</div></div><div class="wa-time">ahora ✓✓</div>';msgs.appendChild(resp);msgs.scrollTop=msgs.scrollHeight;},1000);msgs.scrollTop=msgs.scrollHeight;}
 }
 
 // ── FEEDBACK
@@ -1117,19 +1020,11 @@ function selFbT(el,t){document.querySelectorAll('.fbt').forEach(x=>x.classList.r
 function setFbS(v){fbStar=v;document.querySelectorAll('.fbs').forEach((s,i)=>s.classList.toggle('on',i<v));}
 function submitFb(){
   const text=document.getElementById('fb-text').value.trim();
-  fetch(SHEETS,{method:'POST',body:JSON.stringify({
-    sprint:SPRINT,pantalla:SNAMES[curS]||curS,tipo:fbType||'general',
-    estrellas:fbStar||'',comentario:text,
-    dispositivo:window.innerWidth<768?'mobile':'desktop',modo:mode==='u'?'usuario':'evaluador'
-  })}).catch(()=>{});
-  // Save to localStorage history
+  fetch(SHEETS,{method:'POST',body:JSON.stringify({sprint:SPRINT,pantalla:SNAMES[curS]||curS,tipo:fbType||'general',estrellas:fbStar||'',comentario:text,dispositivo:window.innerWidth<768?'mobile':'desktop',modo:mode==='u'?'usuario':'evaluador'})}).catch(()=>{});
   const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
-  const newId='fb-'+String(list.length+1).padStart(3,'0');
-  list.push({id:newId,date:new Date().toISOString().slice(0,10),sprint:SPRINT,screen:SNAMES[curS]||curS,type:fbType||'general',stars:fbStar||0,text:text,status:'pendiente'});
+  list.push({id:'fb-'+String(list.length+1).padStart(3,'0'),date:new Date().toISOString().slice(0,10),sprint:SPRINT,screen:SNAMES[curS]||curS,type:fbType||'general',stars:fbStar||0,text:text,status:'pendiente'});
   localStorage.setItem('luca_fb_history',JSON.stringify(list));
-  document.querySelector('.fb-send').style.display='none';
-  document.getElementById('fb-ok').style.display='block';
-  document.getElementById('fb-text').value='';
+  document.querySelector('.fb-send').style.display='none';document.getElementById('fb-ok').style.display='block';document.getElementById('fb-text').value='';
   setTimeout(()=>{closeFb();document.querySelector('.fb-send').style.display='block';document.getElementById('fb-ok').style.display='none';},2000);
 }
 
@@ -1151,49 +1046,23 @@ function initFbHistory(){
     ]));
   }
 }
-
 function renderFbHistory(){
-  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
-  const container=document.getElementById('fbhist-list');
-  if(!container)return;
-  container.innerHTML='';
-  // Sort newest first
+  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]'),container=document.getElementById('fbhist-list');
+  if(!container)return;container.innerHTML='';
   list.sort((a,b)=>b.id.localeCompare(a.id));
-  list.forEach(item=>{
-    const isRes=item.status==='resuelto';
-    const div=document.createElement('div');
-    div.className='fbh-item'+(isRes?' resolved':'');
-    div.innerHTML=
-      '<div style="display:flex;justify-content:space-between;align-items:center;">'+
-        '<div><span class="bdg '+(isRes?'bg':'ba')+'">'+(isRes?'Resuelto':'Pendiente')+'</span> <span style="font-size:12px;color:var(--ts);margin-left:6px;">'+item.screen+'</span></div>'+
-        '<span class="fbh-meta">'+item.date+'</span>'+
-      '</div>'+
-      '<div class="fbh-text">'+item.text+'</div>'+
-      '<div style="display:flex;justify-content:space-between;align-items:center;">'+
-        '<span class="fbh-meta">'+(item.type||'general')+' · '+item.sprint+'</span>'+
-        '<button class="fbh-btn" onclick="resolveFb(\''+item.id+'\')">'+(isRes?'Marcar pendiente':'Marcar resuelto')+'</button>'+
-      '</div>';
-    container.appendChild(div);
-  });
+  list.forEach(item=>{const isRes=item.status==='resuelto';const div=document.createElement('div');div.className='fbh-item'+(isRes?' resolved':'');
+    div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;"><div><span class="bdg '+(isRes?'bg':'ba')+'">'+(isRes?'Resuelto':'Pendiente')+'</span> <span style="font-size:12px;color:var(--ts);margin-left:6px;">'+item.screen+'</span></div><span class="fbh-meta">'+item.date+'</span></div><div class="fbh-text">'+item.text+'</div><div style="display:flex;justify-content:space-between;align-items:center;"><span class="fbh-meta">'+(item.type||'general')+' · '+item.sprint+'</span><button class="fbh-btn" onclick="resolveFb(\''+item.id+'\')">'+(isRes?'Marcar pendiente':'Marcar resuelto')+'</button></div>';
+    container.appendChild(div);});
 }
-
 function resolveFb(id){
-  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]');
-  const item=list.find(x=>x.id===id);
-  if(item){
-    item.status=item.status==='resuelto'?'pendiente':'resuelto';
-    localStorage.setItem('luca_fb_history',JSON.stringify(list));
-    renderFbHistory();
-    // Fire-and-forget to Google Sheets
-    fetch(SHEETS,{method:'POST',body:JSON.stringify({action:'update_status',id:id,status:item.status})}).catch(()=>{});
-  }
+  const list=JSON.parse(localStorage.getItem('luca_fb_history')||'[]'),item=list.find(x=>x.id===id);
+  if(item){item.status=item.status==='resuelto'?'pendiente':'resuelto';localStorage.setItem('luca_fb_history',JSON.stringify(list));renderFbHistory();
+    fetch(SHEETS,{method:'POST',body:JSON.stringify({action:'update_status',id:id,status:item.status})}).catch(()=>{});}
 }
 
 // ── INIT
 initFbHistory();
-setTimeout(()=>{
-  if(document.getElementById('monto-in')){updateImpact(320000);}
-},100);
+setTimeout(()=>{if(document.getElementById('monto-in'))updateImpact(320000);},100);
 </script>
 
 </body></html>
