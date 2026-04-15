@@ -3,7 +3,7 @@
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v3.4.1</title>
+<title>LUCA — Prototipo Sprint 00 v3.4.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -229,11 +229,11 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .lib-chart{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:16px;margin-bottom:14px;overflow:visible;}
 .lib-title{font-size:13px;font-weight:600;color:var(--tp);margin-bottom:12px;}
 .lib-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;overflow:visible;}
-.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:60px;flex-shrink:0;font-weight:500;}
+.lib-date{font-size:11px;color:var(--tp);font-family:'JetBrains Mono',monospace;width:52px;flex-shrink:0;font-weight:500;}
 .lib-bar-wrap{flex:1;min-width:0;height:22px;background:var(--bpi);border-radius:4px;overflow:visible;position:relative;}
 .lib-bar-fill{height:100%;background:var(--g);border-radius:4px;transition:width .6s;position:relative;display:flex;align-items:center;}
 .lib-amount{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#fff;font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-.lib-amount.outside{position:static;transform:none;flex-shrink:0;color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+.lib-amount.outside{position:static;transform:none;flex-shrink:0;min-width:52px;text-align:right;color:var(--g);font-size:11px;font-weight:600;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 </style>
 </head>
@@ -697,7 +697,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v3.4.1';
+const SPRINT='S00-v3.4.2';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','alerta':'Alerta Exclusión','panel':'Panel Fiscal','wa':'WhatsApp'};
 
 let curS='onb', fbStar=0, fbType='', isDark=true, mode='', obStep=0, selTypeCode='', selTypeSum=true, selTypeName='';
