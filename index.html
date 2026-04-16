@@ -79,6 +79,10 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;font-weight:500;}
 .fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s,box-shadow .2s;}
+.date-wrap{position:relative;}
+.date-wrap input[type=text]{padding-right:40px;}
+.date-wrap input[type=date]{position:absolute;top:0;right:0;width:40px;height:100%;opacity:0;cursor:pointer;z-index:2;}
+.date-icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:16px;pointer-events:none;color:var(--tm);z-index:1;}
 .fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gd);}
 .fi textarea{resize:none;min-height:80px;}
 .btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
@@ -512,7 +516,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;font-variant-numeric:tabular-nums;margin-bottom:6px;" id="ib-margen">$2.280.000</div>
           <div class="ib-t" id="impact-text"></div>
         </div>
-        <div class="fi"><label>3 · Fecha del comprobante</label><input type="text" id="fecha-in" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="updateFecha(this.value)"></div>
+        <div class="fi"><label>3 · Fecha del comprobante</label><div class="date-wrap"><input type="text" id="fecha-in" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="updateFecha(this.value)"><input type="date" onchange="syncFromPicker(this,'fecha-in')" tabindex="-1"><span class="date-icon">📅</span></div></div>
         <div class="ds" id="fecha-sugerida">Este comprobante supera el tope de tu categoría. Considerá adelantar la fecha.</div>
         <div class="fi">
           <label>4 · CUIT del receptor</label>
@@ -529,11 +533,11 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <div class="fi"><label>Descripción</label><input type="text" value="Servicios contables — Abril 2026"></div>
         <div id="periodo-box">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-            <div class="fi" style="margin:0;"><label>Período desde</label><input type="text" id="periodo-desde" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="onPeriodoDesdeChange()"></div>
-            <div class="fi" style="margin:0;"><label>Período hasta</label><input type="text" id="periodo-hasta" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"></div>
+            <div class="fi" style="margin:0;"><label>Período desde</label><div class="date-wrap"><input type="text" id="periodo-desde" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="onPeriodoDesdeChange()"><input type="date" onchange="syncFromPicker(this,'periodo-desde');onPeriodoDesdeChange()" tabindex="-1"><span class="date-icon">📅</span></div></div>
+            <div class="fi" style="margin:0;"><label>Período hasta</label><div class="date-wrap"><input type="text" id="periodo-hasta" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"><input type="date" onchange="syncFromPicker(this,'periodo-hasta')" tabindex="-1"><span class="date-icon">📅</span></div></div>
           </div>
           <div class="ds-service">⚠️ Para evitar discrepancias en ARCA, usá la misma fecha que la de emisión en los campos desde y hasta.</div>
-          <div class="fi"><label>Fecha de cobro esperada</label><input type="text" id="fecha-cobro" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"></div>
+          <div class="fi"><label>Fecha de cobro esperada</label><div class="date-wrap"><input type="text" id="fecha-cobro" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"><input type="date" onchange="syncFromPicker(this,'fecha-cobro')" tabindex="-1"><span class="date-icon">📅</span></div></div>
           <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);">ℹ️ Para servicios, el tope se calcula usando la fecha <strong>desde</strong> del período facturado.</div>
         </div>
         <button class="btn btn-p" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
@@ -950,6 +954,12 @@ function formatDateInput(el){
   if(v.length>5)v=v.slice(0,5)+'/'+v.slice(5);
   if(v.length>10)v=v.slice(0,10);
   el.value=v;
+}
+
+function syncFromPicker(picker,textId){
+  if(!picker.value)return;
+  const p=picker.value.split('-');
+  document.getElementById(textId).value=p[2]+'/'+p[1]+'/'+p[0];
 }
 
 function initDates(){
