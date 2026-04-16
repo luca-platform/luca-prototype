@@ -78,8 +78,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .sp{display:inline-block;font-size:10px;color:var(--ts);background:var(--bpi);border-radius:20px;padding:3px 10px;margin-bottom:12px;border:1px solid var(--brm);}
 .fi{margin-bottom:14px;}
 .fi label{font-size:12px;color:var(--ts);display:block;margin-bottom:5px;font-weight:500;}
-.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s,box-shadow .2s;color-scheme:dark;}
-.light .fi input,.light .fi textarea,.light .fi select{color-scheme:light;}
+.fi input,.fi textarea,.fi select{width:100%;background:var(--bpi);border:1px solid var(--br);border-radius:var(--Rx);padding:10px 12px;font-family:'Inter',system-ui,sans-serif;font-size:14px;color:var(--tp);outline:none;transition:border-color .2s,box-shadow .2s;}
 .fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gd);}
 .fi textarea{resize:none;min-height:80px;}
 .btn{width:100%;padding:14px;border-radius:var(--Rs);font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:500;cursor:pointer;border:none;transition:opacity .15s,transform .1s;}
@@ -513,7 +512,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
           <div style="font-size:28px;font-weight:700;letter-spacing:-0.5px;font-variant-numeric:tabular-nums;margin-bottom:6px;" id="ib-margen">$2.280.000</div>
           <div class="ib-t" id="impact-text"></div>
         </div>
-        <div class="fi"><label>3 · Fecha del comprobante</label><input type="date" id="fecha-in" onchange="updateFecha(this.value)"></div>
+        <div class="fi"><label>3 · Fecha del comprobante</label><input type="text" id="fecha-in" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="updateFecha(this.value)"></div>
         <div class="ds" id="fecha-sugerida">Este comprobante supera el tope de tu categoría. Considerá adelantar la fecha.</div>
         <div class="fi">
           <label>4 · CUIT del receptor</label>
@@ -530,11 +529,11 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
         <div class="fi"><label>Descripción</label><input type="text" value="Servicios contables — Abril 2026"></div>
         <div id="periodo-box">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
-            <div class="fi" style="margin:0;"><label>Período desde</label><input type="date" id="periodo-desde" onchange="onPeriodoDesdeChange()"></div>
-            <div class="fi" style="margin:0;"><label>Período hasta</label><input type="date" id="periodo-hasta"></div>
+            <div class="fi" style="margin:0;"><label>Período desde</label><input type="text" id="periodo-desde" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)" onchange="onPeriodoDesdeChange()"></div>
+            <div class="fi" style="margin:0;"><label>Período hasta</label><input type="text" id="periodo-hasta" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"></div>
           </div>
           <div class="ds-service">⚠️ Para evitar discrepancias en ARCA, usá la misma fecha que la de emisión en los campos desde y hasta.</div>
-          <div class="fi"><label>Fecha de cobro esperada</label><input type="date" id="fecha-cobro"></div>
+          <div class="fi"><label>Fecha de cobro esperada</label><input type="text" id="fecha-cobro" placeholder="DD/MM/AAAA" inputmode="numeric" maxlength="10" oninput="formatDateInput(this)"></div>
           <div style="background:var(--bpi);border-radius:var(--Rx);padding:10px 12px;margin-bottom:14px;font-size:12px;color:var(--ts);">ℹ️ Para servicios, el tope se calcula usando la fecha <strong>desde</strong> del período facturado.</div>
         </div>
         <button class="btn btn-p" onclick="showConfirm()" style="margin-bottom:8px;">Previsualizar →</button>
@@ -939,54 +938,55 @@ function updateImpact(v){
   if(hero){hero.textContent='$'+Math.max(rest,0).toLocaleString('es-AR');hero.style.color=pct>=95?'var(--r)':pct>=80?'var(--a)':'var(--g)';}
 }
 
-// ── DATE HELPERS
-function toISO(d){return d.toISOString().slice(0,10);}
+// ── DATE HELPERS (DD/MM/YYYY)
+function toDMY(d){const dd=String(d.getDate()).padStart(2,'0'),mm=String(d.getMonth()+1).padStart(2,'0');return dd+'/'+mm+'/'+d.getFullYear();}
 function firstOfMonth(d){return new Date(d.getFullYear(),d.getMonth(),1);}
 function lastOfMonth(d){return new Date(d.getFullYear(),d.getMonth()+1,0);}
+function parseDMY(s){if(!s||s.length<10)return null;const p=s.split('/');if(p.length!==3)return null;const d=new Date(parseInt(p[2]),parseInt(p[1])-1,parseInt(p[0]));return isNaN(d)?null:d;}
+
+function formatDateInput(el){
+  let v=el.value.replace(/[^\d]/g,'');
+  if(v.length>2)v=v.slice(0,2)+'/'+v.slice(2);
+  if(v.length>5)v=v.slice(0,5)+'/'+v.slice(5);
+  if(v.length>10)v=v.slice(0,10);
+  el.value=v;
+}
 
 function initDates(){
   const today=new Date();
-  document.getElementById('fecha-in').value=toISO(today);
-  document.getElementById('periodo-desde').value=toISO(firstOfMonth(today));
-  const hasta=document.getElementById('periodo-hasta');
-  hasta.value=toISO(lastOfMonth(today));
-  hasta.min=toISO(firstOfMonth(today));
-  document.getElementById('fecha-cobro').value=toISO(firstOfMonth(today));
+  document.getElementById('fecha-in').value=toDMY(today);
+  document.getElementById('periodo-desde').value=toDMY(firstOfMonth(today));
+  document.getElementById('periodo-hasta').value=toDMY(lastOfMonth(today));
+  const concepto=document.getElementById('concepto-sel').value;
+  document.getElementById('fecha-cobro').value=concepto==='prod'?toDMY(today):toDMY(firstOfMonth(today));
 }
 
 function updateFecha(v){}
 
 function onPeriodoDesdeChange(){
-  const desde=document.getElementById('periodo-desde');
+  const desde=parseDMY(document.getElementById('periodo-desde').value);
+  if(!desde)return;
   const hasta=document.getElementById('periodo-hasta');
   const cobro=document.getElementById('fecha-cobro');
-  if(!desde.value)return;
-  const d=new Date(desde.value+'T12:00:00');
-  const lastDay=lastOfMonth(d);
-  hasta.min=desde.value;
-  if(!hasta.value||hasta.value<desde.value){
-    hasta.value=toISO(lastDay);
-  } else {
-    const hastaDate=new Date(hasta.value+'T12:00:00');
-    if(hastaDate.getMonth()!==d.getMonth()||hastaDate.getFullYear()!==d.getFullYear()){
-      hasta.value=toISO(lastDay);
-    }
+  const lastDay=lastOfMonth(desde);
+  const hastaDate=parseDMY(hasta.value);
+  if(!hastaDate||hastaDate<desde||hastaDate.getMonth()!==desde.getMonth()||hastaDate.getFullYear()!==desde.getFullYear()){
+    hasta.value=toDMY(lastDay);
   }
   const concepto=document.getElementById('concepto-sel').value;
   if(concepto!=='prod'){
-    cobro.value=desde.value;
+    cobro.value=toDMY(desde);
   }
 }
 
 function updateConcepto(v){
-  const box=document.getElementById('periodo-box');
-  box.style.display=v==='prod'?'none':'block';
+  document.getElementById('periodo-box').style.display=v==='prod'?'none':'block';
   const cobro=document.getElementById('fecha-cobro');
   if(v==='prod'){
-    cobro.value=toISO(new Date());
+    cobro.value=toDMY(new Date());
   } else {
-    const desde=document.getElementById('periodo-desde');
-    if(desde.value) cobro.value=desde.value;
+    const desde=parseDMY(document.getElementById('periodo-desde').value);
+    if(desde) cobro.value=toDMY(desde);
   }
 }
 function showConfirm(){
