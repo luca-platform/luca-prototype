@@ -43,15 +43,34 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .cnt{padding:20px;flex:1;max-width:680px;width:100%;margin:0 auto;}
 .card{background:var(--bc);border:1px solid var(--br);border-radius:var(--R);padding:18px;margin-bottom:14px;box-shadow:var(--sh);transition:border-color .2s;}
 .cl{font-size:10px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
-.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;padding:10px 0 16px;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
-.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;transition:opacity .15s;}
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--bs);border-top:1px solid var(--br);display:flex;justify-content:space-around;align-items:flex-end;padding:8px 4px max(14px,env(safe-area-inset-bottom)) 4px;z-index:50;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;flex:1;min-width:0;padding:4px 2px;transition:opacity .15s;user-select:none;-webkit-user-select:none;}
 .ni:active{opacity:.6;}
-.ni-i{font-size:20px;}.ni-l{font-size:10px;color:var(--tm);}
-.ni.active .ni-l{color:var(--g);font-weight:500;}
-.sn{height:80px;}
-.fab{position:fixed;bottom:80px;right:20px;width:52px;height:52px;border-radius:50%;background:var(--g);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(45,206,122,.35);font-size:26px;color:#fff;z-index:49;transition:transform .15s,box-shadow .15s;}
-.fab:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(45,206,122,.5);}
-.fab:active{transform:scale(.94);}
+.ni-i{font-size:20px;color:var(--tm);transition:color .15s;line-height:1;}
+.ni-l{font-size:10px;color:var(--tm);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+.ni.active .ni-i{color:var(--g);}
+.ni.active .ni-l{color:var(--g);font-weight:600;}
+/* Elevated center "Crear" tab — replaces old FAB */
+.ni-crear{align-self:stretch;justify-content:flex-end;}
+.ni-crear .ni-circle{width:48px;height:48px;border-radius:50%;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:300;box-shadow:0 4px 14px rgba(45,206,122,.35);margin-top:-18px;transition:transform .15s,box-shadow .15s;line-height:1;}
+.ni-crear:active .ni-circle{transform:scale(.92);}
+.ni-crear:hover .ni-circle{box-shadow:0 6px 20px rgba(45,206,122,.5);}
+.ni-crear .ni-l{color:var(--g);font-weight:600;margin-top:4px;}
+.sn{height:88px;}
+/* "Más" bottom sheet */
+.sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:90;opacity:0;pointer-events:none;transition:opacity .2s;}
+.sheet-backdrop.open{opacity:1;pointer-events:auto;}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--bs);border-top:1px solid var(--br);border-radius:var(--R) var(--R) 0 0;z-index:91;transform:translateY(100%);transition:transform .25s cubic-bezier(.4,0,.2,1);padding:10px 0 max(20px,env(safe-area-inset-bottom)) 0;max-height:78vh;overflow-y:auto;}
+.sheet.open{transform:translateY(0);}
+.sheet-handle{width:40px;height:4px;background:var(--brm);border-radius:100px;margin:6px auto 10px;}
+.sheet-title{font-size:12px;font-weight:700;color:var(--ts);text-transform:uppercase;letter-spacing:.8px;padding:4px 22px 10px;}
+.sheet-item{display:flex;align-items:center;gap:16px;padding:14px 22px;cursor:pointer;color:var(--tp);font-size:15px;transition:background .1s;}
+.sheet-item:active{background:var(--bh);}
+.sheet-item-icon{font-size:20px;min-width:24px;text-align:center;}
+.sheet-item-sub{font-size:12px;color:var(--tm);margin-top:2px;}
+.sheet-item-body{display:flex;flex-direction:column;}
+.sheet-sep{height:1px;background:var(--br);margin:6px 22px;}
+@media(min-width:768px){.sheet,.sheet-backdrop{display:none!important;}}
 .pt{height:8px;background:var(--bpi);border-radius:100px;overflow:hidden;margin:8px 0;}
 .pf{height:100%;border-radius:100px;transition:width 1s cubic-bezier(.4,0,.2,1);}
 .bdg{display:inline-block;font-size:10px;font-weight:600;border-radius:6px;padding:3px 9px;}
@@ -193,7 +212,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 .metric-sub{font-size:10px;color:var(--tm);margin-top:3px;}
 /* desktop nav */
 @media(min-width:768px){
-  .bnav{display:none;}.fab{bottom:24px;}
+  .bnav{display:none;}
   #fb-btn{bottom:24px;}#fb-panel{bottom:80px;}
   .cnt{padding:28px 24px;}
   .dnav{display:flex;align-items:center;gap:4px;}
@@ -559,14 +578,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
     <div class="sn"></div>
   </div>
-  <div class="bnav">
-    <div class="ni active" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
-  </div>
-  <button class="fab" onclick="goTo('s-cbte')">+</button>
 </div>
 
 <!-- ══ CREAR COMPROBANTE ══ -->
@@ -673,13 +684,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
     <div class="sn"></div>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni active"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
-  </div>
 </div>
 
 <!-- ══ ERROR AFIP ══ -->
@@ -753,13 +757,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
     <div class="sn"></div>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni active"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
-  </div>
 </div>
 
 <!-- ══ PANEL FISCAL ══ -->
@@ -776,13 +773,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       <div class="tr2"><div class="tm2"><div>Recursos Humanos Plus</div><div class="ts2">FC-C · 07/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$240.000</div><span class="bdg bg">CAE ✓</span></div></div>
     </div>
     <div class="sn"></div>
-  </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni active"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
@@ -812,13 +802,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
     <div class="sn"></div>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
-  </div>
 </div>
 
 <!-- ══ CONFIGURACIÓN ══ -->
@@ -829,13 +812,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Configuración</div>
     <div style="font-size:13px;color:var(--ts);margin-bottom:20px;">Próximamente: perfil, notificaciones, integraciones, facturación</div>
     <div class="sn"></div>
-  </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
 </div>
 
@@ -872,14 +848,55 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     <div id="fbhist-list"></div>
     <div class="sn"></div>
   </div>
-  <div class="bnav">
-    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
-    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
-    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
-    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
-  </div>
 </div>
+
+<!-- ══ MOBILE BOTTOM NAV (shared across all screens) ══ -->
+<nav class="bnav" id="bnav" role="navigation" aria-label="Navegación principal">
+  <div class="ni" data-target="s-dash" onclick="goTo('s-dash')">
+    <div class="ni-i">⊞</div><div class="ni-l">Inicio</div>
+  </div>
+  <div class="ni" data-target="s-panel" onclick="goTo('s-panel')">
+    <div class="ni-i">≡</div><div class="ni-l">Comprobantes</div>
+  </div>
+  <div class="ni ni-crear" data-target="s-cbte" onclick="goTo('s-cbte')" aria-label="Crear comprobante">
+    <div class="ni-circle">+</div><div class="ni-l">Crear</div>
+  </div>
+  <div class="ni" data-target="s-recat" onclick="goTo('s-recat')">
+    <div class="ni-i">◉</div><div class="ni-l">Recateg.</div>
+  </div>
+  <div class="ni" data-target="more" onclick="openMoreSheet()" aria-label="Más opciones">
+    <div class="ni-i">⋯</div><div class="ni-l">Más</div>
+  </div>
+</nav>
+
+<!-- ══ "MÁS" BOTTOM SHEET (mobile only) ══ -->
+<div class="sheet-backdrop" id="sheet-backdrop" onclick="closeMoreSheet()"></div>
+<aside class="sheet" id="more-sheet" role="dialog" aria-label="Más opciones" aria-modal="true">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title">Más opciones</div>
+  <div class="sheet-item" onclick="goToFromSheet('s-agenda')">
+    <div class="sheet-item-icon">👥</div>
+    <div class="sheet-item-body"><div>Agenda de clientes</div><div class="sheet-item-sub">Guardar y reutilizar CUITs</div></div>
+  </div>
+  <div class="sheet-item" onclick="goToFromSheet('s-wa')">
+    <div class="sheet-item-icon">💬</div>
+    <div class="sheet-item-body"><div>WhatsApp</div><div class="sheet-item-sub">Emitir conversacional (Iteración 2)</div></div>
+  </div>
+  <div class="sheet-sep"></div>
+  <div class="sheet-item" onclick="goToFromSheet('s-config')">
+    <div class="sheet-item-icon">⚙</div>
+    <div class="sheet-item-body"><div>Configuración</div><div class="sheet-item-sub">Cuenta, AFIP, preferencias</div></div>
+  </div>
+  <div class="sheet-item" onclick="goToFromSheet('s-fbhist')">
+    <div class="sheet-item-icon">🗒</div>
+    <div class="sheet-item-body"><div>Historial de feedback</div><div class="sheet-item-sub">Tus comentarios enviados</div></div>
+  </div>
+  <div class="sheet-sep"></div>
+  <div class="sheet-item" onclick="toggleTheme();closeMoreSheet();">
+    <div class="sheet-item-icon" id="sheet-theme-icon">☀</div>
+    <div class="sheet-item-body"><div>Cambiar tema</div><div class="sheet-item-sub" id="sheet-theme-sub">Modo claro / oscuro</div></div>
+  </div>
+</aside>
 
 <!-- ══ FEEDBACK PANEL ══ -->
 <div id="fb-btn" onclick="toggleFb()" title="Feedback">💬</div>
@@ -916,10 +933,54 @@ function goTo(id){
   document.getElementById(id).classList.add('active');
   curS=id.replace('s-','');
   document.getElementById('fb-ctx').textContent='Pantalla: '+(SNAMES[curS]||curS);
-  closeFb();window.scrollTo(0,0);
+  closeFb();closeMoreSheet();window.scrollTo(0,0);
   if(id==='s-cbte'){resetCbteForm();initDates();}
   if(id==='s-fbhist') renderFbHistory();
   updateSidebarActive();
+  updateBnavActive();
+  updateBnavVisibility();
+}
+
+function updateBnavActive(){
+  const current = 's-'+curS;
+  // Recat / Comprobantes / Crear map to their own tabs; Agenda/Config/WA/Fbhist activate "Más".
+  const tabMap = {'s-dash':'s-dash','s-panel':'s-panel','s-cbte':'s-cbte','s-recat':'s-recat'};
+  const activeTarget = tabMap[current] || 'more';
+  document.querySelectorAll('#bnav .ni').forEach(n=>{
+    n.classList.toggle('active', n.getAttribute('data-target')===activeTarget);
+  });
+}
+
+function updateBnavVisibility(){
+  // Hide bnav on full-screen flows (onboarding, WhatsApp chat).
+  const hideOn = new Set(['onb','wa']);
+  const bnav = document.getElementById('bnav');
+  if(bnav) bnav.style.display = hideOn.has(curS) ? 'none' : '';
+}
+
+function openMoreSheet(){
+  document.getElementById('more-sheet').classList.add('open');
+  document.getElementById('sheet-backdrop').classList.add('open');
+  // Reflect current theme in the sheet toggle label
+  const icon=document.getElementById('sheet-theme-icon');
+  const sub=document.getElementById('sheet-theme-sub');
+  if(icon) icon.textContent = isDark ? '☀' : '☾';
+  if(sub) sub.textContent = isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+  // Mark "Más" active while sheet is open
+  document.querySelectorAll('#bnav .ni').forEach(n=>{
+    n.classList.toggle('active', n.getAttribute('data-target')==='more');
+  });
+}
+
+function closeMoreSheet(){
+  document.getElementById('more-sheet').classList.remove('open');
+  document.getElementById('sheet-backdrop').classList.remove('open');
+  updateBnavActive();
+}
+
+function goToFromSheet(id){
+  closeMoreSheet();
+  goTo(id);
 }
 
 function toggleSidebarPin(){
@@ -1245,6 +1306,8 @@ function resolveFb(id){
 initFbHistory();
 initSidebar();
 updateSidebarActive();
+updateBnavActive();
+updateBnavVisibility();
 setTimeout(()=>{if(document.getElementById('monto-in'))updateImpact(320000);},100);
 </script>
 

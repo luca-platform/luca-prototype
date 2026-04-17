@@ -2,7 +2,25 @@
 
 All notable changes to the LUCA prototype. Newest at top.
 
-## [v5.1] — 2026-04-17
+## [v5.2] — 2026-04-17
+### Changed — Mobile UX overhaul
+- Bottom nav rediseñada con 5 slots: Inicio / Comprobantes / **Crear (elevado)** / Recateg. / Más
+- Tab central "Crear" es ahora un botón circular elevado en verde brand (reemplaza al FAB)
+- Eliminado el FAB flotante → un único CTA primario, sin duplicación
+- "Recat" → "Recateg." (label más claro para demo con stakeholder)
+- WhatsApp sale del nav primario (es Iteración 2) y pasa a sheet "Más"
+- iOS safe-area: padding-bottom dinámico para notch/home indicator
+
+### Added
+- Bottom sheet "Más" con: Agenda de clientes, WhatsApp, Configuración, Historial de feedback, toggle de tema
+- Single source of truth: un solo `<nav id="bnav">` al final del body (antes duplicado 7× por pantalla)
+- Oculto automáticamente en flujos full-screen (Onboarding, WhatsApp chat)
+
+### Removed
+- 7 bloques `.bnav` duplicados dentro de cada screen
+- Botón FAB flotante (reemplazado por tab central elevado)
+
+
 ### Changed
 - Sidebar: collapsed by default (64px), auto-expand on hover (220px)
 - Removed duplicate LUCA logo (sidebar no longer has its own logo, only topbar)
