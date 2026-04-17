@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v5.0</title>
+<title>LUCA — Prototipo Sprint 00 v5.1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -205,35 +205,85 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 /* SIDEBAR (desktop) */
 .sidebar{display:none;}
 @media(min-width:768px){
-  .sidebar{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--bs);border-right:1px solid var(--br);z-index:100;transition:width .2s ease;padding:16px 0;}
-  .sidebar.collapsed{width:64px;}
-  .sb-top{padding:0 16px 20px;display:flex;align-items:center;justify-content:space-between;}
-  .sb-logo{font-size:20px;font-weight:600;letter-spacing:-.5px;cursor:pointer;user-select:none;}
-  .sb-logo span{color:var(--g);}
-  .sidebar.collapsed .sb-logo{font-size:14px;}
-  .sb-toggle{background:var(--bpi);border:1px solid var(--br);border-radius:6px;width:24px;height:24px;cursor:pointer;color:var(--ts);font-family:inherit;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;}
-  .sidebar.collapsed .sb-toggle{transform:rotate(180deg);}
-  .sb-nav{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 0;overflow-y:auto;}
+  .sidebar{
+    display:flex;flex-direction:column;
+    position:fixed;left:0;top:0;bottom:0;
+    width:64px;  /* COLLAPSED by default */
+    background:var(--bs);
+    border-right:1px solid var(--br);
+    z-index:100;
+    padding:20px 0 16px;
+    transition:width .25s ease;
+    overflow:hidden;
+  }
+  /* Auto-expand on hover (unless pinned collapsed) */
+  .sidebar:hover{width:220px;}
+  /* Pinned expanded: stays open regardless of hover */
+  .sidebar.pinned{width:220px;}
+  /* Pinned collapsed (no hover expand): sidebar stays at 64px */
+  .sidebar.pinned-collapsed{width:64px;}
+  .sidebar.pinned-collapsed:hover{width:64px;}
+
+  .sb-nav{flex:1;display:flex;flex-direction:column;gap:2px;padding:4px 0;overflow-y:auto;overflow-x:hidden;}
   .sb-bottom{padding:8px 0 0;display:flex;flex-direction:column;gap:2px;}
   .sb-sep{height:1px;background:var(--br);margin:8px 16px;}
-  .sb-item{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;color:var(--ts);font-size:14px;transition:background .15s, color .15s;border-left:3px solid transparent;}
+
+  .sb-item{
+    display:flex;align-items:center;gap:14px;
+    padding:10px 22px;
+    cursor:pointer;color:var(--ts);font-size:14px;
+    transition:background .15s, color .15s;
+    border-left:3px solid transparent;
+    white-space:nowrap;
+  }
   .sb-item:hover{background:var(--bpi);color:var(--tp);}
   .sb-item.active{color:var(--g);background:var(--gd);border-left-color:var(--g);}
-  .sb-icon{font-size:18px;min-width:20px;text-align:center;}
-  .sb-label{white-space:nowrap;overflow:hidden;transition:opacity .2s;}
-  .sidebar.collapsed .sb-label{opacity:0;pointer-events:none;}
-  .sidebar.collapsed .sb-item{padding:10px 22px;justify-content:center;}
-  .sidebar.collapsed .sb-item .sb-label{display:none;}
-  .cnt{margin-left:220px;transition:margin-left .2s ease;}
-  body.sidebar-collapsed .cnt{margin-left:64px;}
-  .tb{padding-left:240px;transition:padding-left .2s ease;}
-  body.sidebar-collapsed .tb{padding-left:84px;}
-  .wa-tb{padding-left:240px;transition:padding-left .2s ease;}
-  body.sidebar-collapsed .wa-tb{padding-left:84px;}
-  .wa-msgs{margin-left:220px;transition:margin-left .2s ease;}
-  body.sidebar-collapsed .wa-msgs{margin-left:64px;}
-  .wa-input-area{left:220px;transition:left .2s ease;}
-  body.sidebar-collapsed .wa-input-area{left:64px;}
+  .sb-icon{font-size:18px;min-width:20px;text-align:center;flex-shrink:0;}
+  .sb-label{
+    opacity:0;
+    transition:opacity .2s ease;
+    pointer-events:none;
+  }
+  /* Show labels only when sidebar is expanded (hover or pinned) */
+  .sidebar:hover .sb-label,
+  .sidebar.pinned .sb-label{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .sidebar.pinned-collapsed:hover .sb-label{
+    opacity:0;
+  }
+
+  /* Pin toggle button at bottom */
+  .sb-pin{
+    display:flex;align-items:center;gap:14px;
+    padding:10px 22px;
+    cursor:pointer;color:var(--tm);font-size:12px;
+    background:transparent;border:none;
+    font-family:'Inter',system-ui,sans-serif;
+    transition:color .15s;
+    white-space:nowrap;
+  }
+  .sb-pin:hover{color:var(--tp);}
+  .sb-pin-icon{font-size:14px;min-width:20px;text-align:center;flex-shrink:0;transition:transform .2s;}
+  .sidebar.pinned .sb-pin-icon{transform:rotate(45deg);color:var(--g);}
+
+  /* Content margin: always 64px (sidebar collapsed width) — sidebar hover OVERLAYS content */
+  .cnt{margin-left:64px;}
+  /* When pinned expanded, content shifts right to accommodate */
+  body.sidebar-pinned .cnt{margin-left:220px;}
+
+  /* Topbar: no padding-left adjust (logo stays visible on left, sidebar overlays from far left) */
+  .tb{padding-left:84px;}  /* 64px sidebar + 20px normal padding */
+  body.sidebar-pinned .tb{padding-left:240px;}  /* 220px sidebar + 20px */
+
+  /* WhatsApp screen adjustments */
+  .wa-tb{padding-left:84px;}
+  body.sidebar-pinned .wa-tb{padding-left:240px;}
+  .wa-msgs{padding-left:84px;}
+  body.sidebar-pinned .wa-msgs{padding-left:240px;}
+  .wa-input-area{padding-left:84px;}
+  body.sidebar-pinned .wa-input-area{padding-left:240px;}
 }
 /* FEEDBACK */
 #fb-btn{position:fixed;bottom:82px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--bs);border:1.5px solid var(--brm);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:var(--sh);font-size:18px;transition:transform .15s;}
@@ -287,10 +337,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <!-- ══ SIDEBAR (desktop) ══ -->
 <aside class="sidebar" id="sidebar">
-  <div class="sb-top">
-    <div class="sb-logo" onclick="goTo('s-dash')">LUC<span>A</span></div>
-    <button class="sb-toggle" onclick="toggleSidebar()" title="Colapsar">‹</button>
-  </div>
   <nav class="sb-nav">
     <div class="sb-item" data-screen="s-dash" onclick="goTo('s-dash')"><span class="sb-icon">⊞</span><span class="sb-label">Inicio</span></div>
     <div class="sb-item" data-screen="s-cbte" onclick="goTo('s-cbte')"><span class="sb-icon">+</span><span class="sb-label">Crear Comprobante</span></div>
@@ -303,6 +349,11 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="sb-bottom">
     <div class="sb-sep"></div>
     <div class="sb-item" data-screen="s-wa" onclick="goTo('s-wa')"><span class="sb-icon">💬</span><span class="sb-label">WhatsApp</span></div>
+    <div class="sb-sep"></div>
+    <button class="sb-pin" onclick="toggleSidebarPin()" title="Fijar menú abierto">
+      <span class="sb-pin-icon">📌</span>
+      <span class="sb-label">Fijar menú</span>
+    </button>
   </div>
 </aside>
 
@@ -856,7 +907,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v5.0';
+const SPRINT='S00-v5.1';
 const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','recat':'Recategorización','panel':'Comprobantes','wa':'WhatsApp','agenda':'Agenda de Clientes','fbhist':'Historial Feedback','config':'Configuración'};
 
 let curS='onb',fbStar=0,fbType='',isDark=true,mode='',obStep=0,selTypeCode='',selTypeSum=true,selTypeName='';
@@ -872,24 +923,24 @@ function goTo(id){
   updateSidebarActive();
 }
 
-function toggleSidebar(){
-  const sb=document.getElementById('sidebar');
-  sb.classList.toggle('collapsed');
-  document.body.classList.toggle('sidebar-collapsed',sb.classList.contains('collapsed'));
-  localStorage.setItem('luca_sidebar_collapsed',sb.classList.contains('collapsed')?'1':'0');
+function toggleSidebarPin(){
+  const sb = document.getElementById('sidebar');
+  sb.classList.toggle('pinned');
+  document.body.classList.toggle('sidebar-pinned', sb.classList.contains('pinned'));
+  localStorage.setItem('luca_sidebar_pinned', sb.classList.contains('pinned') ? '1' : '0');
 }
 
 function initSidebar(){
-  if(localStorage.getItem('luca_sidebar_collapsed')==='1'){
-    document.getElementById('sidebar').classList.add('collapsed');
-    document.body.classList.add('sidebar-collapsed');
+  if(localStorage.getItem('luca_sidebar_pinned') === '1'){
+    document.getElementById('sidebar').classList.add('pinned');
+    document.body.classList.add('sidebar-pinned');
   }
 }
 
 function updateSidebarActive(){
-  document.querySelectorAll('.sb-item').forEach(it=>{
-    const targetScreen=it.getAttribute('data-screen');
-    it.classList.toggle('active',targetScreen==='s-'+curS);
+  document.querySelectorAll('.sb-item').forEach(it => {
+    const targetScreen = it.getAttribute('data-screen');
+    it.classList.toggle('active', targetScreen === 's-'+curS);
   });
 }
 

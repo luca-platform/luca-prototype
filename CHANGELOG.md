@@ -2,6 +2,17 @@
 
 All notable changes to the LUCA prototype. Newest at top.
 
+## [v5.1] — 2026-04-17
+### Changed
+- Sidebar: collapsed by default (64px), auto-expand on hover (220px)
+- Removed duplicate LUCA logo (sidebar no longer has its own logo, only topbar)
+- Content stays centered regardless of sidebar state
+- Topbar pushed right to accommodate sidebar (84px padding-left, 240px when pinned)
+
+### Added
+- Pin toggle at bottom of sidebar: click pin icon to keep sidebar permanently expanded
+- localStorage persistence: remembers pinned state across sessions
+
 ## [v5.0] — 2026-04-17
 ### Changed
 - Sidebar lateral colapsable para desktop (reemplaza topbar dnav)
