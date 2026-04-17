@@ -268,22 +268,21 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   .sb-pin-icon{font-size:14px;min-width:20px;text-align:center;flex-shrink:0;transition:transform .2s;}
   .sidebar.pinned .sb-pin-icon{transform:rotate(45deg);color:var(--g);}
 
-  /* Content margin: always 64px (sidebar collapsed width) — sidebar hover OVERLAYS content */
-  .cnt{margin-left:64px;}
-  /* When pinned expanded, content shifts right to accommodate */
-  body.sidebar-pinned .cnt{margin-left:220px;}
+  /* Shift the whole screen right by sidebar width (collapsed) so content
+     (max-width 680px with margin:0 auto inside .cnt) stays centered in the
+     remaining viewport. Sidebar hover-expand overlays, doesn't push. */
+  .screen{padding-left:64px;}
+  body.sidebar-pinned .screen{padding-left:220px;}
 
-  /* Topbar: no padding-left adjust (logo stays visible on left, sidebar overlays from far left) */
-  .tb{padding-left:84px;}  /* 64px sidebar + 20px normal padding */
-  body.sidebar-pinned .tb{padding-left:240px;}  /* 220px sidebar + 20px */
+  /* Topbar: sticky inside the screen, so its padding-left just accounts for
+     normal content edge. The screen's padding-left already moves it right. */
+  .tb{left:0;right:0;}
 
-  /* WhatsApp screen adjustments */
-  .wa-tb{padding-left:84px;}
-  body.sidebar-pinned .wa-tb{padding-left:240px;}
-  .wa-msgs{padding-left:84px;}
-  body.sidebar-pinned .wa-msgs{padding-left:240px;}
-  .wa-input-area{padding-left:84px;}
-  body.sidebar-pinned .wa-input-area{padding-left:240px;}
+  /* WhatsApp uses fixed positioning for its tb/input-area — shift them too */
+  .wa-tb{left:64px;right:0;}
+  body.sidebar-pinned .wa-tb{left:220px;}
+  .wa-input-area{left:64px;right:0;}
+  body.sidebar-pinned .wa-input-area{left:220px;}
 }
 /* FEEDBACK */
 #fb-btn{position:fixed;bottom:82px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--bs);border:1.5px solid var(--brm);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:var(--sh);font-size:18px;transition:transform .15s;}
