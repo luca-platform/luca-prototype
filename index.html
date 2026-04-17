@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>LUCA — Prototipo Sprint 00 v4.1</title>
+<title>LUCA — Prototipo Sprint 00 v5.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -202,6 +202,39 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   .dn.active{color:var(--g);font-weight:500;}
 }
 @media(max-width:767px){.dnav{display:none;}.sn{display:block;}}
+/* SIDEBAR (desktop) */
+.sidebar{display:none;}
+@media(min-width:768px){
+  .sidebar{display:flex;flex-direction:column;position:fixed;left:0;top:0;bottom:0;width:220px;background:var(--bs);border-right:1px solid var(--br);z-index:100;transition:width .2s ease;padding:16px 0;}
+  .sidebar.collapsed{width:64px;}
+  .sb-top{padding:0 16px 20px;display:flex;align-items:center;justify-content:space-between;}
+  .sb-logo{font-size:20px;font-weight:600;letter-spacing:-.5px;cursor:pointer;user-select:none;}
+  .sb-logo span{color:var(--g);}
+  .sidebar.collapsed .sb-logo{font-size:14px;}
+  .sb-toggle{background:var(--bpi);border:1px solid var(--br);border-radius:6px;width:24px;height:24px;cursor:pointer;color:var(--ts);font-family:inherit;font-size:14px;line-height:1;display:flex;align-items:center;justify-content:center;}
+  .sidebar.collapsed .sb-toggle{transform:rotate(180deg);}
+  .sb-nav{flex:1;display:flex;flex-direction:column;gap:2px;padding:8px 0;overflow-y:auto;}
+  .sb-bottom{padding:8px 0 0;display:flex;flex-direction:column;gap:2px;}
+  .sb-sep{height:1px;background:var(--br);margin:8px 16px;}
+  .sb-item{display:flex;align-items:center;gap:12px;padding:10px 20px;cursor:pointer;color:var(--ts);font-size:14px;transition:background .15s, color .15s;border-left:3px solid transparent;}
+  .sb-item:hover{background:var(--bpi);color:var(--tp);}
+  .sb-item.active{color:var(--g);background:var(--gd);border-left-color:var(--g);}
+  .sb-icon{font-size:18px;min-width:20px;text-align:center;}
+  .sb-label{white-space:nowrap;overflow:hidden;transition:opacity .2s;}
+  .sidebar.collapsed .sb-label{opacity:0;pointer-events:none;}
+  .sidebar.collapsed .sb-item{padding:10px 22px;justify-content:center;}
+  .sidebar.collapsed .sb-item .sb-label{display:none;}
+  .cnt{margin-left:220px;transition:margin-left .2s ease;}
+  body.sidebar-collapsed .cnt{margin-left:64px;}
+  .tb{padding-left:240px;transition:padding-left .2s ease;}
+  body.sidebar-collapsed .tb{padding-left:84px;}
+  .wa-tb{padding-left:240px;transition:padding-left .2s ease;}
+  body.sidebar-collapsed .wa-tb{padding-left:84px;}
+  .wa-msgs{margin-left:220px;transition:margin-left .2s ease;}
+  body.sidebar-collapsed .wa-msgs{margin-left:64px;}
+  .wa-input-area{left:220px;transition:left .2s ease;}
+  body.sidebar-collapsed .wa-input-area{left:64px;}
+}
 /* FEEDBACK */
 #fb-btn{position:fixed;bottom:82px;left:20px;width:44px;height:44px;border-radius:50%;background:var(--bs);border:1.5px solid var(--brm);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:200;box-shadow:var(--sh);font-size:18px;transition:transform .15s;}
 #fb-btn:hover{transform:scale(1.1);}
@@ -251,6 +284,27 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 </style>
 </head>
 <body>
+
+<!-- ══ SIDEBAR (desktop) ══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-top">
+    <div class="sb-logo" onclick="goTo('s-dash')">LUC<span>A</span></div>
+    <button class="sb-toggle" onclick="toggleSidebar()" title="Colapsar">‹</button>
+  </div>
+  <nav class="sb-nav">
+    <div class="sb-item" data-screen="s-dash" onclick="goTo('s-dash')"><span class="sb-icon">⊞</span><span class="sb-label">Inicio</span></div>
+    <div class="sb-item" data-screen="s-cbte" onclick="goTo('s-cbte')"><span class="sb-icon">+</span><span class="sb-label">Crear Comprobante</span></div>
+    <div class="sb-item" data-screen="s-panel" onclick="goTo('s-panel')"><span class="sb-icon">📋</span><span class="sb-label">Comprobantes</span></div>
+    <div class="sb-item" data-screen="s-agenda" onclick="goTo('s-agenda')"><span class="sb-icon">👥</span><span class="sb-label">Agenda Clientes</span></div>
+    <div class="sb-item" data-screen="s-recat" onclick="goTo('s-recat')"><span class="sb-icon">📊</span><span class="sb-label">Recategorización</span></div>
+    <div class="sb-item" data-screen="s-config" onclick="goTo('s-config')"><span class="sb-icon">⚙</span><span class="sb-label">Configuración</span></div>
+    <div class="sb-item" data-screen="s-fbhist" onclick="goTo('s-fbhist')"><span class="sb-icon">💬</span><span class="sb-label">Historial Feedback</span></div>
+  </nav>
+  <div class="sb-bottom">
+    <div class="sb-sep"></div>
+    <div class="sb-item" data-screen="s-wa" onclick="goTo('s-wa')"><span class="sb-icon">💬</span><span class="sb-label">WhatsApp</span></div>
+  </div>
+</aside>
 
 <!-- ══ ONBOARDING ══ -->
 <div class="screen active" id="s-onb">
@@ -303,14 +357,6 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="tb">
     <div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div>
     <div class="tb-r">
-      <nav class="dnav">
-        <div class="dn active" onclick="goTo('s-dash')">Inicio</div>
-        <div class="dn" onclick="goTo('s-cbte')">Crear Comprobante</div>
-        <div class="dn" onclick="goTo('s-panel')">Panel fiscal</div>
-        <div class="dn" onclick="goTo('s-recat')">Recategorización</div>
-        <div class="dn" onclick="goTo('s-agenda')">Agenda</div>
-        <div class="dn" onclick="goTo('s-wa')" style="color:var(--g);">💬 WhatsApp</div>
-      </nav>
       <button class="btn-th" onclick="toggleTheme()">☀</button>
       <div class="av" onclick="goTo('s-fbhist')" title="Ver historial feedback">JC</div>
     </div>
@@ -423,10 +469,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
       </div>
     </div>
 
-    <div class="g2">
-      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
-      <div class="sc" onclick="goTo('s-panel')"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss">Límite 40% Cat K: $10.9M</div></div>
-    </div>
+    <div class="sc" onclick="goTo('s-panel')" style="margin-bottom:14px;"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
 
     <!-- CCMA -->
     <div class="card">
@@ -469,7 +512,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="bnav">
     <div class="ni active" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -583,7 +626,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="bnav">
     <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni active"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -627,7 +670,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
     </div>
     <div class="card">
       <div class="cl" style="margin-bottom:12px;">Pasos para recategorizar</div>
-      <div class="er-step"><div class="sn2">1</div><div class="st">Verificá tu facturación de los últimos 12 meses en el Panel Fiscal</div></div>
+      <div class="er-step"><div class="sn2">1</div><div class="st">Verificá tu facturación de los últimos 12 meses</div></div>
       <div class="er-step"><div class="sn2">2</div><div class="st">Ingresá a ARCA con tu clave fiscal nivel 2 o superior</div></div>
       <div class="er-step"><div class="sn2">3</div><div class="st">Seleccioná <strong>Monotributo > Recategorización</strong> y seguí los pasos</div></div>
       <div class="er-step"><div class="sn2">4</div><div class="st">Confirmá la nueva categoría y pagá la diferencia de cuota si corresponde</div></div>
@@ -663,7 +706,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="bnav">
     <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni active"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -673,29 +716,21 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 <div class="screen" id="s-panel">
   <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av" onclick="goTo('s-fbhist')">JC</div></div></div>
   <div class="cnt">
-    <div class="sp">Panel Fiscal — Abril 2026</div>
-    <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Panel Fiscal</div>
-    <div class="g2">
-      <div class="sc"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
-      <div class="sc"><div class="sl">Compras últ. 12 meses</div><div class="sv">$412k</div><div class="ss">Límite 40% Cat K: $10.9M</div></div>
-    </div>
+    <div class="sp">Comprobantes — Abril 2026</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:16px;">Comprobantes</div>
+    <div class="sc" style="margin-bottom:14px;"><div class="sl">Ventas netas</div><div class="sv">$1.42M</div><div class="ss" style="color:var(--g);">↑ 8% vs marzo</div></div>
     <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Comprobantes emitidos</div>
     <div class="tw" style="margin-bottom:14px;">
       <div class="tr2"><div class="tm2"><div>Constructora del Norte S.A.</div><div class="ts2">FC-C · 11/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$320.000</div><span class="bdg bg">CAE ✓</span></div></div>
       <div class="tr2"><div class="tm2"><div>Farmacia Belgrano S.R.L.</div><div class="ts2">FC-C · 09/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$185.000</div><span class="bdg bg">CAE ✓</span></div></div>
       <div class="tr2"><div class="tm2"><div>Recursos Humanos Plus</div><div class="ts2">FC-C · 07/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$240.000</div><span class="bdg bg">CAE ✓</span></div></div>
     </div>
-    <div style="font-size:12px;font-weight:500;color:var(--tm);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;">Comprobantes recibidos</div>
-    <div class="tw">
-      <div class="tr2"><div class="tm2"><div>Coworking Centro S.A.</div><div class="ts2">FC-A · 08/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$145.000</div><span class="bdg bb">Registrado</span></div></div>
-      <div class="tr2"><div class="tm2"><div>Telecom Argentina</div><div class="ts2">FC-A · 05/04</div></div><div class="tr2-r"><div class="mo" style="font-size:14px;">$85.000</div><span class="bdg bb">Registrado</span></div></div>
-    </div>
     <div class="sn"></div>
   </div>
   <div class="bnav">
     <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni active"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni active"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -730,7 +765,25 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="bnav">
     <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
+    <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
+    <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
+  </div>
+</div>
+
+<!-- ══ CONFIGURACIÓN ══ -->
+<div class="screen" id="s-config">
+  <div class="tb"><div class="logo" onclick="goTo('s-dash')">LUC<span>A</span></div><div class="tb-r"><button class="btn-bk" onclick="goTo('s-dash')">← Inicio</button><div class="av">JC</div></div></div>
+  <div class="cnt">
+    <div class="sp">Configuración</div>
+    <div style="font-size:20px;font-weight:600;margin-bottom:6px;">Configuración</div>
+    <div style="font-size:13px;color:var(--ts);margin-bottom:20px;">Próximamente: perfil, notificaciones, integraciones, facturación</div>
+    <div class="sn"></div>
+  </div>
+  <div class="bnav">
+    <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
+    <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -772,7 +825,7 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
   <div class="bnav">
     <div class="ni" onclick="goTo('s-dash')"><div class="ni-i">⊞</div><div class="ni-l">Inicio</div></div>
     <div class="ni" onclick="goTo('s-cbte')"><div class="ni-i">◎</div><div class="ni-l">Comprobante</div></div>
-    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Panel</div></div>
+    <div class="ni" onclick="goTo('s-panel')"><div class="ni-i">≡</div><div class="ni-l">Comprobantes</div></div>
     <div class="ni" onclick="goTo('s-recat')"><div class="ni-i">◉</div><div class="ni-l">Recat</div></div>
     <div class="ni" onclick="goTo('s-wa')"><div class="ni-i">💬</div><div class="ni-l">WhatsApp</div></div>
   </div>
@@ -803,8 +856,8 @@ html,body{font-family:'Inter',system-ui,sans-serif;font-feature-settings:'cv11',
 
 <script>
 const SHEETS='https://script.google.com/macros/s/AKfycbxD8S0hBIZWisP1z_G3SaKqLQYrs1LnAyp6PzhxY5v40TwiXQ4DlV5d8UKAbDnKKpRb/exec';
-const SPRINT='S00-v4.1';
-const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','recat':'Recategorización','panel':'Panel Fiscal','wa':'WhatsApp','agenda':'Agenda de Clientes','fbhist':'Historial Feedback'};
+const SPRINT='S00-v5.0';
+const SNAMES={'onb':'Onboarding','dash':'Dashboard','cbte':'Crear Comprobante','error':'Error AFIP','recat':'Recategorización','panel':'Comprobantes','wa':'WhatsApp','agenda':'Agenda de Clientes','fbhist':'Historial Feedback','config':'Configuración'};
 
 let curS='onb',fbStar=0,fbType='',isDark=true,mode='',obStep=0,selTypeCode='',selTypeSum=true,selTypeName='';
 
@@ -816,6 +869,28 @@ function goTo(id){
   closeFb();window.scrollTo(0,0);
   if(id==='s-cbte'){resetCbteForm();initDates();}
   if(id==='s-fbhist') renderFbHistory();
+  updateSidebarActive();
+}
+
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  sb.classList.toggle('collapsed');
+  document.body.classList.toggle('sidebar-collapsed',sb.classList.contains('collapsed'));
+  localStorage.setItem('luca_sidebar_collapsed',sb.classList.contains('collapsed')?'1':'0');
+}
+
+function initSidebar(){
+  if(localStorage.getItem('luca_sidebar_collapsed')==='1'){
+    document.getElementById('sidebar').classList.add('collapsed');
+    document.body.classList.add('sidebar-collapsed');
+  }
+}
+
+function updateSidebarActive(){
+  document.querySelectorAll('.sb-item').forEach(it=>{
+    const targetScreen=it.getAttribute('data-screen');
+    it.classList.toggle('active',targetScreen==='s-'+curS);
+  });
 }
 
 function toggleTheme(){
@@ -1118,6 +1193,8 @@ function resolveFb(id){
 
 // ── INIT
 initFbHistory();
+initSidebar();
+updateSidebarActive();
 setTimeout(()=>{if(document.getElementById('monto-in'))updateImpact(320000);},100);
 </script>
 

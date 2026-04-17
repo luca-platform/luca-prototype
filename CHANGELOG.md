@@ -2,6 +2,21 @@
 
 All notable changes to the LUCA prototype. Newest at top.
 
+## [v5.0] — 2026-04-17
+### Changed
+- Sidebar lateral colapsable para desktop (reemplaza topbar dnav)
+- Renombrar "Panel fiscal" a "Comprobantes"
+- Bottom nav mantenido para mobile
+
+### Removed
+- Todas las referencias a "Compras recibidas" (dashboard, panel fiscal)
+- Sección "Comprobantes recibidos" del Panel Fiscal
+- Métrica "Compras últ. 12 meses" del dashboard
+
+### Added
+- Nueva pantalla "Configuración" (placeholder)
+- Separator antes de WhatsApp en sidebar (visual hierarchy)
+
 ## [v4.1] — 2026-04-15
 ### Changed
 - Restored comprobante type cards with show/hide UX (select one → others disappear, "Cambiar tipo" to reset)
